@@ -4,7 +4,7 @@
       JustVue
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn flat dark to="/songs">
+      <v-btn flat dark to="/">
         Browse
       </v-btn>
     </v-toolbar-items>

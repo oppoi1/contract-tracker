@@ -3,6 +3,9 @@ import Router from 'vue-router';
 import Contracts from '../components/Contracts'
 import Register from '../components/authentication/Register';
 import Login from '../components/authentication/Login';
+import CreateContract from '../components/CreateContracts';
+import ViewContract from '../components/ViewContracts';
+import EditContract from '../components/EditContracts';
 
 Vue.use(Router);
 
@@ -11,8 +14,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'root',
+      name: 'contracts',
       component: Contracts
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: CreateContract
+    },
+    {
+      path: '/:contractId',
+      name: 'contract',
+      component: ViewContract
+    },
+    {
+      path: '/:contractId/edit',
+      name: 'contract-edit',
+      component: EditContract
     },
     {
       path: '/register',
