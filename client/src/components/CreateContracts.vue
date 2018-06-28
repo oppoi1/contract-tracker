@@ -15,6 +15,21 @@
         v-model="contract.partner"
       ></v-text-field>
       <v-text-field
+        label="Start"
+        required
+        type="date"
+        :rules="[required]"
+        v-model="contract.start"
+      ></v-text-field>
+      <v-text-field
+        label="End"
+        required
+        type="date"
+        value="date"
+        :rules="[required]"
+        v-model="contract.duration"
+      ></v-text-field>
+      <v-text-field
         label="Objectives"
         required
         :rules="[required]"
@@ -65,15 +80,17 @@ export default {
       contract: {
         number: null,
         partner: null,
-        // start: null,
-        // duration: null,
+        start: null,
+        duration: null,
         objectives: null,
         futureobjectives: null,
         other: null,
-        optionalPartner: null
+        optionalPartner: null,
+        createdBy: this.$store.state.user.name
       },
       error: null,
-      required: (value) => !!value || 'Required.'
+      required: (value) => !!value || 'Required.',
+      date: new Date().toJSON().slice(0,10).toString()
     }
   },
   methods: {

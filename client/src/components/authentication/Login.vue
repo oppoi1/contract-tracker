@@ -3,8 +3,8 @@
   <v-flex xs7 offset-xs3>
     <panel title="Login">
       <v-text-field
-        label="Email"
-        v-model="email"
+        label="name"
+        v-model="name"
       ></v-text-field>
         <v-text-field
         type="password"
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import AuthenticationService from "../../services/AuthenticationService";
+import AuthenticationService from '../../services/AuthenticationService';
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      name: '',
+      password: '',
       error: null
     };
   },
@@ -32,12 +32,12 @@ export default {
     async login() {
       try {
         const response = await AuthenticationService.login({
-          email: this.email,
+          name: this.name,
           password: this.password
         });
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
-        this.$router.push("songs");
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
+        this.$router.push('/');
       } catch (error) {
         this.error = error.response.data.error;
       }

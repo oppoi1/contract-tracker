@@ -15,6 +15,6 @@ export default {
     return Api().get(`contracts/${contractId}`);
   },
   put(contract) {
-    return Api().pit(`songs/${contract.id}`, contract);
+    return Api().pit(`contracts/${contract.id}`, contract);
   }
 };

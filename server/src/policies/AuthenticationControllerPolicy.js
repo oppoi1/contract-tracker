@@ -3,17 +3,17 @@ const Joi = require('Joi')
 module.exports = {
   register (req, res, next) {
     const schema = {
-      email: Joi.string().email(),
-      password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$'))
+      name: Joi.string().min(4).max(30),
+      password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{4,32}$'))
     }
 
     const { error } = Joi.validate(req.body, schema)
 
     if (error) {
       switch (error.details[0].context.key) {
-        case 'email':
+        case 'name':
           res.status(400).send({
-            error: 'You must provide a valid email adress'
+            error: 'You must provide a unique and valid name'
           })
           break
         case 'password':
@@ -24,7 +24,7 @@ module.exports = {
           break
         default:
           res.status(400).send({
-            error: 'Invalid email and password'
+            error: 'Invalid name and password'
           })
       }
     } else {

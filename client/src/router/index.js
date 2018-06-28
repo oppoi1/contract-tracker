@@ -14,23 +14,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'contracts',
+      name: 'root',
       component: Contracts
     },
     {
-      path: '/create',
-      name: 'create',
-      component: CreateContract
-    },
-    {
-      path: '/:contractId',
-      name: 'contract',
-      component: ViewContract
-    },
-    {
-      path: '/:contractId/edit',
-      name: 'contract-edit',
-      component: EditContract
+      path: '/contracts',
+      name: 'contracts',
+      component: Contracts
     },
     {
       path: '/register',
@@ -41,6 +31,21 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/contracts/add',
+      name: 'contracts-create',
+      component: CreateContract
+    },
+    {
+      path: '/contracts/:contractId',
+      name: 'contract',
+      component: ViewContract
+    },
+    {
+      path: '/contracts/:contractId/edit',
+      name: 'contract-edit',
+      component: EditContract
     }
   ]
 });

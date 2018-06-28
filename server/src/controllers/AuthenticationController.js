@@ -12,24 +12,27 @@ function jwtSignUser (user) {
 module.exports = {
   async register (req, res) {
     try {
+      console.log(req.body)
       const user = await User.create(req.body)
+      console.log('user: ' + user)
       const userJson = user.toJSON()
+      console.log('json ' + userJson)
       res.send({
         user: userJson,
         token: jwtSignUser(userJson)
       })
     } catch (error) {
       res.status(400).send({
-        error: 'This email account is already in use'
+        error: 'This name is already in use'
       })
     }
   },
   async login (req, res) {
     try {
-      const { email, password } = req.body
+      const { name, password } = req.body
       const user = await User.findOne({
         where: {
-          email: email
+          name: name
         }
       })
 

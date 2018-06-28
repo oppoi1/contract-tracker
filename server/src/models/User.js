@@ -7,9 +7,10 @@ function hashPassword (user, options) {
   if (!user.changed('password')) {
     return
   }
+
   return bcrypt
-    .genSaltSync(SALT_FACTOR)
-    .then(salt => bcrypt.hashASync(user.password, salt, null))
+    .genSaltAsync(SALT_FACTOR)
+    .then(salt => bcrypt.hashAsync(user.password, salt, null))
     .then(hash => {
       user.setDataValue('password', hash)
     })
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
     {
-      email: {
+      name: {
         type: DataTypes.STRING,
         unique: true
       },

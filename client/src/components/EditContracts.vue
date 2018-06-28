@@ -4,25 +4,33 @@
     <panel title="Contract Metadata">
       <v-text-field
         label="Number"
-        required
         :rules="[required]"
         v-model="contract.number"
       ></v-text-field>
       <v-text-field
         label="Partner"
-        required
         :rules="[required]"
         v-model="contract.partner"
       ></v-text-field>
       <v-text-field
+        label="Start"
+        type="date"
+        :rules="[required]"
+        v-model="contract.start.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
+      ></v-text-field>
+      <v-text-field
+        label="End"
+        type="date"
+        :rules="[required]"
+        v-model="contract.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
+      ></v-text-field>
+      <v-text-field
         label="Objectives"
-        required
         :rules="[required]"
         v-model="contract.objectives"
       ></v-text-field>
       <v-text-field
         label="FutureObjectives"
-        required
         :rules="[required]"
         v-model="contract.futureobjectives"
       ></v-text-field>
@@ -33,7 +41,6 @@
      <panel title="contract Structure" class="ml-2">
       <v-text-field
         label="Other"
-        required
         :rules="[required]"
         multi-line
         v-model="contract.other"
@@ -41,7 +48,6 @@
 
       <v-text-field
         label="optionalPartner"
-        required
         :rules="[required]"
         multi-line
         v-model="contract.optionalPartner"
@@ -65,12 +71,13 @@ export default {
       contract: {
         number: null,
         partner: null,
-        // start: null,
-        // duration: null,
+        start: null,
+        duration: null,
         objectives: null,
         futureobjectives: null,
         other: null,
-        optionalPartner: null
+        optionalPartner: null,
+        modifiedBy: this.$store.state.user.name
       },
       error: null,
       required: (value) => !!value || 'Required.'
