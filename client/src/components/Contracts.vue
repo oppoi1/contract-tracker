@@ -1,7 +1,6 @@
 <template>
   <v-layout row wrap>
     <v-flex xs6 offset-xs3>
-      <contract-seach-panel/>
       <contract-panel class="mt-2"/>
     </v-flex>
   </v-layout>
@@ -10,12 +9,10 @@
 <script>
 import ContractsService from '../services/ContractsService';
 import ContractPanel from './Panels/ContractPanel';
-import ContractSeachPanel from './Panels/ContractSearchPanel';
 export default {
   components: {
     ContractsService,
     ContractPanel,
-    ContractSeachPanel
   },
   data () {
     return {

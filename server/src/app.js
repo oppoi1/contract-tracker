@@ -12,7 +12,7 @@ app.use(cors())
 
 require('./routes')(app)
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(process.env.PORT || 8081)
   console.log(`Magic happens on port ${config.port}`)
 })

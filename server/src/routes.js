@@ -1,6 +1,7 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const ContractController = require('./controllers/ContractController')
+const CategoryController = require('./controllers/CategoryController')
 
 module.exports = app => {
   app.post(
@@ -14,4 +15,5 @@ module.exports = app => {
   app.post('/contracts', ContractController.post)
   app.get('/contracts/:contractId', ContractController.show)
   app.put('/contracts/:contractId', ContractController.put)
+  app.get('/categories', CategoryController.get)
 }

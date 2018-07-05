@@ -1,8 +1,5 @@
 <template>
-    <v-text-field
-    label="Search by Number, Partner or Category"
-    v-model="search">
-    </v-text-field>
+  
 </template>
 
 <script>

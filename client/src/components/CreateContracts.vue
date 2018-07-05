@@ -3,7 +3,7 @@
     <v-flex xs4>
     <panel title="Contract Metadata">
       <v-text-field
-        label="Number"
+        label="Identifier"
         required
         :rules="[required]"
         v-model="contract.number"
@@ -13,6 +13,12 @@
         required
         :rules="[required]"
         v-model="contract.partner"
+      ></v-text-field>
+      <v-text-field
+        label="optionalPartner"
+        required
+        :rules="[required]"
+        v-model="contract.optionalPartner"
       ></v-text-field>
       <v-text-field
         label="Start"
@@ -30,7 +36,30 @@
         v-model="contract.duration"
       ></v-text-field>
       <v-text-field
+        label="Other"
+        required
+        :rules="[required]"
+        v-model="contract.other"
+      ></v-text-field>
+
+    </panel>
+   </v-flex>
+   <v-flex xs8>
+     <panel title="Contract Objectives" class="ml-2">
+      <div>
+        <v-radio-group v-model="contract.categories">
+          <v-radio
+            v-for="category in categories"
+            :key="category.name"
+            :label="`Radio ${category.name}`"
+            :value="category.name"
+          ></v-radio>
+        </v-radio-group>
+      </div>
+
+      <v-text-field
         label="Objectives"
+        multi-line
         required
         :rules="[required]"
         v-model="contract.objectives"
@@ -39,27 +68,8 @@
         label="FutureObjectives"
         required
         :rules="[required]"
+        multi-line
         v-model="contract.futureobjectives"
-      ></v-text-field>
-
-    </panel>
-   </v-flex>
-   <v-flex xs8>
-     <panel title="contract Structure" class="ml-2">
-      <v-text-field
-        label="Other"
-        required
-        :rules="[required]"
-        multi-line
-        v-model="contract.other"
-      ></v-text-field>
-
-      <v-text-field
-        label="optionalPartner"
-        required
-        :rules="[required]"
-        multi-line
-        v-model="contract.optionalPartner"
       ></v-text-field>
     </panel>
     <div class="danger-alert" v-if="error">
@@ -74,6 +84,7 @@
 
 <script>
 import ContractsService from '../services/ContractsService'
+import CategoryService from '../services/CategoryService'
 export default {
   data () {
     return {
@@ -86,11 +97,16 @@ export default {
         futureobjectives: null,
         other: null,
         optionalPartner: null,
+        categories: null,
         createdBy: this.$store.state.user.name
+      },
+      categories: {
+        id: null,
+        name: null
       },
       error: null,
       required: (value) => !!value || 'Required.',
-      date: new Date().toJSON().slice(0,10).toString()
+      date: new Date().toJSON().slice(0,10).toString(),
     }
   },
   methods: {
@@ -113,10 +129,28 @@ export default {
         console.log(e)
       }
     }
+  },
+  async mounted () {
+    try {
+      this.categories = (await CategoryService.get()).data
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 </script>
 
 <style scoped>
+#checkboxes input{
+    display: inline-block;
+    margin-right: 10px;
+}
 
+#checkboxes label {
+    display: inline-block;
+}
+label {
+    display: block;
+    margin: 20px 0 10px;
+}
 </style>

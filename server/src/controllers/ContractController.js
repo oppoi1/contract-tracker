@@ -12,7 +12,7 @@ module.exports = {
         contracts = await Contract.findAll({
           where: {
             [Op.or]: [
-              'number', 'partner', 'start', 'duration'
+              'number', 'partner', 'start', 'duration', 'categories'
             ].map(key => ({
               [key]: {
                 [Op.like]: `%${search}%`

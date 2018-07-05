@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     futureobjectives: DataTypes.TEXT,
     other: DataTypes.TEXT,
     optionalPartner: DataTypes.TEXT,
+    categories: DataTypes.TEXT,
     createdBy: DataTypes.STRING,
     modifiedBy: DataTypes.STRING
   })
