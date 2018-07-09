@@ -33,17 +33,17 @@ export default new Router({
       component: Login
     },
     {
-      path: '/contracts/add',
+      path: '/contract/add',
       name: 'contracts-create',
       component: CreateContract
     },
     {
-      path: '/contracts/:contractId',
+      path: '/contract/:contractId',
       name: 'contract',
       component: ViewContract
     },
     {
-      path: '/contracts/:contractId/edit',
+      path: '/contract/:contractId/edit',
       name: 'contract-edit',
       component: EditContract
     }

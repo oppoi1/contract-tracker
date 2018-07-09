@@ -46,31 +46,26 @@
    </v-flex>
    <v-flex xs8>
      <panel title="Contract Objectives" class="ml-2">
-      <div>
-        <v-radio-group v-model="contract.categories">
-          <v-radio
-            v-for="category in categories"
-            :key="category.name"
-            :label="`Radio ${category.name}`"
-            :value="category.name"
-          ></v-radio>
-        </v-radio-group>
-      </div>
-
-      <v-text-field
+      <v-flex xs12>
+        <v-combobox
+          v-model="contract.categories"
+          :items="catArray"
+          label="Select a category or create a new one"
+          chips
+        ></v-combobox>
+      </v-flex>
+      <v-textarea
         label="Objectives"
-        multi-line
         required
         :rules="[required]"
         v-model="contract.objectives"
-      ></v-text-field>
-      <v-text-field
+      ></v-textarea>
+      <v-textarea
         label="FutureObjectives"
         required
         :rules="[required]"
-        multi-line
         v-model="contract.futureobjectives"
-      ></v-text-field>
+      ></v-textarea>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
@@ -100,10 +95,8 @@ export default {
         categories: null,
         createdBy: this.$store.state.user.name
       },
-      categories: {
-        id: null,
-        name: null
-      },
+      categories: [],
+      catArray: [],
       error: null,
       required: (value) => !!value || 'Required.',
       date: new Date().toJSON().slice(0,10).toString(),
@@ -119,9 +112,26 @@ export default {
         this.error = 'Please fill in all the required fields.'
         return
       }
+
+      const exists = [];
+      for(const key in this.categories) {
+        exists.push(this.categories[key].name)
+      }
+      if(!exists.includes(this.contract.categories)) {
+        const cntrctCat = {
+          name: this.contract.categories
+        }
+        try {
+          await CategoryService.post(cntrctCat)
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
       // call api
       try {
         await ContractsService.post(this.contract)
+        // TODO: send category to db
         this.$router.push({
           name: 'contracts'
         })
@@ -133,6 +143,9 @@ export default {
   async mounted () {
     try {
       this.categories = (await CategoryService.get()).data
+      for(var i = 0; i < this.categories.length; i++) {
+        this.catArray.push(this.categories[i].name)
+      }
     } catch (e) {
       console.log(e)
     }

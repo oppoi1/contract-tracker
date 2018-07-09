@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs6 offset-xs3>
+    <v-flex xs8 offset-xs2>
       <contract-panel class="mt-2"/>
     </v-flex>
   </v-layout>

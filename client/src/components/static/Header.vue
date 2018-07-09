@@ -7,7 +7,7 @@
       <v-btn flat dark to="/contracts" v-if="$store.state.isUserLoggedIn">
         Overview
       </v-btn>
-      <v-btn flat dark to="/contracts/add" v-if="$store.state.isUserLoggedIn">
+      <v-btn flat dark to="/contract/add" v-if="$store.state.isUserLoggedIn">
        Add Contracts
       </v-btn>
     </v-toolbar-items>

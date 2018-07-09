@@ -39,29 +39,27 @@
    </v-flex>
    <v-flex xs8>
      <panel title="Contract Objectives" class="ml-2">
-      <div>
-        <v-radio-group v-model="contract.categories">
-          <v-radio
-            v-for="category in categories"
-            :key="category.name"
-            :label="`Radio ${category.name}`"
-            :value="category.name"
-          ></v-radio>
-        </v-radio-group>
-      </div>
-      <v-text-field
+      <v-flex xs12>
+        <v-combobox
+          v-model="contract.categories"
+          :items="catArray"
+          label="Selected category"
+          chips
+        ></v-combobox>
+      </v-flex>
+      <v-textarea
         label="Objectives"
         :rules="[required]"
         multi-line
         v-model="contract.objectives"
-      ></v-text-field>
+      ></v-textarea>
 
-      <v-text-field
+      <v-textarea
         label="FutureObjectives"
         :rules="[required]"
         multi-line
         v-model="contract.futureobjectives"
-      ></v-text-field>
+      ></v-textarea>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
@@ -91,10 +89,8 @@ export default {
         categories: null,
         modifiedBy: this.$store.state.user.name
       },
-      categories: {
-        id: null,
-        name: null
-      },
+      categories: [],
+      catArray: [],
       error: null,
       required: (value) => !!value || 'Required.'
     }
@@ -102,12 +98,34 @@ export default {
   methods: {
     async save () {
       this.error = null
+      this.contract.modifiedBy = this.$store.state.user.name
       const areAllFieldsFilledIn = Object
         .keys(this.contract)
         .every(key => !!this.contract[key])
+      
       if (!areAllFieldsFilledIn) {
         this.error = 'Please fill in all the required fields.'
+        
+        console.log(this.contract);
         return
+      }  
+
+      /* check if in array
+       * call api
+       */
+      const exists = [];
+      for(const key in this.categories) {
+        exists.push(this.categories[key].name)
+      }
+      if(!exists.includes(this.contract.categories)) {
+        const cntrctCat = {
+          name: this.contract.categories
+        }
+        try {
+          await CategoryService.post(cntrctCat)
+        } catch (e) {
+          console.log(e);
+        }
       }
 
       const contractId = this.$store.state.route.params.contractId
@@ -115,6 +133,7 @@ export default {
       // call api
       try {
         await ContractsService.put(this.contract)
+        // TODO: send category to db
         this.$router.push({
           name: 'contracts',
           params: {
@@ -127,14 +146,19 @@ export default {
     }
   },
   async mounted () {
+    // get contract data
     try {
       const contractId = this.$store.state.route.params.contractId
       this.contract = (await ContractsService.show(contractId)).data
     } catch (e) {
       console.log(e)
     }
+    // get categories
     try {
       this.categories = (await CategoryService.get()).data
+      for(var i = 0; i < this.categories.length; i++) {
+        this.catArray.push(this.categories[i].name)
+      }
     } catch (e) {
       console.log(e)
     }

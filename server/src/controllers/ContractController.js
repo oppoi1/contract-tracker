@@ -7,7 +7,6 @@ module.exports = {
     try {
       let contracts = null
       const search = req.query.search
-      console.log(search)
       if (search) {
         contracts = await Contract.findAll({
           where: {
@@ -25,7 +24,6 @@ module.exports = {
           limit: 50
         })
       }
-      console.log(contracts)
       res.send(contracts)
     } catch (err) {
       res.status(500).send({
