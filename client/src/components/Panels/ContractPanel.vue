@@ -1,25 +1,25 @@
 <template>
 <div>
   <panel title="Contracts">
-    <v-btn slot="action" to="contracts/add" class="white accent-2" light fab small absolute right middle>
+    <v-btn slot="action" to="contract/add" class="white accent-2" light fab small absolute right middle>
       <v-icon>add</v-icon>
     </v-btn>
     <search-panel/>
   </panel>
   <v-data-table
-      :headers="headers"
-      :items="contracts"
-      hide-actions
-      class="elevation-1"
-    >
+    :headers="headers"
+    :items="contracts"
+    hide-actions
+    class="elevation-1"
+  >
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.number }}</td>
         <td class="text-xs-left">{{ props.item.partner }}</td>
         <td class="text-xs-left">{{ props.item.categories }}</td>
         <td class="text-xs-left">{{ props.item.start }}</td>
-        <td class="text-xs-left">{{ props.item.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
+        <td class="text-xs-left" lazy>{{ props.item.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
         <td class="text-xs-left">{{ props.item.createdBy }}</td>
-        <td class="text-xs-left">{{ props.item.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
+        <td class="text-xs-left" lazy>{{ props.item.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
         <td class="text-xs-left">
           <v-btn small color="primary" fab dark :to="{name: 'contract', params: {contractId: props.item.id}}">
             <v-icon dark>list</v-icon>

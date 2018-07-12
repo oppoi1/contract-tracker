@@ -8,18 +8,20 @@
         :rules="[required]"
         v-model="contract.number"
       ></v-text-field>
-      <v-text-field
-        label="Partner"
-        required
-        :rules="[required]"
+      <v-combobox
         v-model="contract.partner"
-      ></v-text-field>
-      <v-text-field
-        label="optionalPartner"
+        :rules="[required]"
+        :items="prtnrArr"
+        label="Select the Partners Company or create a new one"
+        chips
+      ></v-combobox>
+      <v-combobox
+        label="Enter a Partner"
         required
         :rules="[required]"
+        :items="cmpnyPrtnr"
         v-model="contract.optionalPartner"
-      ></v-text-field>
+      ></v-combobox>
       <v-text-field
         label="Start"
         required
@@ -36,17 +38,25 @@
         v-model="contract.duration"
       ></v-text-field>
       <v-text-field
-        label="Other"
+        label="Price"
         required
-        :rules="[required]"
-        v-model="contract.other"
+        placeholder="per Month"
+        prefix="€"
+        v-model="contract.pricePerMonth"
       ></v-text-field>
+
 
     </panel>
    </v-flex>
    <v-flex xs8>
      <panel title="Contract Objectives" class="ml-2">
       <v-flex xs12>
+      <v-text-field
+        label="Other"
+        required
+        :rules="[required]"
+        v-model="contract.other"
+      ></v-text-field>
         <v-combobox
           v-model="contract.categories"
           :items="catArray"
@@ -80,6 +90,8 @@
 <script>
 import ContractsService from '../services/ContractsService'
 import CategoryService from '../services/CategoryService'
+import PartnerService from '../services/PartnerService'
+import _ from 'lodash'
 export default {
   data () {
     return {
@@ -93,10 +105,22 @@ export default {
         other: null,
         optionalPartner: null,
         categories: null,
+        pricePerMonth: null,
         createdBy: this.$store.state.user.name
+      },
+      partner: {
+        name: null,
+        company: null,
+        adress: null,
+        branch: null,
+        phone: null,
+        fax: null,
+        contracts: null
       },
       categories: [],
       catArray: [],
+      prtnrArr: [],
+      cmpnyPrtnr: [],
       error: null,
       required: (value) => !!value || 'Required.',
       date: new Date().toJSON().slice(0,10).toString(),
@@ -128,10 +152,26 @@ export default {
         }
       }
 
+      const checkPartner = [];
+      for (const pkey in this.partner) {
+        console.log(pkey);
+        checkPartner.push(this.partner[pkey].name)
+      }
+      if(!checkPartner.includes(this.contract.partner)) {
+        const newPartner = {
+          company: this.contract.partner,
+          name: this.contract.optionalPartner
+        }
+        try {
+          await PartnerService.post(newPartner)
+        } catch (e) {
+          console.log(e);
+          }
+      }
+
       // call api
       try {
         await ContractsService.post(this.contract)
-        // TODO: send category to db
         this.$router.push({
           name: 'contracts'
         })
@@ -142,12 +182,29 @@ export default {
   },
   async mounted () {
     try {
+      this.partner = (await PartnerService.get()).data
+      for(var i = 0; i < this.partner.length; i++) {
+        this.prtnrArr.push(this.partner[i].company)
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
       this.categories = (await CategoryService.get()).data
       for(var i = 0; i < this.categories.length; i++) {
         this.catArray.push(this.categories[i].name)
       }
     } catch (e) {
       console.log(e)
+    }
+  },
+  watch: {
+    'contract.partner': function(val) {
+      for(var i = 0; i < this.partner.length; i++) {
+        if(this.partner[i].company === val) {         
+          this.cmpnyPrtnr.push(this.partner[i].name)
+        }
+      }
     }
   }
 }
