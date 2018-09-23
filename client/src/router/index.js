@@ -6,6 +6,7 @@ import Login from '../components/authentication/Login';
 import CreateContract from '../components/CreateContracts';
 import ViewContract from '../components/ViewContracts';
 import EditContract from '../components/EditContracts';
+import CategoryContracts from '../components/CategoryContracts'
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/contract/:contractId/edit',
       name: 'contract-edit',
       component: EditContract
-    }
+    },
+    {
+      path: '/contracts/:categoryId',
+      name: 'contract-category',
+      component: CategoryContracts
+    },
   ]
 });

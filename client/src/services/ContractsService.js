@@ -16,5 +16,8 @@ export default {
   },
   put(contract) {
     return Api().put(`contracts/${contract.id}`, contract);
+  },
+  get(category) {
+    return Api().get(`contracts/category/${category}`);
   }
 };

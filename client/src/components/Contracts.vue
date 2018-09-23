@@ -1,7 +1,8 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs8 offset-xs2>
-      <contract-panel class="mt-2"/>
+    <CategoryPanel/>
+    <v-flex xs8 offset-xs1>
+      <contract-panel/>
     </v-flex>
   </v-layout>
 </template>
@@ -9,10 +10,13 @@
 <script>
 import ContractsService from '../services/ContractsService';
 import ContractPanel from './Panels/ContractPanel';
+import CategoryPanel from '../components/Panels/CategoryPanel';
+
 export default {
   components: {
     ContractsService,
     ContractPanel,
+    CategoryPanel
   },
   data () {
     return {
@@ -20,8 +24,9 @@ export default {
     }
   },
   async mounted () {
-    // do request to backend for all songs
-    this.contracts = (await ContractsService.index()).data   
+    // do request to backend for all Contracts
+    // unnecessary
+    // this.contracts = (await ContractsService.index()).data   
   }
 }
 </script>

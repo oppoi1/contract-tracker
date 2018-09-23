@@ -64,5 +64,19 @@ module.exports = {
         error: 'Error while updating contract'
       })
     }
+  },
+  async get (req, res) {
+    try {
+      const contracts = await Contract.findAll({
+        where: {
+          categories: req.params.category
+        }
+      })
+      res.send(contracts)
+    } catch (err) {
+      res.status(500).send({
+        error: `an error occured while trying to fetch contracts from ${req.params.category}`
+      })
+    }
   }
 }
