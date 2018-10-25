@@ -1,6 +1,9 @@
 <template>
   <v-layout>
     <v-flex xs4>
+      <div v-for="user in usrArray" :key="user.name">
+        <v-btn>{{user.name}}</v-btn>
+      </div>
    </v-flex>
   </v-layout>
 </template>
