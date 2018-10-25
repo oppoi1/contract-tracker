@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Contracts from '../components/Contracts'
-import Register from '../components/authentication/Register';
-import Login from '../components/authentication/Login';
-import CreateContract from '../components/CreateContracts';
-import ViewContract from '../components/ViewContracts';
-import EditContract from '../components/EditContracts';
+import Register from '../components/authentication/Register'
+import Login from '../components/authentication/Login'
+import CreateContract from '../components/CreateContracts'
+import ViewContract from '../components/ViewContracts'
+import EditContract from '../components/EditContracts'
 import CategoryContracts from '../components/CategoryContracts'
+import UserAdmin from '../components/UserAdmin'
 
 Vue.use(Router);
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/contracts/:categoryId',
       name: 'contract-category',
       component: CategoryContracts
+    },
+    {
+      path: '/user/admin',
+      name: 'user-administration',
+      component: UserAdmin
     },
   ]
 });

@@ -21,4 +21,6 @@ module.exports = app => {
   app.post('/categories', CategoryController.post)
   app.get('/partner', PartnerController.get)
   app.post('/partner', PartnerController.post)
+  app.get('/users', AuthenticationController.get)
+  app.put('/users', AuthenticationControllerPolicy.update, AuthenticationController.update)
 }

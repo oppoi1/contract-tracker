@@ -11,8 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     categories: DataTypes.TEXT,
     createdBy: DataTypes.STRING,
     pricePerMonth: DataTypes.INTEGER,
+    responsible: DataTypes.STRING,
+    cancel: DataTypes.INTEGER,
     modifiedBy: DataTypes.STRING
   })
-
   return Contract
 }

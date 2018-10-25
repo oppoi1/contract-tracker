@@ -9,10 +9,17 @@
         v-model="contract.number"
       ></v-text-field>
       <v-combobox
+        v-model="contract.responsible"
+        :rules="[required]"
+        :items="usrArray"
+        label="Responsible for this contract"
+        chips
+      ></v-combobox>
+      <v-combobox
         v-model="contract.partner"
         :rules="[required]"
         :items="prtnrArr"
-        label="Select the Partners Company or create a new one"
+        label="Select Company or create a new one"
         chips
       ></v-combobox>
       <v-combobox
@@ -38,25 +45,26 @@
         v-model="contract.duration"
       ></v-text-field>
       <v-text-field
-        label="Price"
+        label="cancelPeriod"
+        required
+        :rules="[required]"
+        placeholder="in Months, ex: 3"
+        v-model="contract.cancel"
+      ></v-text-field>
+      <v-text-field
+        label="Price per Month"
         required
         placeholder="per Month"
         prefix="€"
         v-model="contract.pricePerMonth"
       ></v-text-field>
-
+      <p class="red">p.A: {{ contract.pricePerMonth * 12 }} €</p>
 
     </panel>
    </v-flex>
    <v-flex xs8>
      <panel title="Contract Objectives" class="ml-2">
       <v-flex xs12>
-      <v-text-field
-        label="Other"
-        required
-        :rules="[required]"
-        v-model="contract.other"
-      ></v-text-field>
         <v-combobox
           v-model="contract.categories"
           :items="catArray"
@@ -76,6 +84,12 @@
         :rules="[required]"
         v-model="contract.futureobjectives"
       ></v-textarea>
+      <v-textarea
+        label="Comments / Specifics"
+        required
+        :rules="[required]"
+        v-model="contract.other"
+      ></v-textarea>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
@@ -91,6 +105,7 @@
 import ContractsService from '../services/ContractsService'
 import CategoryService from '../services/CategoryService'
 import PartnerService from '../services/PartnerService'
+import AuthenticationService from '../services/AuthenticationService'
 import _ from 'lodash'
 export default {
   data () {
@@ -106,6 +121,8 @@ export default {
         optionalPartner: null,
         categories: null,
         pricePerMonth: null,
+        responsible: null,
+        cancel: null,
         createdBy: this.$store.state.user.name
       },
       partner: {
@@ -121,6 +138,7 @@ export default {
       catArray: [],
       prtnrArr: [],
       cmpnyPrtnr: [],
+      usrArray: [],
       error: null,
       required: (value) => !!value || 'Required.',
       date: new Date().toJSON().slice(0,10).toString(),
@@ -193,6 +211,14 @@ export default {
       this.categories = (await CategoryService.get()).data
       for(var i = 0; i < this.categories.length; i++) {
         this.catArray.push(this.categories[i].name)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    try {
+      this.users = (await AuthenticationService.get()).data
+      for(var i = 0; i < this.users.length; i++) {
+        this.usrArray.push(this.users[i].name)
       }
     } catch (e) {
       console.log(e)

@@ -1,4 +1,5 @@
 const { User } = require('../models')
+const { Users } = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
@@ -56,6 +57,32 @@ module.exports = {
     } catch (error) {
       res.status(500).send({
         error: 'An error has occured trying to log in'
+      })
+    }
+  },
+  async get (req, res) {
+    try {
+      const users = await Users.findAll({
+        limit: 15
+      })
+      res.send(users)
+    } catch (err) {
+      res.status(500).send({
+        error: `Error while fetching users ${err}`
+      })
+    }
+  },
+  async update (req, res) {
+    try {
+      const user = await User.update(req.body, {
+        where: {
+          name: req.params.name
+        }
+      })
+      res.send(user)
+    } catch (error) {
+      res.status(500).send({
+        error: 'Error while updating User'
       })
     }
   }

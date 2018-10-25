@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Category = sequelize.define('Category', {
+  const Users = sequelize.define('Users', {
     name: DataTypes.STRING
   })
-  return Category
+  return Users
 }

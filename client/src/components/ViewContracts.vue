@@ -8,7 +8,7 @@
               {{contract.number}}
             </div>
             <div class="contract-partner">
-              {{contract.partner}}
+              {{contract.partner}}.
               {{contract.optionalPartner}}
             </div>
             <div class="contract-start">
