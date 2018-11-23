@@ -9,5 +9,8 @@ export default {
   },
   get() {
     return Api().get('users');
+  },
+  post(credentials) {
+    return Api().post('update', credentials)
   }
 };

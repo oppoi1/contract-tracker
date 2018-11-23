@@ -8,6 +8,7 @@ import ViewContract from '../components/ViewContracts'
 import EditContract from '../components/EditContracts'
 import CategoryContracts from '../components/CategoryContracts'
 import UserAdmin from '../components/UserAdmin'
+import UserAdminEdit from '../components/UserAdminEdit'
 
 Vue.use(Router);
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/contracts/:categoryId',
       name: 'contract-category',
       component: CategoryContracts
+    },
+    {
+      path: '/user/admin/:userId',
+      name: 'user-administration-edit',
+      component: UserAdminEdit
     },
     {
       path: '/user/admin',
