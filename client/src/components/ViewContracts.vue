@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs6>
-      <panel :title="contract.partner + ': ' + contract.number">
+      <panel :title="'Contract: ' + contract.number">
         <v-layout>
           <v-flex xs3 ma-2 text-xs-left ma-3>
             <div class="contract-contact text-xs-left subheading mb-3">
@@ -91,14 +91,61 @@
       </panel>
     </v-flex>
     <v-flex xs6>
-      <panel title="About the Partner" class="ml-2">
-        <span>
-          {{prtnrArr[0].company}}
-        </span>
-        {{prtnrArr[0].name}}
-        {{prtnrArr[0].adress}}
-        {{prtnrArr[0].branch}}
-        {{prtnrArr[0].phone}}
+      <panel :title="'Partner details: ' + prtnrArr[0].company" class="ml-2">
+        <v-layout>
+          <v-flex xs3 ma-2 text-xs-left ma-3>
+            <div class="text-xs-left subheading mb-3">
+              Company: 
+            </div>
+            <div class="text-xs-left subheading mb-3">
+              Address: 
+            </div>
+            <div class="text-xs-left subheading mb-3">
+              Branch: 
+            </div>
+            <div class="text-xs-left subheading mb-3">
+              Phone: 
+            </div>
+          </v-flex>
+          <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
+            <div class="mb-3">
+              <span class="font-weight-bold">
+                {{prtnrArr[0].company}}
+              </span>
+            </div>
+            <div class="mb-3">
+              <span class="font-weight-bold">
+                {{prtnrArr[0].name}}
+              </span>
+            </div>
+            <div class="mb-3">
+              <span class="font-weight-bold">
+                {{prtnrArr[0].branch}}
+              </span>
+            </div>
+            <div class="mb-3">
+              <span class="font-weight-bold">
+                {{prtnrArr[0].phone}}
+              </span>
+            </div>
+          </v-flex>
+        </v-layout>
+        <v-btn class="blue" dark :to="{
+          name: 'contract-edit',
+          params () {
+            return {
+              contractId: contract.id
+            }
+          }
+        }">Edit</v-btn>
+        <v-btn class="blue" dark :to="{
+          name: 'contract-edit',
+          params () {
+            return {
+              contractId: contract.id
+            }
+          }
+        }">Delete</v-btn>
       </panel>
     </v-flex>
   </v-layout>
