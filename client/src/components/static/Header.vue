@@ -4,12 +4,32 @@
       JustVue
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn flat dark to="/contracts" v-if="$store.state.isUserLoggedIn">
-        Overview
-      </v-btn>
-      <v-btn flat dark to="/contract/add" v-if="$store.state.isUserLoggedIn">
-       Add Contracts
-      </v-btn>
+      <v-menu offset-y>
+        <v-btn slot="activator" flat dark v-if="$store.state.isUserLoggedIn">
+          Contracts
+        </v-btn>
+        <v-list>
+          <v-list-tile to="/contracts">
+            Overview
+          </v-list-tile>
+          <v-list-tile to="/contract/add">
+            Add Contracts
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+      <v-menu offset-y>
+        <v-btn slot="activator" flat dark v-if="$store.state.isUserLoggedIn">
+          Partner
+        </v-btn>
+        <v-list>
+          <v-list-tile to="/partner">
+            Overview
+          </v-list-tile>
+          <v-list-tile to="/partner">
+            Add Partner
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>

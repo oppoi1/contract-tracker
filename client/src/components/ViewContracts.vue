@@ -4,29 +4,8 @@
       <panel :title="'Contract: ' + contract.number">
         <v-layout>
           <v-flex xs3 ma-2 text-xs-left ma-3>
-            <div class="contract-contact text-xs-left subheading mb-3">
-              Contact: 
-            </div>
-            <div class="contract-start text-xs-left subheading mb-3">
-              Contract begins:
-            </div>
-            <div class="contract-end text-xs-left subheading mb-3">
-              Contract ends: 
-            </div>
-            <div class="contract-categories text-xs-left subheading mb-3">
-              Categories: 
-            </div>
-            <div class="contract-price text-xs-left subheading mb-3">
-              Price per Month:
-            </div>
-            <div class="contract-objectives text-xs-left subheading mb-3">
-              Objectives: 
-            </div>
-            <div class="contract-futureObjectives text-xs-left subheading mb-3">
-              Future objectives: 
-            </div>
-            <div class="contract-other text-xs-left subheading mb-3">
-              Misc
+            <div class="contract-contact text-xs-left subheading mb-3" v-for="item in items" :key="item">
+              {{item}}:
             </div>
           </v-flex>
           <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
@@ -52,7 +31,7 @@
             </div>
             <div class="contract-price mb-3">
               <span class="font-weight-bold">
-                {{contract.pricePerMonth}}
+                {{contract.pricePerMonth}}&euro;
               </span>
             </div>
             <div class="contract-objectives mb-3">
@@ -130,6 +109,9 @@
             </div>
           </v-flex>
         </v-layout>
+        <div v-bind="test">
+          {{test}}
+        </div>
         <v-btn class="blue" dark :to="{
           name: 'contract-edit',
           params () {
@@ -159,7 +141,9 @@ export default {
     return {
       contract: {},
       partner: {},
-      prtnrArr: []
+      prtnrArr: [],
+      // contract properties
+      items: ['Contact', 'Contract begins', 'Contract ends', 'Categories', 'Price per Month', 'Objectives', 'Future objectives', 'Miscellaneous'],
     }
   },
   async mounted () {
@@ -174,6 +158,15 @@ export default {
       }
     } catch (e) {
       console.log(e);
+    }
+  },
+  methods: {
+    // calculate date difference / 30 and return costs from creating contract and today
+    date_difference(date1) {
+      var dt1 = new Date(date1)
+      var dt2 = new Date()
+
+      return Math.floor((Date.UTC(dt2.getFullYear(),dt2.getMonth(),dt2.getDate()) - Date.UTC(dt1.getFullYear(),dt1.getMonth(),dt1.getDate())))
     }
   }
 }
