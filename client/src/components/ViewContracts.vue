@@ -92,7 +92,9 @@
     </v-flex>
     <v-flex xs6>
       <panel title="About the Partner" class="ml-2">
-        {{prtnrArr[0].company}}
+        <span>
+          {{prtnrArr[0].company}}
+        </span>
         {{prtnrArr[0].name}}
         {{prtnrArr[0].adress}}
         {{prtnrArr[0].branch}}
