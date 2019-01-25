@@ -37,16 +37,8 @@ export default {
   height: 150px;
   overflow: hidden;
 }
-
 .contract-number {
- font-size: 24px;
-}
-
-.contract-partner {
-font-size: 20px;
-}
-
-.contract-start {
-font-size: 16px;
+  border: 1px solid #000;
+  padding: 3px;
 }
 </style>

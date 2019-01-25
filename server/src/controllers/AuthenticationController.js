@@ -62,8 +62,8 @@ module.exports = {
   async get (req, res) {
     try {
       const users = await User.findAll({
-        limit: 15,
-        order: [['name'], ['lastname'], ['department']]
+        attributes: ['id', 'name', 'email', 'createdAt', 'updatedAt'],
+        limit: 15
       })
       res.send(users)
     } catch (err) {
