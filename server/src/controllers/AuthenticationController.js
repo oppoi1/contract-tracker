@@ -1,5 +1,4 @@
 const { User } = require('../models')
-const { Users } = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
@@ -62,8 +61,9 @@ module.exports = {
   },
   async get (req, res) {
     try {
-      const users = await Users.findAll({
-        limit: 15
+      const users = await User.findAll({
+        limit: 15,
+        order: [['name'], ['lastname'], ['department']]
       })
       res.send(users)
     } catch (err) {

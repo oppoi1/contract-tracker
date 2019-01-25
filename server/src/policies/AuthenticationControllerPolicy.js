@@ -1,9 +1,10 @@
-const Joi = require('Joi')
+const Joi = require('joi')
 
 module.exports = {
   register (req, res, next) {
     const schema = {
       name: Joi.string().min(4).max(30),
+      email: Joi.string().email({minDomainAtoms: 2}),
       password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{4,32}$'))
     }
 
@@ -13,18 +14,18 @@ module.exports = {
       switch (error.details[0].context.key) {
         case 'name':
           res.status(400).send({
-            error: 'You must provide a unique and valid name'
+            error: 'You must provide a unique and valid name/email address.'
           })
           break
         case 'password':
           res.status(400).send({
             error:
-              'Password provided failed to match the rules: <br/> 1. It must contain only lower and upper case and numerics <br/> 2. Must be between 8 and 32 characters long'
+              'Password provided failed to match the rules: <br/> 1. It must contain only lower and upper case and numerics <br/> 2. Must be between 8 and 32 characters long.'
           })
           break
         default:
           res.status(400).send({
-            error: 'Invalid name and password'
+            error: 'Invalid name and password.'
           })
       }
     } else {
@@ -34,6 +35,7 @@ module.exports = {
   update (req, res, next) {
     const schema = {
       name: Joi.string().min(4).max(30),
+      email: Joi.string().email({minDomainAtoms: 2}),
       password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{4,32}$'))
     }
 
@@ -49,12 +51,12 @@ module.exports = {
           break
         case 'password':
           res.status(400).send({
-            error: 'Password provided failed to match the rules'
+            error: 'Password provided failed to match the rules.'
           })
           break
         default:
           res.status(400).send({
-            error: 'Invalid name and password'
+            error: 'Invalid name, email and/or password.'
           })
       }
     } else {

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -6,7 +7,7 @@ const app = express()
 const { sequelize } = require('./models')
 const config = require('./config/config')
 
-app.use(morgan('combined'))
+app.use(morgan('tiny'))
 app.use(bodyParser.json())
 app.use(cors())
 

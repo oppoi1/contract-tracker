@@ -1,11 +1,11 @@
 module.exports = {
   port: process.env.PORT || 8081,
   db: {
-    database: process.env.DB_NAME || 'justvue',
-    user: process.env.DB_USER || 'jvue',
-    password: process.env.DB_PW || '2malTanzen',
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PW,
     options: {
-      dialect: process.env.DIALECT || 'mysql',
+      dialect: process.env.DIALECT,
       host: process.env.HOST || 'localhost'
     }
   },

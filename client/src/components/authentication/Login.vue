@@ -10,6 +10,7 @@
         type="password"
         label="Password"
         v-model="password"
+        @keyup.enter="login"
       ></v-text-field>
       <div class="danger-alert" v-html="error"></div>
       <v-btn class="blue" dark @click="login">Login</v-btn>

@@ -7,15 +7,20 @@
           label="name"
           v-model="name"
         ></v-text-field>
+        <v-text-field
+          label="email"
+          v-model="email"
+        ></v-text-field>
           <v-text-field
           type="password"
           label="Password"
           v-model="password"
           autocomplete="new-password"
+          @keyup.enter="register"
         ></v-text-field>
       </form>
       <div class="danger-alert" v-html="error"></div>
-      <v-btn class="blue" dark @click="register">Register</v-btn>
+      <v-btn class="blue" dark @click="register" @keyup.enter="register">Register</v-btn>
     </panel>
   </v-flex>
 </v-layout>
@@ -28,6 +33,7 @@ export default {
     return {
       name: '',
       password: '',
+      email: '',
       error: null
     };
   },
@@ -36,6 +42,7 @@ export default {
       try {
         const response = await AuthenticationService.register({
           name: this.name,
+          email: this.email,
           password: this.password
         });
         this.$store.dispatch('setToken', response.data.token);
