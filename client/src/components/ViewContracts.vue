@@ -109,9 +109,6 @@
             </div>
           </v-flex>
         </v-layout>
-        <div v-bind="test">
-          {{test}}
-        </div>
         <v-btn class="blue" dark :to="{
           name: 'contract-edit',
           params () {
@@ -120,14 +117,6 @@
             }
           }
         }">Edit</v-btn>
-        <v-btn class="blue" dark :to="{
-          name: 'contract-edit',
-          params () {
-            return {
-              contractId: contract.id
-            }
-          }
-        }">Delete</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -148,7 +137,11 @@ export default {
   },
   async mounted () {
     const contractId = this.$store.state.route.params.contractId
-    this.contract = (await ContractsService.show(contractId)).data
+    try {
+      this.contract = (await ContractsService.show(contractId)).data
+      } catch (error) {
+      console.log(error)
+    }
 
     try {
       this.partner = (await PartnerService.get()).data

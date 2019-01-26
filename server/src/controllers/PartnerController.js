@@ -13,7 +13,7 @@ module.exports = {
       })
     }
   },
-  async getOne (req, res) {
+  async show (req, res) {
     try {
       const partner = await Partner.findById(req.params.partnerId)
       res.send(partner)

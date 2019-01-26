@@ -9,6 +9,8 @@ import EditContract from '../components/EditContracts'
 import CategoryContracts from '../components/CategoryContracts'
 import UserAdmin from '../components/UserAdmin'
 import UserAdminEdit from '../components/UserAdminEdit'
+import PartnerOverview from '../components/partner/ShowPartner'
+import ViewPartner from '../components/partner/ViewPartner'
 
 Vue.use(Router);
 
@@ -65,5 +67,15 @@ export default new Router({
       name: 'user-administration',
       component: UserAdmin
     },
+    {
+      path: '/partner',
+      name: 'partner-overview',
+      component: PartnerOverview
+    },
+    {
+      path: '/partner/:partnerId',
+      name: 'partner-view',
+      component: ViewPartner
+    }
   ]
 });
