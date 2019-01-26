@@ -154,39 +154,7 @@ export default {
         this.error = 'Please fill in all the required fields.'
         return
       }
-
-      const exists = [];
-      for(const key in this.categories) {
-        exists.push(this.categories[key].name)
-      }
-      if(!exists.includes(this.contract.categories)) {
-        const cntrctCat = {
-          name: this.contract.categories
-        }
-        try {
-          await CategoryService.post(cntrctCat)
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      const checkPartner = [];
-      for (const pkey in this.partner) {
-        console.log(pkey);
-        checkPartner.push(this.partner[pkey].name)
-      }
-      if(!checkPartner.includes(this.contract.partner)) {
-        const newPartner = {
-          company: this.contract.partner,
-          name: this.contract.optionalPartner
-        }
-        try {
-          await PartnerService.post(newPartner)
-        } catch (e) {
-          console.log(e);
-          }
-      }
-
+      
       // call api
       try {
         await ContractsService.post(this.contract)

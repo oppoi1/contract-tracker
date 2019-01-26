@@ -13,6 +13,17 @@ module.exports = {
       })
     }
   },
+  async getOne (req, res) {
+    try {
+      const partner = await Partner.findById(req.params.partnerId)
+      res.send(partner)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({
+        error: `Couldn't find Partner you are looking for.`
+      })
+    }
+  },
   async post (req, res) {
     try {
       const partners = await Partner.create(req.body)
