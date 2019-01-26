@@ -20,7 +20,7 @@ module.exports = {
     } catch (err) {
       console.log(err)
       res.status(500).send({
-        error: 'Error while fetching partner'
+        error: `Couldn't find Partner you are looking for.`
       })
     }
   },
