@@ -33,5 +33,26 @@ module.exports = {
         error: 'Error while creating Partner'
       })
     }
+  },
+  async put (req, res) {
+    try {
+      const existingPartner = await Partner.findById(req.params.partnerId)
+      if (!existingPartner) {
+        const error = new Error(`Couldn't find partner`)
+        error.code = 404
+        throw error
+      }
+
+      const partner = await Partner.update(req.body, {
+        where: {
+          id: req.params.partnerId
+        }
+      })
+      res.send(partner)
+    } catch (error) {
+      res.status(500).send({
+        error: `Couldn't update partner.`
+      })
+    }
   }
 }

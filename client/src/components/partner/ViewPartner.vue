@@ -1,64 +1,80 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
-      <panel :title="'Partner: ' + partner.company">
-        <v-layout>
-          <v-flex xs3 ma-2 text-xs-left ma-3>
-            <div class="contract-contact text-xs-left subheading mb-3" v-for="item in items" :key="item">
-              {{item}}:
-            </div>
-          </v-flex>
+      <panel :title="'Partner: ' + partner.name">
+        <v-layout justify-start row fill-height>
           <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
-            <div class="contract-contact mb-3">
-              <span class="font-weight-bold">
+            <div class="partner mb-3">
+              <div class="v-badge partner">
+                Name:
+              </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.name}}
-              </span>
+              </div>
             </div>
-            <div class="contract-start mb-3">
-              <span class="font-weight-bold">
+            <div class="partner mb-3">
+              <div class="v-badge partner">
+                Company:
+             </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.company}}
-              </span>
+              </div>
             </div>
-            <div class="contract-end mb-3">
-              <span class="font-weight-bold">
+            <div class="partnerd mb-3">
+              <div class="v-badge partner">
+                Address:
+              </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.address}}
-              </span>
+              </div>
             </div>
-            <div class="contract-categories mb-3">
-              <span class="font-weight-bold">
+            <div class="partner mb-3">
+              <div class="v-badge partner">
+                Branch:
+              </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.branch}}
-              </span>
+              </div>
             </div>
-            <div class="contract-price mb-3">
-              <span class="font-weight-bold">
+            <div class="partner mb-3">
+              <div class="v-badge partner">
+                Phone:
+              </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.phone}}
-              </span>
+              </div>
             </div>
-            <div class="contract-objectives mb-3">
-              <span class="font-weight-bold">
+            <div class="partner mb-3">
+              <div class="v-badge partner">
+                Fax:
+              </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.fax}}
-              </span>
+              </div>
             </div>
-            <div class="contract-futureObjectives mb-3">
-              <span class="font-weight-bold">
+            <div class="partner mb-3">
+              <div class="v-badge partner">
+                Created:  
+              </div>
+              <div class="font-weight-bold v-badge">
                 {{this.partner.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]}}
-              </span>
+              </div>
             </div>
           </v-flex>
         </v-layout>
         <v-btn class="blue" dark :to="{
-          name: 'contract-edit',
+          name: 'partner-edit',
           params () {
             return {
-              contractId: contract.id
+              partnerId: this.partner.id
             }
           }
         }">Edit</v-btn>
         <v-btn class="blue" dark :to="{
-          name: 'contract-edit',
+          name: 'partner-edit',
           params () {
             return {
-              contractId: contract.id
+              contractId: this.partner.id
             }
           }
         }">Delete</v-btn>
@@ -72,9 +88,7 @@ import PartnerService from '../../services/PartnerService'
 export default {
   data () {
     return {
-      partner: {},
-      // partner properties
-      items: ['Name', 'Company', 'Address', 'Branch', 'Phone', 'Fax', 'createdAt'],
+      partner: {}
     }
   },
   async mounted () {
@@ -83,7 +97,7 @@ export default {
       this.partner = (await PartnerService.show(partnerId)).data
       } catch (error) {
       console.log(error)
-    }
+    } 
   },
 }
 </script>
@@ -91,5 +105,8 @@ export default {
 <style>
 span + span {
   margin-left: 20px;
+}
+.partner {
+  width: 50%
 }
 </style>
