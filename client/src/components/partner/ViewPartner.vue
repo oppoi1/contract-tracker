@@ -99,6 +99,7 @@ export default {
       console.log(error)
     } 
   },
+  // todo: function to delete partner
 }
 </script>
 

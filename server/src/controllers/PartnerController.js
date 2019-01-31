@@ -54,5 +54,20 @@ module.exports = {
         error: `Couldn't update partner.`
       })
     }
+  },
+  async delete (req, res) {
+    try {
+      const existingPartner = await Partner.findById(req.params.partnerId)
+      if (!existingPartner) {
+        const error = new Error(`Couldn't find partner to delete.`)
+        error.code = 404
+        throw error
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({
+        error: `Couldn't retrieve data: deleting partner.`
+      })
+    }
   }
 }

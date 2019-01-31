@@ -22,6 +22,7 @@ module.exports = app => {
   app.get('/partner', PartnerController.get)
   app.get('/partner/:partnerId', PartnerController.show)
   app.get('/partner/:partnerId', PartnerController.put)
+  app.get('/partner/:partnerId', PartnerController.delete)
   app.post('/partner', PartnerController.post)
   app.get('/users', AuthenticationController.get)
   app.put('/users', AuthenticationControllerPolicy.update, AuthenticationController.update)

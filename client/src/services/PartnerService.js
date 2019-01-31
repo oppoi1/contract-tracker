@@ -12,5 +12,8 @@ export default {
   },
   put(partner) {
     return Api().put(`partner/${partnerId}/edit`, partner)
+  },
+  delete(partner) {
+    return Api().delete(`partner/${partnerId}/edit`, partner)
   }
 }
