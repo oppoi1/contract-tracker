@@ -9,5 +9,11 @@ export default {
   },
   post (partner) {
     return Api().post('partner', partner)
+  },
+  put(partnerId, partner) {
+    return Api().put(`partner/${partnerId}/edit`, partner)
+  },
+  delete(partnerId) {
+    return Api().delete(`partner/${partnerId}`)
   }
 }

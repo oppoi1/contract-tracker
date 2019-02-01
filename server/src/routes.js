@@ -3,6 +3,7 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 const ContractController = require('./controllers/ContractController')
 const CategoryController = require('./controllers/CategoryController')
 const PartnerController = require('./controllers/PartnerController')
+const CompanyController = require('./controllers/CompanyController')
 
 module.exports = app => {
   app.post(
@@ -21,7 +22,10 @@ module.exports = app => {
   app.post('/categories', CategoryController.post)
   app.get('/partner', PartnerController.get)
   app.get('/partner/:partnerId', PartnerController.show)
+  app.put('/partner/:partnerId', PartnerController.put)
+  app.delete('/partner/:partnerId', PartnerController.delete)
   app.post('/partner', PartnerController.post)
+  app.get('/company', CompanyController.get)
   app.get('/users', AuthenticationController.get)
   app.put('/users', AuthenticationControllerPolicy.update, AuthenticationController.update)
 }

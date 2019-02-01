@@ -33,5 +33,50 @@ module.exports = {
         error: 'Error while creating Partner'
       })
     }
+  },
+  async put (req, res) {
+    try {
+      const existingPartner = await Partner.findById(req.params.partnerId)
+      if (!existingPartner) {
+        const error = new Error(`Couldn't find partner`)
+        error.code = 404
+        throw error
+      }
+
+      const partner = await Partner.update(req.body, {
+        where: {
+          id: req.params.partnerId
+        }
+      })
+      res.send(partner)
+    } catch (error) {
+      res.status(500).send({
+        error: `Couldn't update partner.`
+      })
+    }
+  },
+  async delete (req, res) {
+    try {
+      const existingPartner = await Partner.findById(req.params.partnerId)
+      if (!existingPartner) {
+        const error = new Error(`Couldn't find partner to delete.`)
+        error.code = 404
+        throw error
+      }
+      try {
+        await existingPartner.destroy()
+        return res.send({message: `Partner deleted successfully.`})
+      } catch (error) {
+        console.log(error)
+        const throwbackError = new Error(`Couldn't delete partner. Please ask your administrator.`)
+        error.code = 404
+        throw throwbackError
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({
+        error: `Couldn't retrieve data: deleting partner.`
+      })
+    }
   }
 }

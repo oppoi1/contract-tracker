@@ -20,7 +20,7 @@ app.use(cors())
 // eslint-disable-next-line no-unused-vars
 Partner.Company = Partner.belongsTo(Company)
 Partner.Contract = Partner.hasMany(Contract)
-Category.Contract = Category.hasOne(Contract)
+Category.Contract = Category.hasMany(Contract)
 Company.Contract = Company.hasMany(Contract)
 
 require('./routes')(app)

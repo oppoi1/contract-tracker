@@ -40,7 +40,6 @@ module.exports = {
     let partner = null
     let category = null
     let body = req.body
-
     try {
       category = await Category.findOne({where: {name: body.categories}})
       if (!category) {
@@ -50,7 +49,7 @@ module.exports = {
       console.log(category.id)
     } catch (error) {
       console.log(error)
-      res.status(500).send({
+      return res.status(500).send({
         error: 'Error while creating Category.'
       })
     }
@@ -63,7 +62,7 @@ module.exports = {
       }
     } catch (err) {
       console.log(err)
-      res.status(500).send({
+      return res.status(500).send({
         error: 'Error while creating Company.'
       })
     }
@@ -78,7 +77,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(error)
-      res.status(500).send({
+      return res.status(500).send({
         error: 'Error while creating Partner.'
       })
     }
@@ -95,6 +94,7 @@ module.exports = {
         pricePerMonth: body.pricePerMonth,
         responsible: body.responsible,
         cancel: body.cancel,
+        modifiedBy: body.modifiedBy || body.createdBy,
         createdAt: body.createdAt,
         updatedAt: body.updatedAt,
         PartnerId: partner.id,
