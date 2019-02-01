@@ -40,7 +40,6 @@ module.exports = {
     let partner = null
     let category = null
     let body = req.body
-
     try {
       category = await Category.findOne({where: {name: body.categories}})
       if (!category) {
@@ -95,6 +94,7 @@ module.exports = {
         pricePerMonth: body.pricePerMonth,
         responsible: body.responsible,
         cancel: body.cancel,
+        modifiedBy: body.modifiedBy || body.createdBy,
         createdAt: body.createdAt,
         updatedAt: body.updatedAt,
         PartnerId: partner.id,

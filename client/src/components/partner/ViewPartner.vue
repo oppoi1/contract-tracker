@@ -1,6 +1,8 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
+      <div class="danger-alert mb-3" v-html="error"></div>
+      <div class="success-alert mb-3" v-html="success"></div>
       <panel :title="'Partner: ' + partner.name">
         <v-layout justify-start row fill-height>
           <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
@@ -56,8 +58,11 @@
               <div class="v-badge partner">
                 Created:  
               </div>
-              <div class="font-weight-bold v-badge">
+              <div class="font-weight-bold v-badge" v-if="this.partner">
                 {{this.partner.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]}}
+              </div>
+              <div class="font-weight-bold v-badge" v-else>
+                
               </div>
             </div>
           </v-flex>
@@ -70,14 +75,7 @@
             }
           }
         }">Edit</v-btn>
-        <v-btn class="blue" dark :to="{
-          name: 'partner-edit',
-          params () {
-            return {
-              contractId: this.partner.id
-            }
-          }
-        }">Delete</v-btn>
+        <v-btn class="blue" dark @click="delete_partner()">Delete</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -88,7 +86,9 @@ import PartnerService from '../../services/PartnerService'
 export default {
   data () {
     return {
-      partner: {}
+      partner: {},
+      error: null,
+      success: null
     }
   },
   async mounted () {
@@ -97,9 +97,23 @@ export default {
       this.partner = (await PartnerService.show(partnerId)).data
       } catch (error) {
       console.log(error)
+      this.error = error
     } 
   },
-  // todo: function to delete partner
+  methods: {
+    async delete_partner() {
+      try {
+        const response = await PartnerService.delete(this.$store.state.route.params.partnerId)
+        this.success = response.data.message
+        setTimeout(() => {
+          this.$router.push('/partner');
+        }, 3000)
+      } catch (error) {
+        console.log(error)
+        this.error = error.data.error
+      }
+    }
+  }
 }
 </script>
 

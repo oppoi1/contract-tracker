@@ -58,4 +58,8 @@ a {
 .danger-alert {
   color: red;
 }
+
+.success-alert {
+  color: green;
+}
 </style>

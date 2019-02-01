@@ -106,6 +106,7 @@ import ContractsService from '../services/ContractsService'
 import CategoryService from '../services/CategoryService'
 import PartnerService from '../services/PartnerService'
 import AuthenticationService from '../services/AuthenticationService'
+import CompanyService from '../services/CompanyService'
 import _ from 'lodash'
 export default {
   data () {
@@ -137,6 +138,7 @@ export default {
       categories: [],
       catArray: [],
       prtnrArr: [],
+      companyArr: [],
       cmpnyPrtnr: [],
       usrArray: [],
       error: null,
@@ -169,9 +171,9 @@ export default {
   async mounted () {
     try {
       this.partner = (await PartnerService.get()).data
-      for(var i = 0; i < this.partner.length; i++) {
-        this.prtnrArr.push(this.partner[i].company)
-      }
+      // for(var i = 0; i < this.partner.length; i++) {
+      //   this.prtnrArr.push(this.partner[i].CompanyId)
+      // }
     } catch (e) {
       console.log(e);
     }
@@ -191,12 +193,31 @@ export default {
     } catch (e) {
       console.log(e)
     }
+    try {
+      this.companyArr = (await CompanyService.get()).data
+      for(var i = 0; i < this.companyArr.length; i++) {
+        this.prtnrArr.push(this.companyArr[i].name)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   },
   watch: {
     'contract.partner': function(val) {
-      for(var i = 0; i < this.partner.length; i++) {
-        if(this.partner[i].company === val) {         
-          this.cmpnyPrtnr.push(this.partner[i].name)
+      // check in company array
+      for(var i = 0; i < this.companyArr.length; i++) {
+        // if the name of company is the same as val
+        console.log(this.companyArr[i].name)
+        console.log(val)
+        if(this.companyArr[i].name === val) {
+          console.log('matched')
+          // if the same then look in partner arr where company id = companyarr[i].id
+          const result = this.partner.map(partner => {
+            var newObj = {}
+            partner.CompanyId === this.companyArr[i].id ? newObj = partner.name : undefined
+            return newObj
+          })
+          this.cmpnyPrtnr = result
         }
       }
     }

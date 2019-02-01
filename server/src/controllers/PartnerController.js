@@ -63,6 +63,15 @@ module.exports = {
         error.code = 404
         throw error
       }
+      try {
+        await existingPartner.destroy()
+        return res.send({message: `Partner deleted successfully.`})
+      } catch (error) {
+        console.log(error)
+        const throwbackError = new Error(`Couldn't delete partner. Please ask your administrator.`)
+        error.code = 404
+        throw throwbackError
+      }
     } catch (error) {
       console.log(error)
       res.status(500).send({
