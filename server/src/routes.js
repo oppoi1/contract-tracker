@@ -18,6 +18,7 @@ module.exports = app => {
   app.post('/contracts', ContractController.post)
   app.get('/contracts/:contractId', ContractController.show)
   app.put('/contracts/:contractId', ContractController.put)
+  app.delete('/contracts/:contractId', ContractController.delete)
   app.get('/categories', CategoryController.get)
   app.post('/categories', CategoryController.post)
   app.get('/partner', PartnerController.get)
