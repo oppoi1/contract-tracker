@@ -146,5 +146,29 @@ module.exports = {
         error: `an error occured while trying to fetch contracts from ${req.params.category}`
       })
     }
+  },
+  async delete (req, res) {
+    try {
+      const existingContract = await Contract.findById(req.params.contractId)
+      if (!existingContract) {
+        const error = new Error(`Couldn't find contract to delete.`)
+        error.code = 404
+        throw error
+      }
+      try {
+        await existingContract.destroy()
+        return res.send({message: `Contract deleted successfully.`})
+      } catch (error) {
+        console.log(error)
+        const throwbackError = new Error(`Couldn't delete Contract. Please ask your administrator.`)
+        error.code = 404
+        throw throwbackError
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({
+        error: `Couldn't retrieve data: deleting Contract.`
+      })
+    }
   }
 }

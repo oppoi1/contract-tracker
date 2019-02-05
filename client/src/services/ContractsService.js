@@ -19,5 +19,8 @@ export default {
   },
   get(category) {
     return Api().get(`contracts/category/${category}`);
+  },
+  delete(contractId) {
+    return Api().delete(`contracts/${contractId}`)
   }
 };

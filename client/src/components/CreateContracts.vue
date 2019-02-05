@@ -59,7 +59,6 @@
         v-model="contract.pricePerMonth"
       ></v-text-field>
       <p class="red">p.A: {{ contract.pricePerMonth * 12 }} €</p>
-
     </panel>
    </v-flex>
    <v-flex xs8>
@@ -207,10 +206,7 @@ export default {
       // check in company array
       for(var i = 0; i < this.companyArr.length; i++) {
         // if the name of company is the same as val
-        console.log(this.companyArr[i].name)
-        console.log(val)
         if(this.companyArr[i].name === val) {
-          console.log('matched')
           // if the same then look in partner arr where company id = companyarr[i].id
           const result = this.partner.map(partner => {
             var newObj = {}

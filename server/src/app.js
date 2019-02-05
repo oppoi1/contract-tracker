@@ -16,8 +16,6 @@ app.use(morgan('tiny'))
 app.use(bodyParser.json())
 app.use(cors())
 
-// Company.Partner = Company.hasMany(Partner)
-// eslint-disable-next-line no-unused-vars
 Partner.Company = Partner.belongsTo(Company)
 Partner.Contract = Partner.hasMany(Contract)
 Category.Contract = Category.hasMany(Contract)
@@ -26,6 +24,6 @@ Company.Contract = Company.hasMany(Contract)
 require('./routes')(app)
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(process.env.PORT || 8081)
+  app.listen(process.env.PORT || 8087)
   console.log(`Magic happens on port ${config.port}`)
 })
