@@ -35,6 +35,7 @@ module.exports = {
     }
   },
   async put (req, res) {
+    console.log(req.params)
     try {
       const existingPartner = await Partner.findById(req.params.partnerId)
       if (!existingPartner) {

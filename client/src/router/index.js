@@ -9,7 +9,7 @@ import EditContract from '../components/EditContracts'
 import CategoryContracts from '../components/CategoryContracts'
 import UserAdmin from '../components/UserAdmin'
 import UserAdminEdit from '../components/UserAdminEdit'
-import PartnerOverview from '../components/partner/ShowPartner'
+import PartnerOverview from '../components/partner/Partner'
 import ViewPartner from '../components/partner/ViewPartner'
 import EditPartner from '../components/partner/EditPartner'
 

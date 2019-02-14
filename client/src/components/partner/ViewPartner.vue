@@ -1,11 +1,11 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
-      <div class="danger-alert mb-3" v-html="error"></div>
-      <div class="success-alert mb-3" v-html="success"></div>
       <panel :title="'Partner: ' + partner.name">
+        <div class="danger-alert mb-3" v-html="error"></div>
+        <div class="success-alert mb-3" v-html="success"></div>
         <v-layout justify-start row fill-height>
-          <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
+          <v-flex xs8 ma-2 text-xs-left ma-3 subheading>
             <div class="partner mb-3">
               <div class="v-badge partner">
                 Name:
@@ -44,14 +44,6 @@
               </div>
               <div class="font-weight-bold v-badge">
                 {{this.partner.phone}}
-              </div>
-            </div>
-            <div class="partner mb-3">
-              <div class="v-badge partner">
-                Fax:
-              </div>
-              <div class="font-weight-bold v-badge">
-                {{this.partner.fax}}
               </div>
             </div>
             <div class="partner mb-3">
