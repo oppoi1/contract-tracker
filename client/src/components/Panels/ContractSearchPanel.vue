@@ -1,6 +1,6 @@
 <template>
     <v-text-field
-    label="Search by Number, Partner or Category"
+    label="Search by Number"
     v-model="search">
     </v-text-field>
 </template>

@@ -1,7 +1,9 @@
 <template>
   <v-toolbar fixed class="blue" dark>
-    <v-toolbar-title class="mr-4">
+    <v-toolbar-title class="mr-4" to="/">
+    <v-btn slot="activator" flat dark class="elevation-11" to="/">
       JustVue
+    </v-btn>
     </v-toolbar-title>
     <v-toolbar-items>
       <v-menu offset-y>

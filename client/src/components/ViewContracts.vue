@@ -4,54 +4,89 @@
       <panel :title="'Contract: ' + contract.number">
         <div class="danger-alert mb-3" v-html="error"></div>
         <div class="success-alert mb-3" v-html="success"></div>
-        <v-layout>
-          <v-flex xs3 ma-2 text-xs-left ma-3>
-            <div class="contract-contact text-xs-left subheading mb-3" v-for="item in items" :key="item">
-              {{item}}:
+        <v-layout justify-start row fill-height>
+          <v-flex xs8 ma-2 text-xs-left ma-3 subheading>
+            <div class="mb-3">
+              <div class="v-badge contract">
+                Contract Id:
+              </div>
+              <div class="contract-contact v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.id}}
+                </span>
+              </div>
             </div>
-          </v-flex>
-          <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
-            <div class="contract-contact mb-3">
-              <span class="font-weight-bold">
-                {{contract.optionalPartner}}
-              </span>
+            <div class="mb-3">
+              <div class="v-badge contract">
+                Contract Start:
+              </div>
+              <div class="contract-start v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.start}}
+                </span>
+              </div>
             </div>
-            <div class="contract-start mb-3">
-              <span class="font-weight-bold">
-                {{contract.start}}
-              </span>
+             <div class="mb-3">
+              <div class="v-badge contract">
+                Contract Ends:
+              </div>
+              <div class="contract-end v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.duration}}
+                </span>
+              </div>
+             </div>
+             <div class="mb-3">
+              <div class="v-badge contract">
+                Contract Categories:
+              </div>
+              <div class="contract-categories v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.categories}}
+                </span>
+              </div>
+             </div>
+             <div class="mb-3">
+              <div class="v-badge contract">
+                Price per Month:
+              </div>
+              <div class="contract-price v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.pricePerMonth}}&euro;
+                </span>
+              </div>
+             </div>
+             <div class="mb-3">
+              <div class="v-badge contract">
+                Contract Objectives:
+              </div>
+              <div class="contract-objectives v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.objectives}}
+                </span>
+              </div>
+             </div>
+             <div class="mb-3">
+              <div class="v-badge contract">
+                Futures Objectives:
+              </div>
+              <div class="contract-futureObjectives v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.futureobjectives}}
+                </span>
+              </div>
+             </div>
+             <div class="mb-3">
+              <div class="v-badge contract">
+                Miscellaneous:
+              </div>
+              <div class="contract-other v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract.other}}
+                </span>
+              </div>
             </div>
-            <div class="contract-end mb-3">
-              <span class="font-weight-bold">
-                {{contract.duration}}
-              </span>
-            </div>
-            <div class="contract-categories mb-3">
-              <span class="font-weight-bold">
-                {{contract.categories}}
-              </span>
-            </div>
-            <div class="contract-price mb-3">
-              <span class="font-weight-bold">
-                {{contract.pricePerMonth}}&euro;
-              </span>
-            </div>
-            <div class="contract-objectives mb-3">
-              <span class="font-weight-bold">
-                {{contract.objectives}}
-              </span>
-            </div>
-            <div class="contract-futureObjectives mb-3">
-              <span class="font-weight-bold">
-                {{contract.futureobjectives}}
-              </span>
-            </div>
-            <div class="contract-other mb-3">
-              <span class="font-weight-bold">
-                {{contract.other}}
-              </span>
-            </div>
-          </v-flex>
+          </v-flex> 
         </v-layout>
         <v-btn class="blue" dark :to="{
           name: 'contract-edit',
@@ -65,11 +100,14 @@
       </panel>
     </v-flex>
     <v-flex xs6>
-      <panel :title="'Partner details: ' + prtnrArr[0].company" class="ml-2">
+      <panel :title="'Partner details: ' + company.name" class="ml-2">
         <v-layout>
           <v-flex xs3 ma-2 text-xs-left ma-3>
             <div class="text-xs-left subheading mb-3">
               Company: 
+            </div>
+            <div class="text-xs-left subheading mb-3">
+              Contact: 
             </div>
             <div class="text-xs-left subheading mb-3">
               Address: 
@@ -84,12 +122,17 @@
           <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{prtnrArr[0].company}}
+                {{company.name}}
               </span>
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
                 {{prtnrArr[0].name}}
+              </span>
+            </div>
+            <div class="mb-3">
+              <span class="font-weight-bold">
+                {{company.address}}
               </span>
             </div>
             <div class="mb-3">
@@ -118,16 +161,19 @@
 </template>
 
 <script>
-import ContractsService from '../services/ContractsService';
+import ContractsService from '../services/ContractsService'
 import PartnerService from '../services/PartnerService'
+import CompanyService from '../services/CompanyService'
 export default {
   data () {
     return {
       contract: {},
       partner: {},
+      company: {},
       prtnrArr: [],
+      companyArr: [],
       // contract properties
-      items: ['Contact', 'Contract begins', 'Contract ends', 'Categories', 'Price per Month', 'Objectives', 'Future objectives', 'Miscellaneous'],
+      items: ['Contract ID', 'Contract begins', 'Contract ends', 'Categories', 'Price per Month', 'Objectives', 'Future objectives', 'Miscellaneous'],
       success: null,
       error: null
     }
@@ -140,6 +186,7 @@ export default {
       console.log(error)
     }
 
+    // find partner
     try {
       this.partner = (await PartnerService.get()).data
       for(var i = 0; i < this.partner.length; i++) {      
@@ -147,7 +194,19 @@ export default {
           this.prtnrArr.push(this.partner[i])
       }
     } catch (e) {
-      console.log(e);
+      console.log(e)
+    }
+
+    // find company
+    try {
+      this.companyArr = (await CompanyService.get()).data
+      for(i = 0; i < this.companyArr.length; i++) {
+        if(this.contract.CompanyId === this.companyArr[i].id) {
+          this.company = this.companyArr[i]
+        }
+      }
+    } catch (e) {
+      console.log(e)
     }
   },
   methods: {
@@ -177,5 +236,8 @@ export default {
 <style>
 span + span {
   margin-left: 20px;
+}
+.contract {
+  width: 40%
 }
 </style>
