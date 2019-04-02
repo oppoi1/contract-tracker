@@ -3,7 +3,7 @@
     <CategoryPanel/>
     <v-flex xs8 offset-xs1>
       <panel title='Contracts'>
-        <p slot="action">{{cat}}</p>
+        <p slot="action">{{replaceSpace(cat)}}</p>
         <v-btn slot="action" to="contract/add" class="white accent-2" light fab small absolute right middle>
           <v-icon>add</v-icon>
         </v-btn>
@@ -16,12 +16,12 @@
   >
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.number }}</td>
-        <td class="text-xs-left">{{ props.item.partner }}</td>
-        <td class="text-xs-left">{{ props.item.categories }}</td>
-        <td class="text-xs-left">{{ props.item.start }}</td>
-        <td class="text-xs-left" lazy>{{ props.item.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
-        <td class="text-xs-left">{{ props.item.createdBy }}</td>
-        <td class="text-xs-left" lazy>{{ props.item.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
+        <td class="text-xs-left">{{ firstLetterUC(props.item.partner) }}</td>
+        <td class="text-xs-left">{{ props.item.category }}</td>
+        <td class="text-xs-left">{{ StripAndReverse(props.item.start) }}</td>
+        <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.duration) }}</td>
+        <td class="text-xs-left">{{ firstLetterUC(props.item.createdBy) }}</td>
+        <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.createdAt) }}</td>
         <td class="text-xs-left">
           <v-btn small color="primary" fab dark :to="{name: 'contract', params: {contractId: props.item.id}}">
             <v-icon dark>list</v-icon>
@@ -52,7 +52,7 @@ export default {
             value: 'id',
           },
           { text: 'Partner', value: 'partner' },
-          { text: 'Category', value: 'categories'},
+          { text: 'Category', value: 'category'},
           { text: 'Date', value: 'start' },
           { text: 'Duration', value: 'duration' },
           { text: 'Created By', value: 'createdBy' },
@@ -70,13 +70,26 @@ export default {
     // do request to backend for all Contracts
     this.contracts  = (await ContractsService.get(cat[4])).data
   },
-    watch: {
-      async '$route' (to, from) {          
-        const URL = document.URL
-        const cat = URL.split('/')
-        this.cat = cat[4]
-        this.contracts  = (await ContractsService.get(cat[4])).data
-      }
+  watch: {
+    async '$route' (to, from) {          
+      const URL = document.URL
+      const cat = URL.split('/')
+      this.cat = cat[4]
+      this.contracts  = (await ContractsService.get(cat[4])).data
+    }
+  },
+  methods: {
+    StripAndReverse(val) {
+      val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
+      return val.split('-').reverse().join('-')
+    },
+    firstLetterUC(val) {
+      var length = val.length
+      return val.substring(0,1).toUpperCase() + val.substring(1, length)
+    },
+    replaceSpace(val) {
+      return val.replace('%20', ' ')
+    }
   }
 }
 </script>

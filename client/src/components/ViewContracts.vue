@@ -7,77 +7,77 @@
         <v-layout justify-start row fill-height>
           <v-flex xs8 ma-2 text-xs-left ma-3 subheading>
             <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Contract Id:
               </div>
-              <div class="contract-contact v-badge">
+              <div style="display:inline-table" class="contract-contact v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract.id}}
+                  {{contract.number}}
                 </span>
               </div>
             </div>
             <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Contract Start:
               </div>
-              <div class="contract-start v-badge">
+              <div style="display:inline-table" class="contract-start v-badge">
                 <span class="font-weight-bold contract">
                   {{contract.start}}
                 </span>
               </div>
             </div>
              <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Contract Ends:
               </div>
-              <div class="contract-end v-badge">
+              <div style="display:inline-table" class="contract-end v-badge">
                 <span class="font-weight-bold contract">
                   {{contract.duration}}
                 </span>
               </div>
              </div>
              <div class="mb-3">
-              <div class="v-badge contract">
-                Contract Categories:
+              <div style="display:inline-table" class="contract">
+                Contract Category:
               </div>
-              <div class="contract-categories v-badge">
+              <div style="display:inline-table" class="contract-categories v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract.categories}}
+                  {{contract.category}}
                 </span>
               </div>
              </div>
              <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Price per Month:
               </div>
-              <div class="contract-price v-badge">
+              <div style="display:inline-table" class="contract-price v-badge">
                 <span class="font-weight-bold contract">
                   {{contract.pricePerMonth}}&euro;
                 </span>
               </div>
              </div>
              <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Contract Objectives:
               </div>
-              <div class="contract-objectives v-badge">
+              <div style="display:inline-table" class="contract-objectives v-badge">
                 <span class="font-weight-bold contract">
                   {{contract.objectives}}
                 </span>
               </div>
              </div>
              <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Futures Objectives:
               </div>
-              <div class="contract-futureObjectives v-badge">
+              <div style="display:inline-table" class="contract-futureObjectives v-badge">
                 <span class="font-weight-bold contract">
                   {{contract.futureobjectives}}
                 </span>
               </div>
              </div>
              <div class="mb-3">
-              <div class="v-badge contract">
+              <div style="display:inline-table" class="v-badge contract">
                 Miscellaneous:
               </div>
               <div class="contract-other v-badge">

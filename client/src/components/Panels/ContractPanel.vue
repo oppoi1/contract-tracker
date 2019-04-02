@@ -14,12 +14,12 @@
   >
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.number }}</td>
-        <td class="text-xs-left">{{ props.item.partner }}</td>
-        <td class="text-xs-left">{{ props.item.categories }}</td>
-        <td class="text-xs-left">{{ props.item.start }}</td>
-        <td class="text-xs-left" lazy>{{ props.item.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
-        <td class="text-xs-left">{{ props.item.createdBy }}</td>
-        <td class="text-xs-left" lazy>{{ props.item.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0] }}</td>
+        <td class="text-xs-left">{{ firstLetterUC(props.item.partner) }}</td>
+        <td class="text-xs-left">{{ props.item.category }}</td>
+        <td class="text-xs-left">{{ StripAndReverse(props.item.start) }}</td>
+        <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.duration) }}</td>
+        <td class="text-xs-left">{{ firstLetterUC(props.item.createdBy) }}</td>
+        <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.createdAt) }}</td>
         <td class="text-xs-left">
           <v-btn small color="primary" fab dark :to="{name: 'contract', params: {contractId: props.item.id}}">
             <v-icon dark>list</v-icon>
@@ -64,6 +64,16 @@ export default {
   },
   components: {
     SearchPanel: SearchPanel
+  },
+  methods: {
+    StripAndReverse(val) {
+      val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
+      return val.split('-').reverse().join('-')
+    },
+    firstLetterUC(val) {
+      var length = val.length
+      return val.substring(0,1).toUpperCase() + val.substring(1, length)
+    }
   }
 }
 </script>

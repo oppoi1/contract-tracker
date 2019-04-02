@@ -14,7 +14,7 @@ module.exports = app => {
   app.post('/login', AuthenticationController.login)
 
   app.get('/contracts', ContractController.index)
-  app.get('/contracts/category/:category', ContractController.get)
+  app.get('/contracts/category/:category', ContractController.index)
   app.post('/contracts', ContractController.post)
   app.get('/contracts/:contractId', ContractController.show)
   app.put('/contracts/:contractId', ContractController.put)

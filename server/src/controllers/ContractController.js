@@ -10,12 +10,14 @@ module.exports = {
   async index (req, res) {
     try {
       let contracts = null
+      let partnerContractObject = []
+      let fetchedPartner
       const search = req.query.search
       if (search) {
         contracts = await Contract.findAll({
           where: {
             [Op.or]: [
-              'number', 'partner', 'start', 'duration', 'categories'
+              'number', 'partner', 'start', 'duration', 'category'
             ].map(key => ({
               [key]: {
                 [Op.like]: `%${search}%`
@@ -24,12 +26,37 @@ module.exports = {
           }
         })
       } else {
-        contracts = await Contract.findAll({
+        Contract.findAll({
           limit: 50
         })
+          .then(contract => {
+            contracts = contract
+            return Partner.findAll()
+          })
+          .then(partner => {
+            fetchedPartner = partner
+            for (var i = 0; i < contracts.length; i++) {
+              partnerContractObject[i] = {}
+              partnerContractObject[i].id = contracts[i].id
+              partnerContractObject[i].number = contracts[i].number
+              partnerContractObject[i].category = contracts[i].category
+              partnerContractObject[i].duration = contracts[i].duration
+              partnerContractObject[i].start = contracts[i].start
+              partnerContractObject[i].createdBy = contracts[i].createdBy
+              partnerContractObject[i].createdAt = contracts[i].createdAt
+              for (var j = 0; j < fetchedPartner.length; j++) {
+                if (contracts[i].PartnerId === fetchedPartner[i].id) {
+                  partnerContractObject[i].partner = fetchedPartner[j].name
+                }
+              }
+            }
+            res.send(partnerContractObject)
+          })
+          .catch(err => console.log(err))
       }
-      res.send(contracts)
+      // res.send(partnerContractObject)
     } catch (err) {
+      console.log(err)
       res.status(500).send({
         error: 'an error occured while trying to fetch contracts'
       })
@@ -82,6 +109,8 @@ module.exports = {
       })
     }
 
+    console.log(body)
+
     try {
       let contract = await Contract.create({
         number: body.number,
@@ -98,7 +127,7 @@ module.exports = {
         createdAt: body.createdAt,
         updatedAt: body.updatedAt,
         PartnerId: partner.id,
-        CategoryId: category.id,
+        category: category.name,
         CompanyId: company.id
       })
       res.send(contract)
@@ -130,20 +159,6 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: 'Error while updating contract'
-      })
-    }
-  },
-  async get (req, res) {
-    try {
-      const contracts = await Contract.findAll({
-        where: {
-          categories: req.params.category
-        }
-      })
-      res.send(contracts)
-    } catch (err) {
-      res.status(500).send({
-        error: `an error occured while trying to fetch contracts from ${req.params.category}`
       })
     }
   },
