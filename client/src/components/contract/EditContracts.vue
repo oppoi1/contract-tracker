@@ -83,9 +83,9 @@
 </template>
 
 <script>
-import ContractsService from '../services/ContractsService'
-import CategoryService from '../services/CategoryService'
-import PartnerService from '../services/PartnerService'
+import ContractsService from '../../services/ContractsService'
+import CategoryService from '../../services/CategoryService'
+import PartnerService from '../../services/PartnerService'
 export default {
   data () {
     return {
@@ -174,7 +174,7 @@ export default {
       // call api
       try {
         await ContractsService.put(this.contract)
-        // TODO: send category to db
+        // send category to db
         this.$router.push({
           name: 'contracts',
           params: {

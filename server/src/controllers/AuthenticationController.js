@@ -72,6 +72,7 @@ module.exports = {
       })
     }
   },
+  // TODO: Admin interface is missing all features - fix and enhance
   async update (req, res) {
     try {
       const user = await User.update(req.body, {

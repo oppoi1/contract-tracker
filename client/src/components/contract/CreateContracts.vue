@@ -101,11 +101,11 @@
 </template>
 
 <script>
-import ContractsService from '../services/ContractsService'
-import CategoryService from '../services/CategoryService'
-import PartnerService from '../services/PartnerService'
-import AuthenticationService from '../services/AuthenticationService'
-import CompanyService from '../services/CompanyService'
+import ContractsService from '../../services/ContractsService'
+import CategoryService from '../../services/CategoryService'
+import PartnerService from '../../services/PartnerService'
+import AuthenticationService from '../../services/AuthenticationService'
+import CompanyService from '../../services/CompanyService'
 import _ from 'lodash'
 export default {
   data () {

@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import ContractsService from '../services/ContractsService';
-import ContractPanel from './Panels/ContractPanel';
-import CategoryPanel from '../components/Panels/CategoryPanel';
+import ContractsService from '../../services/ContractsService';
+import ContractPanel from '.././Panels/ContractPanel';
+import CategoryPanel from '../../components/Panels/CategoryPanel';
 
 export default {
   components: {

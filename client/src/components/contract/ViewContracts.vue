@@ -161,9 +161,9 @@
 </template>
 
 <script>
-import ContractsService from '../services/ContractsService'
-import PartnerService from '../services/PartnerService'
-import CompanyService from '../services/CompanyService'
+import ContractsService from '../../services/ContractsService'
+import PartnerService from '../../services/PartnerService'
+import CompanyService from '../../services/CompanyService'
 export default {
   data () {
     return {

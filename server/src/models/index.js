@@ -1,9 +1,10 @@
-const fs = require('fs')
-const path = require('path')
-const Sequelize = require('sequelize')
-const config = require('../config/config')
+import fs from 'fs'
+import path from 'path'
+import Sequelize from 'sequelize'
+import config from '../config/config'
 const db = {}
 
+// Create DB connection
 const sequelize = new Sequelize(
   config.db.database,
   config.db.user,
@@ -14,6 +15,7 @@ const sequelize = new Sequelize(
   config.db.option
 )
 
+// Read all models
 fs.readdirSync(__dirname)
   .filter(file => file !== 'index.js')
   .forEach(file => {

@@ -1,5 +1,3 @@
-TODO: Delete Category extra request and just save with contract - one cate per contract
-
 # client
 
 > A Vue.js project
