@@ -8,14 +8,14 @@
     <v-toolbar-items>
       <v-menu offset-y>
         <v-btn slot="activator" flat dark v-if="$store.state.isUserLoggedIn">
-          Contracts
+          {{$t('menuContracts')}}
         </v-btn>
         <v-list>
           <v-list-tile to="/contracts">
-            Overview
+            {{$t('menuOverview')}}
           </v-list-tile>
           <v-list-tile to="/contract/add">
-            Add Contracts
+            {{$t('menuAddContracts')}}
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -25,34 +25,41 @@
         </v-btn>
         <v-list>
           <v-list-tile to="/partner">
-            Overview
+            {{$t('menuOverview')}}
           </v-list-tile>
           <v-list-tile to="/partner">
-            Add Partner
+            {{$t('menuAddPartner')}}
           </v-list-tile>
         </v-list>
       </v-menu>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>
+      <v-btn flat dark v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+        <flag :iso="entry.flag" v-bind:squared=false />
+        {{ entry.title }}
+      </v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items>
       <v-btn to="/login" flat dark v-if="!$store.state.isUserLoggedIn">
-        Login
+        {{$t('login')}}
       </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
       <v-btn to="/register" flat dark v-if="!$store.state.isUserLoggedIn">
-        Sign Up
+        {{$t('signUp')}}
       </v-btn>
     </v-toolbar-items>
         <v-toolbar-items>
       <v-btn @click="logout" flat dark v-if="$store.state.isUserLoggedIn">
-        Logout
+        {{$t('logout')}}
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
+import i18n from '../../plugins/i18n'
 export default {
   methods: {
     logout () {
@@ -61,11 +68,24 @@ export default {
       this.$router.push({
         name: 'root'
       })
+    },
+    changeLocale(locale) {
+      i18n.locale = locale
+    }
+  },
+  data () {
+    return {
+      languages: [
+        { flag: 'us', language: 'en', title: 'English'},
+        { flag: 'de', language: 'de', title: 'Deutsch'}
+      ]
     }
   }
 }
 </script>
 
 <style scoped>
-
+.active {
+  color: red
+}
 </style>

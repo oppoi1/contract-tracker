@@ -1,6 +1,6 @@
 <template>
   <v-flex xs2>
-    <panel title="Categories"> 
+    <panel :title="$t('menuCategories')"> 
       <div v-for="item in categories" :key="item.name">
         <v-btn flat :to="{name: 'contract-category', params: {categoryId: item.name}}">{{item.name}}</v-btn>
       </div>

@@ -1,6 +1,6 @@
 <template>
     <v-text-field
-    label="Search by Number"
+    :label="$t('lblSearch')"
     v-model="search">
     </v-text-field>
 </template>

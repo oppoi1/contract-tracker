@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <CategoryPanel/>
     <v-flex xs8 offset-xs1>
-      <panel title='Contracts'>
+      <panel :title="$t('menuContracts')">
         <p slot="action">{{replaceSpace(cat)}}</p>
         <v-btn slot="action" to="contract/add" class="white accent-2" light fab small absolute right middle>
           <v-icon>add</v-icon>
@@ -46,17 +46,17 @@ export default {
     return {
        headers: [
           {
-            text: 'Contract',
+            text: this.$t('tblContract'),
             align: 'left',
             sortable: false,
             value: 'id',
           },
-          { text: 'Partner', value: 'partner' },
-          { text: 'Category', value: 'category'},
-          { text: 'Date', value: 'start' },
-          { text: 'Duration', value: 'duration' },
-          { text: 'Created By', value: 'createdBy' },
-          { text: 'Created', value: 'createdAt'},
+          { text: this.$t('tblPartner'), value: 'partner' },
+          { text: this.$t('tblCategory'), value: 'categories'},
+          { text: this.$t('tblDate'), value: 'start' },
+          { text: this.$t('tblDuration'), value: 'duration' },
+          { text: this.$t('tblCreatedBy'), value: 'createdBy' },
+          { text: this.$t('tblCreated'), value: 'createdAt'},
           { text: '', value: 'id'}
         ],
       contracts: null,

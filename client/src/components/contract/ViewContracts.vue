@@ -8,7 +8,7 @@
           <v-flex xs8 ma-2 text-xs-left ma-3 subheading>
             <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Contract Id:
+                {{$t('contract')}}
               </div>
               <div style="display:inline-table" class="contract-contact v-badge">
                 <span class="font-weight-bold contract">
@@ -18,7 +18,7 @@
             </div>
             <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Contract Start:
+                {{$t('contractStart')}}
               </div>
               <div style="display:inline-table" class="contract-start v-badge">
                 <span class="font-weight-bold contract">
@@ -28,7 +28,7 @@
             </div>
              <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Contract Ends:
+                {{$t('contractEnds')}}
               </div>
               <div style="display:inline-table" class="contract-end v-badge">
                 <span class="font-weight-bold contract">
@@ -38,7 +38,7 @@
              </div>
              <div class="mb-3">
               <div style="display:inline-table" class="contract">
-                Contract Category:
+                {{$t('contractCat')}}
               </div>
               <div style="display:inline-table" class="contract-categories v-badge">
                 <span class="font-weight-bold contract">
@@ -48,7 +48,7 @@
              </div>
              <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Price per Month:
+                {{$t('pricePerMonth')}}
               </div>
               <div style="display:inline-table" class="contract-price v-badge">
                 <span class="font-weight-bold contract">
@@ -58,7 +58,7 @@
              </div>
              <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Contract Objectives:
+                {{$t('contractObjectives')}}
               </div>
               <div style="display:inline-table" class="contract-objectives v-badge">
                 <span class="font-weight-bold contract">
@@ -68,7 +68,7 @@
              </div>
              <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Futures Objectives:
+                {{$t('futuresObjectives')}}
               </div>
               <div style="display:inline-table" class="contract-futureObjectives v-badge">
                 <span class="font-weight-bold contract">
@@ -78,7 +78,7 @@
              </div>
              <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                Miscellaneous:
+                {{$t('misc')}}
               </div>
               <div class="contract-other v-badge">
                 <span class="font-weight-bold contract">
@@ -95,28 +95,28 @@
               contractId: contract.id
             }
           }
-        }">Edit</v-btn>
-        <v-btn class="blue" dark @click="delete_contract">Delete</v-btn>
+        }">{{$t('edit')}}</v-btn>
+        <v-btn class="blue" dark @click="delete_contract">{{$t('delete')}}</v-btn>
       </panel>
     </v-flex>
     <v-flex xs6>
-      <panel :title="'Partner details: ' + company.name" class="ml-2">
+      <panel :title="$t('partnerDetails') + company.name" class="ml-2">
         <v-layout>
           <v-flex xs3 ma-2 text-xs-left ma-3>
             <div class="text-xs-left subheading mb-3">
-              Company: 
+              {{$t('company')}}
             </div>
             <div class="text-xs-left subheading mb-3">
-              Contact: 
+              {{$t('contact')}} 
             </div>
             <div class="text-xs-left subheading mb-3">
-              Address: 
+              {{$t('address')}} 
             </div>
             <div class="text-xs-left subheading mb-3">
-              Branch: 
+              {{$t('branch')}}
             </div>
             <div class="text-xs-left subheading mb-3">
-              Phone: 
+              {{$t('phone')}}
             </div>
           </v-flex>
           <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
@@ -127,7 +127,7 @@
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{prtnrArr[0].name}}
+                {{firstLetterUC(prtnrArr[0].name)}}
               </span>
             </div>
             <div class="mb-3">
@@ -154,7 +154,7 @@
               contractId: contract.id
             }
           }
-        }">Edit</v-btn>
+        }">{{$t('edit')}}</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -228,7 +228,11 @@ export default {
         console.log(error)
         this.error = error.response.data.error
       }
-    }
+    },
+    firstLetterUC(val) {
+      var length = val.length
+      return val.substring(0,1).toUpperCase() + val.substring(1, length)
+    },
   }
 }
 </script>

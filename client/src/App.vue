@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <v-app>
       <appHeader/>
       <main>

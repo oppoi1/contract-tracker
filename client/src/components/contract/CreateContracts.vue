@@ -1,6 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs4>
+      <!-- TODO: complete I18N  -->
     <panel title="Contract Metadata">
       <v-text-field
         label="Identifier"
@@ -111,7 +112,7 @@ export default {
   data () {
     return {
       contract: {
-        number: null,
+        number: '',
         partner: null,
         start: null,
         duration: null,
