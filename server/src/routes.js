@@ -29,4 +29,5 @@ module.exports = app => {
   app.get('/company', CompanyController.get)
   app.get('/users', AuthenticationController.get)
   app.put('/users', AuthenticationControllerPolicy.update, AuthenticationController.update)
+  app.post('/authenticate', AuthenticationController.authenticate)
 }

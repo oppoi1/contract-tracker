@@ -12,5 +12,8 @@ export default {
   },
   post(credentials) {
     return Api().post('update', credentials)
+  },
+  authenticate(token) {
+    return Api().post('authenticate', token)
   }
 };

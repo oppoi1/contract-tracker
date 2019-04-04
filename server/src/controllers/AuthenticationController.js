@@ -86,5 +86,35 @@ module.exports = {
         error: 'Error while updating User'
       })
     }
+  },
+  /**
+   * Check if token and userid is correct
+   * @param {user modell, token} req
+   * @param {send} res
+   */
+  async authenticate (req, res) {
+    try {
+      const user = await User.findOne({where: {
+        id: req.body.user.id
+      }})
+
+      if (!user) {
+        res.status(500).send({
+          error: `No user found with that id. Are you sure you're logged in?`
+        })
+      }
+      const oldToken = req.body.token
+      const verified = jwt.verify(oldToken, process.env.JWT_SECRET)
+      if (verified) {
+        res.send(true)
+      } else {
+        res.send(false)
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({
+        error: 'Something went wrong authenticating'
+      })
+    }
   }
 }

@@ -12,10 +12,12 @@ import UserAdminEdit from '../components/administration/UserAdminEdit'
 import PartnerOverview from '../components/partner/Partner'
 import ViewPartner from '../components/partner/ViewPartner'
 import EditPartner from '../components/partner/EditPartner'
+import store from '../store/store'
+import AuthenticationService from '../services/AuthenticationService'
 
 Vue.use(Router);
 
-export default new Router({
+export const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -85,3 +87,18 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach(async (to, from, next) => {
+  // check if user is Logged in and it matches token and id
+  if(store.state.isUserLoggedIn) {
+    var token = store.state.token
+    const checkToken = (await AuthenticationService.authenticate({
+      user: store.state.user,
+      token: token
+    })).data
+    if (checkToken == !true) {
+      store.state.isUserLoggedIn = false
+    }
+  }
+  next()
+})
