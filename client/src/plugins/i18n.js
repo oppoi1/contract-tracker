@@ -30,6 +30,7 @@ const messages = {
     logout: 'logout',
     signUp: 'sign Up',
     login: 'login',
+    save: 'save',
 
     // menu items
     menuContracts: 'Contracts',
@@ -46,6 +47,20 @@ const messages = {
     tblDuration: 'Duration',
     tblCreatedBy: 'Created By',
     tblCreated: 'Created',
+
+    // contract details
+    detailId: 'Identifier',
+    detailResponsible: 'Responsible for this contract',
+    detailPartner: 'Select a Company or create a new one',
+    detailoptionalPartner: 'Enter a Partner',
+    detailStart: 'Start' ,
+    detailEnd: 'End',
+    detailPpM: 'per Month',
+    detailCancel: 'Cancel period',
+    detailCategories: 'Select a category or create a new one',
+    detailObjectives: 'Objectives',
+    detailfObjectives: 'Objectives for the future',
+    detailOther: 'Comments / Specifics',
 
     // search label
     lblSearch: 'Search by Number',
@@ -76,6 +91,7 @@ const messages = {
     logout: 'Ausloggen',
     signUp: 'Registrieren',
     login: 'Anmelden',
+    save: 'Speichern',
 
     // menu items
     menuContracts: 'Verträge',
@@ -92,6 +108,20 @@ const messages = {
     tblDuration: 'Endet',
     tblCreatedBy: 'Erstellt durch',
     tblCreated: 'Erstellt am',
+
+    // contract details
+    detailId: 'Nummer',
+    detailResponsible: 'Verantwortlicher',
+    detailPartner: 'Eine Firma auswählen oder eine neue Eingeben',
+    detailoptionalPartner: 'Einen Partner eingeben',
+    detailStart: 'Beginnt' ,
+    detailEnd: 'Endet',
+    detailPpM: 'Pro Monat',
+    detailCancel: 'Kündigungsfrist',
+    detailCategories: 'Wählen Sie eine Kategory aus oder erstellen Sie eine neue',
+    detailObjectives: 'Ziele',
+    detailfObjectives: 'Ziele für die Zukunft',
+    detailOther: 'Kommentare / Weitere Informationen',
 
     // search label
     lblSearch: 'Vertragsnummer eingeben',

@@ -6,20 +6,20 @@
         {{error}}
       </div>
       <v-text-field
-        label="Name"
+        :label="Name"
         :rules="[required]"
         v-model="partner.name"
       ></v-text-field>
       <v-text-field
-        label="Branch"
+        :label="$t('branch')"
         v-model="partner.branch"
       ></v-text-field>
       <v-text-field
-        label="Phone"
+        :label="$t('phone')"
         v-model="partner.phone"
       ></v-text-field>
     <v-btn dark class="blue" @click="save">
-      Save Partner
+      {{$t('save')}}
     </v-btn>
     </panel>
    </v-flex>

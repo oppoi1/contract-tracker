@@ -3,7 +3,7 @@
     <v-flex xs4>
     <panel title="Contract Metadata">
       <v-text-field
-        label="Identifier"
+       :label="$t('detailId')"
         :rules="[required]"
         v-model="contract.number"
       ></v-text-field>
@@ -11,32 +11,32 @@
         v-model="contract.partner"
         :rules="[required]"
         :items="prtnrArr"
-        label="Select the Partners Company or create a new one"
+        :label="$t('detailPartner')"
         chips
       ></v-combobox>
       <v-combobox
-        label="Enter a Partner"
+        :label="$t('detailoptionalPartner')"
         required
         :rules="[required]"
         :items="cmpnyPrtnr"
         v-model="contract.optionalPartner"
       ></v-combobox>
       <v-text-field
-        label="Start"
+        :label="$t('detailStart')"
         type="date"
         :rules="[required]"
         v-model="contract.start.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
       ></v-text-field>
       <v-text-field
-        label="End"
+        :label="$t('detailEnd')"
         type="date"
         :rules="[required]"
         v-model="contract.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
       ></v-text-field>
       <v-text-field
-        label="Price"
+        :label="$t('pricePerMonth')"
         required
-        placeholder="per Month"
+        :placeholder="$t('detailPpM')"
         prefix="€"
         v-model="contract.pricePerMonth"
       ></v-text-field>
@@ -47,26 +47,26 @@
      <panel title="Contract Objectives" class="ml-2">
       <v-flex xs12>
       <v-text-field
-        label="Other"
+        :label="$t('detailOther')"
         :rules="[required]"
         v-model="contract.other"
       ></v-text-field>
         <v-combobox
           v-model="contract.categories"
           :items="catArray"
-          label="Selected category"
+          :label="$t('detailCategories')"
           chips
         ></v-combobox>
       </v-flex>
       <v-textarea
-        label="Objectives"
+        :label="$t('detailObjectives')"
         :rules="[required]"
         multi-line
         v-model="contract.objectives"
       ></v-textarea>
 
       <v-textarea
-        label="FutureObjectives"
+        :label="$t('detailfObjectives')"
         :rules="[required]"
         multi-line
         v-model="contract.futureobjectives"
@@ -76,7 +76,7 @@
       {{error}}
     </div>
     <v-btn dark class="blue" @click="save">
-      Save Contract
+      {{$t('save')}}
     </v-btn>
    </v-flex>
   </v-layout>

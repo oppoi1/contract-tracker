@@ -1,6 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
+      <!-- TODO: Complete Partner and i18n  -->
       <panel :title="'Partner: ' + partner.name">
         <div class="danger-alert mb-3" v-html="error"></div>
         <div class="success-alert mb-3" v-html="success"></div>

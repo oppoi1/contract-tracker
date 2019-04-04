@@ -1,10 +1,9 @@
 <template>
   <v-layout>
     <v-flex xs4>
-      <!-- TODO: complete I18N  -->
     <panel title="Contract Metadata">
       <v-text-field
-        label="Identifier"
+        :label="$t('detailId')"
         required
         :rules="[required]"
         v-model="contract.number"
@@ -13,32 +12,32 @@
         v-model="contract.responsible"
         :rules="[required]"
         :items="usrArray"
-        label="Responsible for this contract"
+        :label="$t('detailResponsible')"
         chips
       ></v-combobox>
       <v-combobox
         v-model="contract.partner"
         :rules="[required]"
         :items="prtnrArr"
-        label="Select Company or create a new one"
+        :label="$t('detailPartner')"
         chips
       ></v-combobox>
       <v-combobox
-        label="Enter a Partner"
+        :label="$t('detailoptionalPartner')"
         required
         :rules="[required]"
         :items="cmpnyPrtnr"
         v-model="contract.optionalPartner"
       ></v-combobox>
       <v-text-field
-        label="Start"
+        :label="$t('detailStart')"
         required
         type="date"
         :rules="[required]"
         v-model="contract.start"
       ></v-text-field>
       <v-text-field
-        label="End"
+        :label="$t('detailEnd')"
         required
         type="date"
         value="date"
@@ -46,16 +45,16 @@
         v-model="contract.duration"
       ></v-text-field>
       <v-text-field
-        label="cancelPeriod"
+        :label="$t('detailCancel')"
         required
         :rules="[required]"
         placeholder="in Months, ex: 3"
         v-model="contract.cancel"
       ></v-text-field>
       <v-text-field
-        label="Price per Month"
+        :label="$t('pricePerMonth')"
         required
-        placeholder="per Month"
+        :placeholder="$t('detailPpM')"
         prefix="€"
         v-model="contract.pricePerMonth"
       ></v-text-field>
@@ -68,24 +67,24 @@
         <v-combobox
           v-model="contract.categories"
           :items="catArray"
-          label="Select a category or create a new one"
+          :label="$t('detailCategories')"
           chips
         ></v-combobox>
       </v-flex>
       <v-textarea
-        label="Objectives"
+        :label="$t('detailObjectives')"
         required
         :rules="[required]"
         v-model="contract.objectives"
       ></v-textarea>
       <v-textarea
-        label="FutureObjectives"
+        :label="$t('detailfObjectives')"
         required
         :rules="[required]"
         v-model="contract.futureobjectives"
       ></v-textarea>
       <v-textarea
-        label="Comments / Specifics"
+        :label="$t('detailOther')"
         required
         :rules="[required]"
         v-model="contract.other"
@@ -95,7 +94,7 @@
       {{error}}
     </div>
     <v-btn dark class="blue" @click="create">
-      Create contract
+      {{$t('create')}}
     </v-btn>
    </v-flex>
   </v-layout>
