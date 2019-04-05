@@ -51,7 +51,7 @@ export default {
           { text: this.$t('tblCreated'), value: 'createdAt'},
           { text: '', value: 'id'}
         ],
-      contracts: null
+      contracts: []
     }
   },
   watch: {

@@ -97,7 +97,8 @@ router.beforeEach(async (to, from, next) => {
       token: token
     })).data
     if (checkToken == !true) {
-      store.state.isUserLoggedIn = false
+      store.dispatch('setToken', null)
+      store.dispatch('setUser', null)
     }
   }
   next()
