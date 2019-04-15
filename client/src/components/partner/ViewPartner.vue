@@ -15,6 +15,7 @@
                 {{this.partner.name}}
               </div>
             </div>
+
             <div class="partner mb-3">
               <div class="v-badge partner">
                 Company:
@@ -23,6 +24,7 @@
                 {{this.partner.company}}
               </div>
             </div>
+
             <div class="partnerd mb-3">
               <div class="v-badge partner">
                 Address:
@@ -31,6 +33,7 @@
                 {{this.partner.address}}
               </div>
             </div>
+            
             <div class="partner mb-3">
               <div class="v-badge partner">
                 Branch:
@@ -52,7 +55,7 @@
                 Created:  
               </div>
               <div class="font-weight-bold v-badge" v-if="this.partner">
-                {{this.partner.createdAt.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]}}
+                {{StripAndReverse(this.partner.createdAt)}}
               </div>
               <div class="font-weight-bold v-badge" v-else>
                 
@@ -105,7 +108,11 @@ export default {
         console.log(error)
         this.error = error.data.error
       }
-    }
+    },
+      StripAndReverse(val) {
+      val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
+      return val.split('-').reverse().join('-')
+    },
   }
 }
 </script>

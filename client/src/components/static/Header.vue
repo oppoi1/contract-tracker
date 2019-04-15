@@ -27,7 +27,7 @@
           <v-list-tile to="/partner">
             {{$t('menuOverview')}}
           </v-list-tile>
-          <v-list-tile to="/partner">
+          <v-list-tile to="/partner/add">
             {{$t('menuAddPartner')}}
           </v-list-tile>
         </v-list>

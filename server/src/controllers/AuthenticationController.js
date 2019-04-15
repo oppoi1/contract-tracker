@@ -104,16 +104,18 @@ module.exports = {
         })
       }
       const oldToken = req.body.token
-      const verified = jwt.verify(oldToken, process.env.JWT_SECRET)
-      if (verified) {
-        res.send(true)
-      } else {
-        res.send(false)
+      if (oldToken) {
+        await jwt.verify(oldToken, process.env.JWT_SECRET, (err) => {
+          if (err) {
+            return res.send(false)
+          }
+        })
       }
+      res.send(true)
     } catch (error) {
       console.log(error)
       res.status(500).send({
-        error: 'Something went wrong authenticating'
+        error: 'Something went wrong while authenticating you'
       })
     }
   }

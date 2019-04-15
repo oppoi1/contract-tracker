@@ -12,6 +12,7 @@ import UserAdminEdit from '../components/administration/UserAdminEdit'
 import PartnerOverview from '../components/partner/Partner'
 import ViewPartner from '../components/partner/ViewPartner'
 import EditPartner from '../components/partner/EditPartner'
+import CreatePartner from '../components/partner/CreatePartner'
 import store from '../store/store'
 import AuthenticationService from '../services/AuthenticationService'
 
@@ -74,6 +75,11 @@ export const router = new Router({
       path: '/partner',
       name: 'partner-overview',
       component: PartnerOverview
+    },
+    {
+      path: '/partner/add',
+      name: 'partner-create',
+      component: CreatePartner
     },
     {
       path: '/partner/:partnerId',

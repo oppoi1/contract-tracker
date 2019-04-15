@@ -6,10 +6,17 @@
         {{error}}
       </div>
       <v-text-field
-        :label="Name"
         :rules="[required]"
         v-model="partner.name"
+        :label="$t('tblPartner')"
       ></v-text-field>
+      <v-combobox
+        v-model="partner.company"
+        :rules="[required]"
+        :items="companyArr"
+        :label="$t('company')"
+        chips
+      ></v-combobox>
       <v-text-field
         :label="$t('branch')"
         v-model="partner.branch"
@@ -32,9 +39,16 @@ import CompanyService from '../../services/CompanyService';
 export default {
   data () {
     return {
-      partner: null,
+      partner: {
+        name: null,
+        branch: null,
+        phone: null,
+        companyName: null
+      },
       company: null,
+      companyName: null,
       error: null,
+      companyArr: [],
       required: (value) => !!value || 'Required.'
     }
   },
@@ -82,23 +96,24 @@ export default {
     try {
       this.company = (await CompanyService.get()).data
       for(var i = 0; i < this.company.length; i++) {
-        if(this.partner.CompanyId === this.company.id) {
-          this.partner.companyName = this.company.name
+        if(this.partner.CompanyId === this.company[i].id) {
+          this.partner.companyName = this.company[i].name
         }
+        this.companyArr.push(this.company[i].name)
       }
     } catch (e) {
       console.log(e)
     }
   },
-  watch: {
-    'contract.partner': function(val) {
-      for(var i = 0; i < this.partner.length; i++) {
-        if(this.partner[i].company === val) {         
-          this.cmpnyPrtnr.push(this.partner[i].name)
-        }
-      }
-    }
-  }
+  // watch: {
+  //   'contract.partner': function(val) {
+  //     for(var i = 0; i < this.partner.length; i++) {
+  //       if(this.partner[i].company === val) {         
+  //         this.cmpnyPrtnr.push(this.partner[i].name)
+  //       }
+  //     }
+  //   }
+  // }
 }
 </script>
 

@@ -1,12 +1,42 @@
+import { Company } from '../models'
 const {Partner} = require('../models')
 
 module.exports = {
   async get (req, res) {
     try {
-      const partners = await Partner.findAll({
+      let partners = null
+      let partnerCompany = []
+      let fetchedCompany = null
+      // const partners = await Partner.findAll({
+      //   limit: 50
+      // })
+      // res.send(partners)
+      Partner.findAll({
         limit: 50
       })
-      res.send(partners)
+        .then(partner => {
+          partners = partner
+          return Company.findAll()
+        })
+        .then(company => {
+          fetchedCompany = company
+          for (var i = 0; i < partners.length; i++) {
+            partnerCompany[i] = {}
+            partnerCompany[i].id = partners[i].id
+            partnerCompany[i].name = partners[i].name
+            partnerCompany[i].branch = partners[i].branch
+            partnerCompany[i].phone = partners[i].phone
+            partnerCompany[i].createdAt = partners[i].createdAt
+            for (var j = 0; j < fetchedCompany.length; j++) {
+              if (partners[i].CompanyId === fetchedCompany[j].id) {
+                partnerCompany[i].company = fetchedCompany[j].name
+                partnerCompany[i].address = fetchedCompany[j].address
+              }
+            }
+          }
+          res.send(partnerCompany)
+        })
+        .catch(err => console.log(err))
     } catch (err) {
       res.status(500).send({
         error: 'An error occured while trying to fetch partner data'
@@ -15,8 +45,34 @@ module.exports = {
   },
   async show (req, res) {
     try {
-      const partner = await Partner.findById(req.params.partnerId)
-      res.send(partner)
+      // the partner
+      let partners
+      // the companies
+      let fetchedCompany
+      // will be result
+      let partnerCompany = {}
+      Partner.findById(req.params.partnerId)
+        .then(partner => {
+          partners = partner
+          return Company.findAll()
+        })
+        .then(company => {
+          fetchedCompany = company
+          for (var i = 0; i < fetchedCompany.length; i++) {
+            if (partners.CompanyId === fetchedCompany[i].id) {
+              partnerCompany.id = partners.id
+              partnerCompany.name = partners.name
+              partnerCompany.branch = partners.branch
+              partnerCompany.phone = partners.phone
+              partnerCompany.createdAt = partners.createdAt
+              partnerCompany.company = fetchedCompany[i].name
+              partnerCompany.address = fetchedCompany[i].address
+            }
+          }
+          res.send(partnerCompany)
+        })
+        .catch(error => console.log(error))
+      // const partner = await Partner.findById(req.params.partnerId)
     } catch (err) {
       console.log(err)
       res.status(500).send({
@@ -26,8 +82,19 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      const partners = await Partner.create(req.body)
-      res.send(partners)
+      let body = req.body
+      const partner = new Partner()
+      partner.name = body.name
+
+      const company = await Company.find({where: {
+        name: body.company
+      }})
+
+      partner.CompanyId = company.id
+      partner.branch = body.branch
+      partner.phone = body.phone
+      partner.save()
+      res.send(partner)
     } catch (err) {
       res.status(500).send({
         error: 'Error while creating Partner'
@@ -35,7 +102,21 @@ module.exports = {
     }
   },
   async put (req, res) {
-    console.log(req.params)
+    let body = req.body
+    let company
+    try {
+      company = await Company.findOne({where: {name: body.companyName}})
+      if (!company) {
+        company = new Company({name: body.companyName})
+        await company.save()
+      }
+    } catch (error) {
+      console.log(error)
+      return res.status(500).send({
+        error: 'Error while creating Company data.'
+      })
+    }
+
     try {
       const existingPartner = await Partner.findById(req.params.partnerId)
       if (!existingPartner) {
@@ -43,6 +124,8 @@ module.exports = {
         error.code = 404
         throw error
       }
+
+      req.body.CompanyId = company.id
 
       const partner = await Partner.update(req.body, {
         where: {

@@ -15,7 +15,7 @@
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.id }}</td>
         <td class="text-xs-left">{{ props.item.name }}</td>
-        <td class="text-xs-left">{{ props.item.companyName }}</td>
+        <td class="text-xs-left">{{ props.item.company }}</td>
         <td class="text-xs-left">{{ props.item.address }}</td>
         <td class="text-xs-left" lazy>{{ props.item.branch }}</td>
         <td class="text-xs-left">{{ props.item.phone }}</td>

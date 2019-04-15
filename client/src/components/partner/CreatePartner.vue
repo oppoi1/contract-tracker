@@ -6,10 +6,17 @@
         {{error}}
       </div>
       <v-text-field
-        :label="Name"
+        :label="$t('tblPartner')"
         :rules="[required]"
         v-model="partner.name"
       ></v-text-field>
+      <v-combobox
+        v-model="partner.company"
+        :rules="[required]"
+        :items="companyArr"
+        :label="$t('company')"
+        chips
+      ></v-combobox>
       <v-text-field
         :label="$t('branch')"
         v-model="partner.branch"
@@ -32,9 +39,10 @@ import CompanyService from '../../services/CompanyService';
 export default {
   data () {
     return {
-      partner: null,
+      partner: {},
       company: null,
       error: null,
+      companyArr: [],
       required: (value) => !!value || 'Required.'
     }
   },
@@ -49,20 +57,13 @@ export default {
       
       if (!areAllFieldsFilledIn) {
         this.error = 'Please fill in all the required fields.'
-        
         return
       }
 
-      // todo: call api to save partner
-      const partnerId = this.$store.state.route.params.partnerId
-
       try {
-        await PartnerService.put(this.partner)
+        await PartnerService.post(this.partner)
         this.$router.push({
-          name: 'partner-view',
-          params: {
-            partnerId: partnerId
-          }
+          name: 'partner-overview'
         })
       } catch (error) {
         this.error = error.response.data
@@ -70,20 +71,11 @@ export default {
     }
   },
   async mounted () {
-    const partnerId = this.$store.state.route.params.partnerId
-    // get partner data
-    try {
-      this.partner = (await PartnerService.show(partnerId)).data
-    } catch (e) {
-      console.log(e);
-    }
     // get company
     try {
       this.company = (await CompanyService.get()).data
       for(var i = 0; i < this.company.length; i++) {
-        if(this.partner.CompanyId === this.company.id) {
-          this.partner.companyName = this.company.name
-        }
+        this.companyArr.push(this.company[i].name)
       }
     } catch (e) {
       console.log(e)
