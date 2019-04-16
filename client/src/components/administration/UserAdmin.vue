@@ -16,7 +16,7 @@
             <tr>
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
-              <td>{{ user.createdAt }}</td>
+              <td>{{ StripAndReverse(user.createdAt) }}</td>
               <!-- <v-btn color="info" :to="{name: 'user-administration-edit', params: {userId: user.id}}">Bearbeiten</v-btn> -->
               <v-btn color="info" v-on:click='seen = !seen' @click='showPanel(user)'>Bearbeiten</v-btn>
               <v-btn color="error">Loeschen</v-btn>
@@ -26,7 +26,7 @@
       </div>
    </v-flex>
    <v-flex xs4>
-    <div id="user-edit">
+    <div v-if="seen">
       <p>{{ id }}</p>
       <p>{{ name }}</p>
       <label>Neues Passwort:
@@ -44,7 +44,7 @@
       <br />
       <v-btn color="success" @click="updateUser">Speichern</v-btn>
       <p>
-        <v-btn color="info" v-if='seen' v-on:click='seen = !seen' @click='hidePanel'>Hide</v-btn>
+        <v-btn color="info" v-if='seen' v-on:click='seen = !seen'>Hide</v-btn>
       </p>
     </div>
    </v-flex>
@@ -65,6 +65,9 @@ export default {
       error: null
     }
   },
+  /**
+   * Load users on pageload
+   */
   async mounted() {
     try {
       this.users = (await AuthenticationService.get()).data
@@ -76,15 +79,25 @@ export default {
     }
   },
   methods: {
+    /**
+     * Show user edit panel 
+     */
     showPanel: (user) => {
-      this.seen = !this.seen // does not work?
-      document.getElementById('user-edit').style.display = ''
+      console.log(user)
+      this.seen = !this.seen
       this.id = user.id
       this.name = user.name
     },
-    hidePanel: () => {
-      document.getElementById('user-edit').style.display = 'none'
+    /**
+     * Date: Set DE date format
+     */
+    StripAndReverse(val) {
+      val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
+      return val.split('-').reverse().join('-')
     },
+    /**
+     * Send data to backend and update
+     */
     async updateUser() {
       try {
         const response = await AuthenticationService.updateUser({

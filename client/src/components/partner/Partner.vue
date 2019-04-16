@@ -43,6 +43,9 @@ export default {
   },
   data () {
     return {
+      /**
+       * Create Datatable with header data
+       */
        headers: [
           {
             text: 'Partner',

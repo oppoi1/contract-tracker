@@ -35,6 +35,9 @@ export default {
 
     }
   },
+  /**
+   * Get User data on startup
+   */
   async mounted() {
     try {
       this.users = (await AuthenticationService.get()).data

@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     user: null,
+    language: null,
     isUserLoggedIn: false
   },
   mutations: {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.user = user;
+    },
+    setLanguage(state, language) {
+      state.language = language
     }
   },
   actions: {
@@ -27,6 +31,9 @@ export default new Vuex.Store({
     },
     setUser({ commit }, user) {
       commit("setUser", user);
+    },
+    setLanguage({ commit }, language) {
+      commit('setLanguage', language)
     }
   }
 });

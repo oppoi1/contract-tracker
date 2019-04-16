@@ -30,6 +30,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * Log User in and set Vuex state
+     */
     async login() {
       try {
         const response = await AuthenticationService.login({

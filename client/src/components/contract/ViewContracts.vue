@@ -179,6 +179,7 @@ export default {
     }
   },
   async mounted () {
+    // get contract id to get contract data
     const contractId = this.$store.state.route.params.contractId
     try {
       this.contract = (await ContractsService.show(contractId)).data
@@ -217,6 +218,9 @@ export default {
 
       return Math.floor((Date.UTC(dt2.getFullYear(),dt2.getMonth(),dt2.getDate()) - Date.UTC(dt1.getFullYear(),dt1.getMonth(),dt1.getDate())))
     },
+    /**
+     * api call to "delete" a contract
+     */
     async delete_contract() {
       try {
         const response = await ContractsService.delete(this.$store.state.route.params.contractId)
@@ -229,6 +233,9 @@ export default {
         this.error = error.response.data.error
       }
     },
+    /**
+     * Set first letter of a string to uppercase
+     */
     firstLetterUC(val) {
       var length = val.length
       return val.substring(0,1).toUpperCase() + val.substring(1, length)

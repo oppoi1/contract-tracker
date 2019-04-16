@@ -97,7 +97,7 @@ export const router = new Router({
 router.beforeEach(async (to, from, next) => {
   // check if user is Logged in and it matches token and id
   if(store.state.isUserLoggedIn) {
-    var token = store.state.token
+    let token = store.state.token
     const checkToken = (await AuthenticationService.authenticate({
       user: store.state.user,
       token: token

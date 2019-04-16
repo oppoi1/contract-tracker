@@ -36,7 +36,7 @@
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn flat dark v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
-        <flag :iso="entry.flag" v-bind:squared=false />
+        <flag :iso="entry.flag" v-bind:squared="false" />
         {{ entry.title }}
       </v-btn>
     </v-toolbar-items>
@@ -62,6 +62,9 @@
 import i18n from '../../plugins/i18n'
 export default {
   methods: {
+    /**
+     * log user out and remove vuex values
+     */
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
@@ -70,11 +73,19 @@ export default {
       })
     },
     changeLocale(locale) {
+      /**
+       * change language and save it in vuex
+       */
       i18n.locale = locale
+      this.$store.dispatch('setLanguage', locale)
     }
   },
   data () {
     return {
+      /**
+       * i18n Internationalization
+       * Languages to choose from
+       */
       languages: [
         { flag: 'us', language: 'en', title: 'English'},
         { flag: 'de', language: 'de', title: 'Deutsch'}

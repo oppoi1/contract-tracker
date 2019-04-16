@@ -146,6 +146,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * Check if all required fields are filled
+     */
     async create () {
       this.error = null
       const areAllFieldsFilledIn = Object
@@ -156,7 +159,7 @@ export default {
         return
       }
       
-      // call api
+      // call api to save
       try {
         await ContractsService.post(this.contract)
         this.$router.push({
@@ -167,6 +170,10 @@ export default {
       }
     }
   },
+  /**
+   * On load
+   * Get partner, categories, companies and  users data
+   */
   async mounted () {
     try {
       this.partner = (await PartnerService.get()).data
@@ -201,6 +208,7 @@ export default {
       console.log(error)
     }
   },
+  // assign partner to company
   watch: {
     'contract.partner': function(val) {
       // check in company array

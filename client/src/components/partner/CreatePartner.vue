@@ -48,6 +48,10 @@ export default {
   },
   methods: {
     async save () {
+      /**
+       * check if all required fields are filled
+       * then post to api
+       */
       this.error = null
       // later
       // this.partner.modifiedBy = this.$store.state.user.name

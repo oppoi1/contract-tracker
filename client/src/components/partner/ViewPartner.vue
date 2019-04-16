@@ -97,6 +97,11 @@ export default {
     } 
   },
   methods: {
+    /**
+     * send delete request to BE
+     * then show success message and redirect
+     * after three seconds to partner overview
+     */
     async delete_partner() {
       try {
         const response = await PartnerService.delete(this.$store.state.route.params.partnerId)
@@ -109,6 +114,10 @@ export default {
         this.error = error.data.error
       }
     },
+    /**
+     * Date: Set DE date format
+     * without time
+     */
       StripAndReverse(val) {
       val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
       return val.split('-').reverse().join('-')

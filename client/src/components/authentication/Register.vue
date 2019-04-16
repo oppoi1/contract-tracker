@@ -38,6 +38,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * Send data to backend
+     */
     async register() {
       try {
         const response = await AuthenticationService.register({

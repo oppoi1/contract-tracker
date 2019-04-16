@@ -44,6 +44,9 @@ export default {
   },
   data () {
     return {
+      /**
+       * Create Datatable with header data
+       */
        headers: [
           {
             text: this.$t('tblContract'),
@@ -64,6 +67,9 @@ export default {
     }
   },
   async mounted() {
+    /**
+     * Get Category and query all Contracts within that category 
+     */
     const URL = document.URL
     const cat = URL.split('/')
     this.cat = cat[4]
@@ -71,6 +77,9 @@ export default {
     this.contracts  = (await ContractsService.get(cat[4])).data
   },
   watch: {
+    /**
+     * I have no clue why I did this
+     */
     async '$route' (to, from) {          
       const URL = document.URL
       const cat = URL.split('/')
@@ -79,14 +88,23 @@ export default {
     }
   },
   methods: {
+    /**
+     * Date: Set DE date format
+     */
     StripAndReverse(val) {
       val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
       return val.split('-').reverse().join('-')
     },
+    /**
+     * Set first letter to capital
+     */
     firstLetterUC(val) {
       var length = val.length
       return val.substring(0,1).toUpperCase() + val.substring(1, length)
     },
+    /**
+     * Delete spaces from string
+     */
     replaceSpace(val) {
       return val.replace('%20', ' ')
     }

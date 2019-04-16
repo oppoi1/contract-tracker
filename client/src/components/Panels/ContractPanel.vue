@@ -66,10 +66,16 @@ export default {
     SearchPanel: SearchPanel
   },
   methods: {
+    /**
+     * Date: Set DE date format
+     */
     StripAndReverse(val) {
       val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
       return val.split('-').reverse().join('-')
     },
+    /**
+     * Set first letter of a string to uppercase
+     */
     firstLetterUC(val) {
       var length = val.length
       return val.substring(0,1).toUpperCase() + val.substring(1, length)

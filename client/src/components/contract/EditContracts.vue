@@ -120,6 +120,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * Check if all required fields are filled
+     */
     async save () {
       this.error = null
       this.contract.modifiedBy = this.$store.state.user.name
@@ -135,7 +138,7 @@ export default {
       }  
 
       /* check if in array
-       * call api
+       * call api to save data
        */
       const exists = [];
       for(const key in this.categories) {
@@ -169,6 +172,7 @@ export default {
           }
       }
 
+      // get contract id to push changes to contract
       const contractId = this.$store.state.route.params.contractId
 
       // call api

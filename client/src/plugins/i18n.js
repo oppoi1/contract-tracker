@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import store from '../store/store'
 
 Vue.use(VueI18n)
 
@@ -129,7 +130,7 @@ const messages = {
 }
 
 const i18n = new VueI18n({
-  locale: 'en', // set locale
+  locale: store.state.language || 'en', // set locale
   fallbackLocale: 'de', // set fallback locale
   messages, // set locale messages
 })

@@ -53,6 +53,10 @@ export default {
     }
   },
   methods: {
+    /**
+     * check if all required fields are filled
+     * then post to api
+     */
     async save () {
       this.error = null
       // later
