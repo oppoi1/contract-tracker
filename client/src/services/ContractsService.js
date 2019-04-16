@@ -1,6 +1,10 @@
 import Api from './Api'
 
 export default {
+  /**
+   * Search function that accepts strings as parameter
+   * @param {string} search 
+   */
   index(search) {
     return Api().get('contracts', {
       params: {

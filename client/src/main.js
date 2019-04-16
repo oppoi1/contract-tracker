@@ -11,13 +11,26 @@ import FlagIcon from 'vue-flag-icon'
 
 Vue.config.productionTip = false;
 
+/**
+ * Use Vuetify CSS framework
+ * also the FlagIcon package from Vuetify
+ */
 Vue.use(Vuetify);
 Vue.use(FlagIcon)
 
+/**
+ * Make Panel global accesible
+ */
 Vue.component("panel", Panel);
 
+/**
+ * Sync vue-routers current $route as part of vuex store's state
+ */
 sync(store, router);
 
+/**
+ * Create Vue Object with all plugins
+ */
 new Vue({
   el: "#app",
   router,

@@ -18,9 +18,16 @@ import AuthenticationService from '../services/AuthenticationService'
 
 Vue.use(Router);
 
+/**
+ * Create new Router object
+ */
+
 export const router = new Router({
   mode: 'history',
   routes: [
+    /**
+     * Contract routes
+     */
     {
       path: '/',
       name: 'root',
@@ -30,16 +37,6 @@ export const router = new Router({
       path: '/contracts',
       name: 'contracts',
       component: Contracts
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
     },
     {
       path: '/contract/add',
@@ -61,16 +58,22 @@ export const router = new Router({
       name: 'contract-category',
       component: CategoryContracts
     },
+    /**
+     * Authentication routes
+     */
     {
-      path: '/user/admin/:userId',
-      name: 'user-administration-edit',
-      component: UserAdminEdit
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
-      path: '/user/admin',
-      name: 'user-administration',
-      component: UserAdmin
+      path: '/login',
+      name: 'login',
+      component: Login
     },
+    /**
+     * Partner routes
+     */
     {
       path: '/partner',
       name: 'partner-overview',
@@ -90,12 +93,29 @@ export const router = new Router({
       path: '/partner/:partnerId/edit',
       name: 'partner-edit',
       component: EditPartner
-    }
+    },
+    /**
+     * User administration routes
+     */
+    {
+      path: '/user/admin/:userId',
+      name: 'user-administration-edit',
+      component: UserAdminEdit
+    },
+    {
+      path: '/user/admin',
+      name: 'user-administration',
+      component: UserAdmin
+    },
   ]
 });
 
+/**
+ * Before a route change occurs
+ * check if user is logged in
+ * if yes check token
+ */
 router.beforeEach(async (to, from, next) => {
-  // check if user is Logged in and it matches token and id
   if(store.state.isUserLoggedIn) {
     let token = store.state.token
     const checkToken = (await AuthenticationService.authenticate({

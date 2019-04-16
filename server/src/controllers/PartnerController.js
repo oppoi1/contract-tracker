@@ -7,10 +7,11 @@ module.exports = {
       let partners = null
       let partnerCompany = []
       let fetchedCompany = null
-      // const partners = await Partner.findAll({
-      //   limit: 50
-      // })
-      // res.send(partners)
+      /**
+       * get all partner
+       * get all companys
+       * map company to partner and return result
+       */
       Partner.findAll({
         limit: 50
       })
@@ -43,6 +44,13 @@ module.exports = {
       })
     }
   },
+  /**
+   * get all partner
+   * get all companys
+   * map company to partner and return result
+   * @param {*} req
+   * @param {*} res
+   */
   async show (req, res) {
     try {
       // the partner
@@ -80,6 +88,13 @@ module.exports = {
       })
     }
   },
+  /**
+   * Create new Partner
+   * Find Company
+   * Assign Company to Partner
+   * @param {*} req
+   * @param {*} res
+   */
   async post (req, res) {
     try {
       let body = req.body
@@ -101,6 +116,13 @@ module.exports = {
       })
     }
   },
+  /**
+   * Check if Company exists
+   * Check if Partner exists
+   * then update Partner
+   * @param {*} req
+   * @param {*} res
+   */
   async put (req, res) {
     let body = req.body
     let company
@@ -139,6 +161,11 @@ module.exports = {
       })
     }
   },
+  /**
+   * Check if Partner exists then delete
+   * @param {*} req
+   * @param {*} res
+   */
   async delete (req, res) {
     try {
       const existingPartner = await Partner.findById(req.params.partnerId)
@@ -148,6 +175,7 @@ module.exports = {
         throw error
       }
       try {
+        // TODO: set inactive, do not delete
         await existingPartner.destroy()
         return res.send({message: `Partner deleted successfully.`})
       } catch (error) {

@@ -1,6 +1,13 @@
 const Joi = require('joi')
 
 module.exports = {
+  /**
+   * Validation of Name, Email and Password
+   * then save user
+   * @param {name, email, password} req
+   * @param {send} res
+   * @param {*} next
+   */
   register (req, res, next) {
     const schema = {
       name: Joi.string().min(4).max(30),
@@ -32,6 +39,13 @@ module.exports = {
       next()
     }
   },
+  /**
+   * Validate data
+   * then ??
+   * @param {name, email, password} req
+   * @param {*} res
+   * @param {*} next
+   */
   update (req, res, next) {
     const schema = {
       name: Joi.string().min(4).max(30),

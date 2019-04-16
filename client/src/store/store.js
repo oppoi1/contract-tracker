@@ -4,6 +4,10 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
+/**
+ * Localstorage store
+ * save if User is logged in and its language
+ */
 export default new Vuex.Store({
   strict: true,
   plugins: [createPersistedState()],

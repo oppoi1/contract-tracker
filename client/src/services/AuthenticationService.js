@@ -13,6 +13,11 @@ export default {
   post(credentials) {
     return Api().post('update', credentials)
   },
+  /**
+   * send user obj to BE
+   * verifying jwt
+   * @param {obj} token 
+   */
   authenticate(token) {
     return Api().post('authenticate', token)
   }

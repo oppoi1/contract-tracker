@@ -14,8 +14,6 @@ const Company = sequelize.import(path.join(__dirname, './models/Company'))
 const Contract = sequelize.import(path.join(__dirname, './models/Contract'))
 const Category = sequelize.import(path.join(__dirname, './models/Category'))
 
-// TODO: replace require with import
-
 // Environment setup
 app.use(morgan('tiny'))
 app.use(bodyParser.json())

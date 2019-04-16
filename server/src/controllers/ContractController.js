@@ -13,6 +13,9 @@ module.exports = {
       let partnerContractObject = []
       let fetchedPartner
       const search = req.query.search
+      /**
+       * Search similar entry in db
+       */
       if (search) {
         contracts = await Contract.findAll({
           where: {
@@ -25,6 +28,10 @@ module.exports = {
             }))
           }
         })
+        /**
+         * Load all Contracts and Partner
+         * Map if matched and return result
+         */
       } else {
         Contract.findAll({
           limit: 50
@@ -54,7 +61,6 @@ module.exports = {
           })
           .catch(err => console.log(err))
       }
-      // res.send(partnerContractObject)
     } catch (err) {
       console.log(err)
       res.status(500).send({
@@ -62,6 +68,15 @@ module.exports = {
       })
     }
   },
+  /**
+   * Check if Category exists
+   * Check if Company exists
+   * Check if Partner exists
+   * if not create
+   * Then create Contract class instance and save it
+   * @param {obj} req
+   * @param {*} res
+   */
   async post (req, res) {
     let company = null
     let partner = null
@@ -108,8 +123,6 @@ module.exports = {
         error: 'Error while creating Partner.'
       })
     }
-
-    console.log(body)
 
     try {
       let contract = await Contract.create({
@@ -162,6 +175,13 @@ module.exports = {
       })
     }
   },
+  /**
+   * Check if contract exists
+   * if yes delete
+   * @param {*} req
+   * @param {*} res
+   */
+  // TODO: do not delete, set inactive
   async delete (req, res) {
     try {
       const existingContract = await Contract.findById(req.params.contractId)

@@ -9,7 +9,6 @@ module.exports = {
       })
       res.send(company)
     } catch (error) {
-      console.log(error)
       res.status(500).send({
         error: `An error occured while fetching Company data.`
       })

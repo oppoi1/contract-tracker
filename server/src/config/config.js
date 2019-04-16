@@ -1,3 +1,6 @@
+/**
+ * Database config
+ */
 module.exports = {
   port: process.env.PORT || 8081,
   db: {

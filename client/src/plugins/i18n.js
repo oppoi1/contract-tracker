@@ -4,6 +4,10 @@ import store from '../store/store'
 
 Vue.use(VueI18n)
 
+/**
+ * Translation for i18n
+ * currently german and english
+ */
 const messages = {
   'en': {
     // partner details
