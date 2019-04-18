@@ -6,6 +6,9 @@ const PartnerController = require('./controllers/PartnerController')
 const CompanyController = require('./controllers/CompanyController')
 
 module.exports = app => {
+// TODO: route protection especially on post/put
+// https://softwareontheroad.com/ideal-nodejs-project-structure/?utm_source=reddit&utm_medium=subreddit
+
   /**
    * Authentication routes
    */
