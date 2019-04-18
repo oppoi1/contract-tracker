@@ -112,9 +112,10 @@ module.exports = {
       }})
 
       if (!user) {
-        res.status(500).send({
-          error: `No user found with that id. Are you sure you're logged in?`
-        })
+        res.send(false)
+        // res.status(500).send({
+        //   error: `No user found with that id. Are you sure you're logged in?`
+        // })
       }
       const oldToken = req.body.token
       if (oldToken) {
