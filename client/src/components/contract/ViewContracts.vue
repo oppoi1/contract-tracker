@@ -191,7 +191,7 @@ export default {
     try {
       this.partner = (await PartnerService.get()).data
       for(var i = 0; i < this.partner.length; i++) {      
-        if(this.partner[i].company === this.contract.partner)
+        if(this.partner[i].id === this.contract.PartnerId)
           this.prtnrArr.push(this.partner[i])
       }
     } catch (e) {
