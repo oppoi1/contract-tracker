@@ -164,7 +164,9 @@
 import ContractsService from '../../services/ContractsService'
 import PartnerService from '../../services/PartnerService'
 import CompanyService from '../../services/CompanyService'
+import utilityMixins from '../../mixins/Main'
 export default {
+  mixins: [utilityMixins],
   data () {
     return {
       contract: {},
@@ -232,14 +234,7 @@ export default {
         console.log(error)
         this.error = error.response.data.error
       }
-    },
-    /**
-     * Set first letter of a string to uppercase
-     */
-    firstLetterUC(val) {
-      var length = val.length
-      return val.substring(0,1).toUpperCase() + val.substring(1, length)
-    },
+    }
   }
 }
 </script>

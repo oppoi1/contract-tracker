@@ -79,7 +79,9 @@
 
 <script>
 import PartnerService from '../../services/PartnerService'
+import utilityMixins from '../../mixins/Main'
 export default {
+  mixins: [utilityMixins],
   data () {
     return {
       partner: {},
@@ -113,14 +115,6 @@ export default {
         console.log(error)
         this.error = error.data.error
       }
-    },
-    /**
-     * Date: Set DE date format
-     * without time
-     */
-      StripAndReverse(val) {
-      val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
-      return val.split('-').reverse().join('-')
     },
   }
 }

@@ -53,7 +53,9 @@
 
 <script>
 import AuthenticationService from '../../services/AuthenticationService';
+import utilityMixins from '../../mixins/Main'
 export default {
+  mixins: [utilityMixins],
   data () {
     return {
       usrArray: [],
@@ -87,13 +89,6 @@ export default {
       this.seen = !this.seen
       this.id = user.id
       this.name = user.name
-    },
-    /**
-     * Date: Set DE date format
-     */
-    StripAndReverse(val) {
-      val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
-      return val.split('-').reverse().join('-')
     },
     /**
      * Send data to backend and update
