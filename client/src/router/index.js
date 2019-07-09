@@ -122,7 +122,7 @@ router.beforeEach(async (to, from, next) => {
       user: store.state.user,
       token: token
     })).data
-    if (checkToken == !true) {
+    if (!checkToken) {
       store.dispatch('setToken', null)
       store.dispatch('setUser', null)
     }

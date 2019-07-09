@@ -9,7 +9,7 @@ module.exports = {
       res.send(categories)
     } catch (err) {
       res.status(500).send({
-        error: 'An error occured while trying to fetch categories'
+        error: 'An error occured while trying to fetch categories.'
       })
     }
   },
@@ -19,7 +19,7 @@ module.exports = {
       res.send(categories)
     } catch (err) {
       res.status(500).send({
-        error: 'Error while creating Category'
+        error: 'Error while creating Category.'
       })
     }
   }

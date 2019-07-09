@@ -14,7 +14,7 @@ export default {
     return Api().post('update', credentials)
   },
   /**
-   * send user obj to BE
+   * send user obj
    * verifying jwt
    * @param {obj} token 
    */

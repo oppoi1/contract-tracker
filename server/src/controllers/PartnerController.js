@@ -40,7 +40,7 @@ module.exports = {
         .catch(err => console.log(err))
     } catch (err) {
       res.status(500).send({
-        error: 'An error occured while trying to fetch partner data'
+        error: 'An error occured while trying to fetch partner data.'
       })
     }
   },
@@ -112,7 +112,7 @@ module.exports = {
       res.send(partner)
     } catch (err) {
       res.status(500).send({
-        error: 'Error while creating Partner'
+        error: 'Error while creating Partner.'
       })
     }
   },
@@ -142,7 +142,7 @@ module.exports = {
     try {
       const existingPartner = await Partner.findById(req.params.partnerId)
       if (!existingPartner) {
-        const error = new Error(`Couldn't find partner`)
+        const error = new Error(`Couldn't find partner.`)
         error.code = 404
         throw error
       }

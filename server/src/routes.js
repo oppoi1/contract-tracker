@@ -7,6 +7,7 @@ const CompanyController = require('./controllers/CompanyController')
 
 module.exports = app => {
 // TODO: route protection especially on post/put
+// TODO: Joi validation
 // https://softwareontheroad.com/ideal-nodejs-project-structure/?utm_source=reddit&utm_medium=subreddit
 
   /**

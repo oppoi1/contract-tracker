@@ -24,7 +24,7 @@ module.exports = {
       })
     } catch (error) {
       res.status(400).send({
-        error: 'This name is already in use'
+        error: 'This name is already in use.'
       })
     }
   },
@@ -46,14 +46,14 @@ module.exports = {
 
       if (!user) {
         return res.status(403).send({
-          error: 'The login information was incorrect'
+          error: 'The login information was incorrect.'
         })
       }
 
       const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: 'The login information was incorrect'
+          error: 'The login information was incorrect.'
         })
       }
       const userJson = user.toJSON()
@@ -63,7 +63,7 @@ module.exports = {
       })
     } catch (error) {
       res.status(500).send({
-        error: 'An error has occured trying to log in'
+        error: 'An error has occured trying to log in.'
       })
     }
   },
@@ -81,7 +81,7 @@ module.exports = {
       res.send(users)
     } catch (err) {
       res.status(500).send({
-        error: `Error while fetching users ${err}`
+        error: `Error while fetching users ${err}.`
       })
     }
   },
@@ -96,7 +96,7 @@ module.exports = {
       res.send(user)
     } catch (error) {
       res.status(500).send({
-        error: 'Error while updating User'
+        error: 'Error while updating User.'
       })
     }
   },
@@ -129,7 +129,7 @@ module.exports = {
     } catch (error) {
       console.log(error)
       res.status(500).send({
-        error: 'Something went wrong while authenticating you'
+        error: 'Something went wrong while authenticating.'
       })
     }
   }

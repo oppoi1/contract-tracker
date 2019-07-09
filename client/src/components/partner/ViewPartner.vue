@@ -1,7 +1,6 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
-      <!-- TODO: Complete Partner and i18n  -->
       <panel :title="'Partner: ' + partner.name">
         <div class="danger-alert mb-3" v-html="error"></div>
         <div class="success-alert mb-3" v-html="success"></div>
@@ -18,7 +17,7 @@
 
             <div class="partner mb-3">
               <div class="v-badge partner">
-                Company:
+                {{$t('company')}}
              </div>
               <div class="font-weight-bold v-badge">
                 {{this.partner.company}}
@@ -27,7 +26,7 @@
 
             <div class="partnerd mb-3">
               <div class="v-badge partner">
-                Address:
+                {{$t('address')}}
               </div>
               <div class="font-weight-bold v-badge">
                 {{this.partner.address}}
@@ -36,7 +35,7 @@
             
             <div class="partner mb-3">
               <div class="v-badge partner">
-                Branch:
+                {{$t('branch')}}
               </div>
               <div class="font-weight-bold v-badge">
                 {{this.partner.branch}}
@@ -44,7 +43,7 @@
             </div>
             <div class="partner mb-3">
               <div class="v-badge partner">
-                Phone:
+                {{$t('phone')}}
               </div>
               <div class="font-weight-bold v-badge">
                 {{this.partner.phone}}
@@ -52,7 +51,7 @@
             </div>
             <div class="partner mb-3">
               <div class="v-badge partner">
-                Created:  
+                {{$t('tblCreated')}}  
               </div>
               <div class="font-weight-bold v-badge" v-if="this.partner">
                 {{StripAndReverse(this.partner.createdAt)}}
@@ -70,8 +69,8 @@
               partnerId: this.partner.id
             }
           }
-        }">Edit</v-btn>
-        <v-btn class="blue" dark @click="delete_partner()">Delete</v-btn>
+        }">{{$t('edit')}}</v-btn>
+        <v-btn class="blue" dark @click="delete_partner()">{{$t('delete')}}</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -100,7 +99,7 @@ export default {
   },
   methods: {
     /**
-     * send delete request to BE
+     * send delete request
      * then show success message and redirect
      * after three seconds to partner overview
      */

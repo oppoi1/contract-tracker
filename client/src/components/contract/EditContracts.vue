@@ -1,6 +1,12 @@
 <template>
   <v-layout>
     <v-flex xs4>
+      PartnerArr {{prtnrArr}}
+      Partner {{partner}}
+      
+      Contract {{contract}}
+
+      CompanyArr {{cmpnyPrtnr}}
     <panel title="Contract Metadata">
       <v-text-field
        :label="$t('detailId')"

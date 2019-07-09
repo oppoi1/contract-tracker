@@ -1,0 +1,15 @@
+[
+  {
+    "name": "default",
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "dancingqueen",
+    "password": "2malTanzen",
+    "database": "contract-tracker",
+    "synchronize": false,
+    "entities": [
+      "entities/*.js"
+    ]
+  }
+]

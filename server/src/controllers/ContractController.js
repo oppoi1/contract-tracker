@@ -1,6 +1,7 @@
 const {Contract, Partner, Company, Category} = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const mysql = require('mysql2')
 
 Partner.Company = Partner.belongsTo(Company)
 Partner.Contract = Partner.hasMany(Contract)
@@ -64,7 +65,7 @@ module.exports = {
     } catch (err) {
       console.log(err)
       res.status(500).send({
-        error: 'an error occured while trying to fetch contracts'
+        error: 'an error occured while trying to fetch contracts.'
       })
     }
   },
@@ -156,8 +157,9 @@ module.exports = {
       const contract = await Contract.findById(req.params.contractId)
       res.send(contract)
     } catch (err) {
+      console.log(err)
       res.status(500).send({
-        error: 'Error while fetching contract'
+        error: 'Error while fetching contract.'
       })
     }
   },
@@ -171,7 +173,7 @@ module.exports = {
       res.send(contract)
     } catch (err) {
       res.status(500).send({
-        error: 'Error while updating contract'
+        error: 'Error while updating contract.'
       })
     }
   },
