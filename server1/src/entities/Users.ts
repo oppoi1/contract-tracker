@@ -1,6 +1,6 @@
 import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId} from "typeorm";
 import {Contracts} from "./Contracts";
-import bcrypt from 'bcrypt-nodejs'
+import bcrypt from 'bcryptjs'
 
 
 @Entity("Users",{schema:"contracts" } )

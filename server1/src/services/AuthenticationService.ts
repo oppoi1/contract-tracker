@@ -2,6 +2,7 @@ import { getRepository } from "typeorm"
 import { Users } from '../entities/Users';
 import jwt from 'jsonwebtoken'
 import { config } from '../config/config'
+import bcrypt from 'bcryptjs';
 
 export class AuthenticationService {
   private authenticationService = getRepository(Users)
@@ -11,23 +12,37 @@ export class AuthenticationService {
    */
   public jwtSignUser(user: any) {
     const ONE_WEEK = 60 * 60 * 24 * 7
-    return jwt.sign(user, config.authentication.jwtSecret, {
-      expiresIn: ONE_WEEK
-    })
+    try {
+      return jwt.sign(user, config.authentication.jwtSecret, {
+        expiresIn: ONE_WEEK
+      })
+    } catch (error) {
+      console.log(error)
+      throw new Error(error)
+    }
+
+
   }
 
   async register (_body) {
-    let user
+    let user: Users
     let userJson
 
     try {
-      user = await this.authenticationService.create(_body)
-      // userJson = user.toJson()
+      user = new Users()
+      user.name = _body.name
+      user.email = _body.email
+      user.password = await bcrypt.hash(_body.password, 10)
+      try {
+        await this.authenticationService.save(user)
+      } catch (error) {
+        throw new Error(error)
+      }
+
       userJson = JSON.stringify(user)
-      return {user: userJson, token: this.jwtSignUser(user)}
+      return {user: userJson, token: this.jwtSignUser(_body)}
     } catch (error) {
-      console.log(error)
-      throw new Error('Can\'t create User. #ASR#1')
+      throw new Error('Can\'t create User. #ASR#1' + error)
     }
   }
 
