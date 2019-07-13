@@ -1,10 +1,10 @@
 import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId} from "typeorm";
-import {contracts} from "./contracts";
-import {partners} from "./partners";
+import {Contracts} from "./Contracts";
+import {Partners} from "./Partners";
 
 
-@Entity("companies",{schema:"contract-tracker" } )
-export class companies {
+@Entity("Companies",{schema:"contracts" } )
+export class Companies {
 
     @PrimaryGeneratedColumn({
         type:"int", 
@@ -15,6 +15,7 @@ export class companies {
 
     @Column("varchar",{ 
         nullable:true,
+        length:50,
         name:"name"
         })
     name:string | null;
@@ -22,6 +23,7 @@ export class companies {
 
     @Column("varchar",{ 
         nullable:true,
+        length:50,
         name:"address"
         })
     address:string | null;
@@ -29,6 +31,7 @@ export class companies {
 
     @Column("varchar",{ 
         nullable:true,
+        length:50,
         name:"branch"
         })
     branch:string | null;
@@ -36,6 +39,7 @@ export class companies {
 
     @Column("varchar",{ 
         nullable:true,
+        length:20,
         name:"phone"
         })
     phone:string | null;
@@ -43,39 +47,34 @@ export class companies {
 
     @Column("varchar",{ 
         nullable:true,
+        length:50,
         name:"fax"
         })
     fax:string | null;
         
 
-    @Column("varchar",{ 
-        nullable:true,
-        name:"contracts"
-        })
-    contracts:string | null;
-        
-
     @Column("datetime",{ 
-        nullable:false,
+        nullable:true,
+        default: () => "CURRENT_TIMESTAMP",
         name:"createdAt"
         })
-    createdAt:Date;
+    createdAt:Date | null;
         
 
     @Column("datetime",{ 
-        nullable:false,
+        nullable:true,
         name:"updatedAt"
         })
-    updatedAt:Date;
+    updatedAt:Date | null;
         
 
    
-    @OneToMany(type=>contracts, contracts=>contracts.company,{ onDelete: 'SET NULL' ,onUpdate: 'CASCADE' })
-    contractss:contracts[];
+    @OneToMany(type=>Contracts, contracts=>contracts.company,{ onDelete: 'RESTRICT' ,onUpdate: 'RESTRICT' })
+    contractss:Contracts[];
     
 
    
-    @OneToMany(type=>partners, partners=>partners.company,{ onDelete: 'SET NULL' ,onUpdate: 'CASCADE' })
-    partnerss:partners[];
+    @OneToMany(type=>Partners, partners=>partners.company,{ onDelete: 'RESTRICT' ,onUpdate: 'RESTRICT' })
+    partnerss:Partners[];
     
 }

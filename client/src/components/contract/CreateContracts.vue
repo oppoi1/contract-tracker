@@ -42,7 +42,7 @@
         type="date"
         value="date"
         :rules="[required]"
-        v-model="contract.duration"
+        v-model="contract.end"
       ></v-text-field>
       <v-text-field
         :label="$t('detailCancel')"
@@ -114,7 +114,7 @@ export default {
         number: '',
         partner: null,
         start: null,
-        duration: null,
+        end: null,
         objectives: null,
         futureobjectives: null,
         other: null,

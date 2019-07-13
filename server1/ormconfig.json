@@ -4,12 +4,12 @@
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "dancingqueen",
-    "password": "2malTanzen",
-    "database": "contract-tracker",
+    "username": "oppoi",
+    "password": "Mama1337new@",
+    "database": "contracttracker",
     "synchronize": false,
     "entities": [
-      "entities/*.js"
+      "src/entities/**/*.ts"
     ]
   }
 ]

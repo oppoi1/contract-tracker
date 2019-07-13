@@ -19,7 +19,7 @@
         <td class="text-xs-left">{{ firstLetterUC(props.item.partner) }}</td>
         <td class="text-xs-left">{{ props.item.category }}</td>
         <td class="text-xs-left">{{ StripAndReverse(props.item.start) }}</td>
-        <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.duration) }}</td>
+        <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.end) }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.createdBy) }}</td>
         <td class="text-xs-left" lazy>{{ StripAndReverse(props.item.createdAt) }}</td>
         <td class="text-xs-left">
@@ -58,7 +58,7 @@ export default {
           { text: this.$t('tblPartner'), value: 'partner' },
           { text: this.$t('tblCategory'), value: 'categories'},
           { text: this.$t('tblDate'), value: 'start' },
-          { text: this.$t('tblDuration'), value: 'duration' },
+          { text: this.$t('tblEnd'), value: 'end' },
           { text: this.$t('tblCreatedBy'), value: 'createdBy' },
           { text: this.$t('tblCreated'), value: 'createdAt'},
           { text: '', value: 'id'}

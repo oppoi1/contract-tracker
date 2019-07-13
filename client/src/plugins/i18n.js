@@ -50,6 +50,9 @@ const messages = {
     tblCategory: 'Category',
     tblDate: 'Date',
     tblDuration: 'Duration',
+    tblEnd: 'Ends',
+    tblResponsible: 'Responsible',
+    tblCompany: 'Company',
     tblCreatedBy: 'Created By',
     tblCreated: 'Created',
 
@@ -110,7 +113,10 @@ const messages = {
     tblPartner: 'Partner',
     tblCategory: 'Kategorie',
     tblDate: 'Beginnt',
-    tblDuration: 'Endet',
+    tblDuration: 'Dauer',
+    tblEnd: 'Endet',
+    tblResponsible: 'Verantwortlich',
+    tblCompany: 'Firma',
     tblCreatedBy: 'Erstellt durch',
     tblCreated: 'Erstellt am',
 

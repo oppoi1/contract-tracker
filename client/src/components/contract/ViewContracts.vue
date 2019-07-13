@@ -32,7 +32,7 @@
               </div>
               <div style="display:inline-table" class="contract-end v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract.duration}}
+                  {{contract.end}}
                 </span>
               </div>
              </div>

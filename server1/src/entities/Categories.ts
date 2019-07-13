@@ -1,9 +1,9 @@
 import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId} from "typeorm";
+import {Contracts} from "./Contracts";
 
 
-@Entity("users",{schema:"contract-tracker" } )
-@Index("name",["name",],{unique:true})
-export class users {
+@Entity("Categories",{schema:"contracts" } )
+export class Categories {
 
     @PrimaryGeneratedColumn({
         type:"int", 
@@ -14,37 +14,29 @@ export class users {
 
     @Column("varchar",{ 
         nullable:true,
-        unique: true,
+        length:50,
         name:"name"
         })
     name:string | null;
         
 
-    @Column("varchar",{ 
-        nullable:true,
-        name:"email"
-        })
-    email:string | null;
-        
-
-    @Column("varchar",{ 
-        nullable:true,
-        name:"password"
-        })
-    password:string | null;
-        
-
     @Column("datetime",{ 
-        nullable:false,
+        nullable:true,
+        default: () => "CURRENT_TIMESTAMP",
         name:"createdAt"
         })
-    createdAt:Date;
+    createdAt:Date | null;
         
 
     @Column("datetime",{ 
-        nullable:false,
+        nullable:true,
         name:"updatedAt"
         })
-    updatedAt:Date;
+    updatedAt:Date | null;
         
+
+   
+    @OneToMany(type=>Contracts, contracts=>contracts.category,{ onDelete: 'RESTRICT' ,onUpdate: 'RESTRICT' })
+    contractss:Contracts[];
+    
 }

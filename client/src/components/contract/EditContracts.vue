@@ -37,7 +37,7 @@
         :label="$t('detailEnd')"
         type="date"
         :rules="[required]"
-        v-model="contract.duration.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
+        v-model="contract.end.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
       ></v-text-field>
       <v-text-field
         :label="$t('pricePerMonth')"
@@ -99,7 +99,7 @@ export default {
         number: null,
         partner: null,
         start: null,
-        duration: null,
+        end: null,
         objectives: null,
         futureobjectives: null,
         other: null,
