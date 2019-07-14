@@ -177,9 +177,6 @@ export default {
   async mounted () {
     try {
       this.partner = (await PartnerService.get()).data
-      // for(var i = 0; i < this.partner.length; i++) {
-      //   this.prtnrArr.push(this.partner[i].CompanyId)
-      // }
     } catch (e) {
       console.log(e);
     }
@@ -193,6 +190,7 @@ export default {
     }
     try {
       this.users = (await AuthenticationService.get()).data
+      console.log(this.users)
       for(var i = 0; i < this.users.length; i++) {
         this.usrArray.push(this.users[i].name)
       }
@@ -218,7 +216,7 @@ export default {
           // if the same then look in partner arr where company id = companyarr[i].id
           const result = this.partner.map(partner => {
             var newObj = {}
-            partner.CompanyId === this.companyArr[i].id ? newObj = partner.name : undefined
+            partner.companyId === this.companyArr[i].id ? newObj = partner.name : undefined
             return newObj
           })
           this.cmpnyPrtnr = result

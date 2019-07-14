@@ -1,64 +1,57 @@
 <template>
   <v-layout>
     <v-flex xs4>
-      PartnerArr {{prtnrArr}}
-      Partner {{partner}}
-      
-      Contract {{contract}}
-
-      CompanyArr {{cmpnyPrtnr}}
-    <panel title="Contract Metadata">
-      <v-text-field
-       :label="$t('detailId')"
-        :rules="[required]"
-        v-model="contract.number"
-      ></v-text-field>
-      <v-combobox
-        v-model="contract.partner"
-        :rules="[required]"
-        :items="prtnrArr"
-        :label="$t('detailPartner')"
-        chips
-      ></v-combobox>
-      <v-combobox
-        :label="$t('detailoptionalPartner')"
-        required
-        :rules="[required]"
-        :items="cmpnyPrtnr"
-        v-model="contract.optionalPartner"
-      ></v-combobox>
-      <v-text-field
-        :label="$t('detailStart')"
-        type="date"
-        :rules="[required]"
-        v-model="contract.start.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
-      ></v-text-field>
-      <v-text-field
-        :label="$t('detailEnd')"
-        type="date"
-        :rules="[required]"
-        v-model="contract.end.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
-      ></v-text-field>
-      <v-text-field
-        :label="$t('pricePerMonth')"
-        required
-        :placeholder="$t('detailPpM')"
-        prefix="€"
-        v-model="contract.pricePerMonth"
-      ></v-text-field>
-
-    </panel>
-   </v-flex>
-   <v-flex xs8>
+      <panel title="Contract Metadata">
+        <v-text-field
+          :label="$t('detailId')"
+          :rules="[required]"
+          v-model="contract[0].number"
+        ></v-text-field>
+        <v-combobox
+          v-model="contract[0].companyName"
+          :rules="[required]"
+          :items="prtnrArr"
+          :label="$t('detailPartner')"
+          chips
+        ></v-combobox>
+        <v-combobox
+          :label="$t('detailoptionalPartner')"
+          required
+          :rules="[required]"
+          :items="cmpnyPrtnr"
+          v-model="contract[0].partnerName"
+        ></v-combobox>
+        <v-text-field
+          :label="$t('detailStart')"
+          type="date"
+          :rules="[required]"
+          v-model="contract[0].start.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
+        ></v-text-field>
+        <v-text-field
+          :label="$t('detailEnd')"
+          type="date"
+          :rules="[required]"
+          v-model="contract[0].end.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]"
+        ></v-text-field>
+        <v-text-field
+          :label="$t('pricePerMonth')"
+          required
+          :placeholder="$t('detailPpM')"
+          prefix="€"
+          v-model="contract[0].pricePerMonth"
+        ></v-text-field>
+        </panel>
+    </v-flex>
+    <v-flex xs8>
      <panel title="Contract Objectives" class="ml-2">
       <v-flex xs12>
-      <v-text-field
-        :label="$t('detailOther')"
-        :rules="[required]"
-        v-model="contract.other"
-      ></v-text-field>
+        <v-text-field
+          :label="$t('detailOther')"
+          :rules="[required]"
+          v-model="contract[0].other"
+        ></v-text-field>
         <v-combobox
-          v-model="contract.categories"
+          v-model="contract[0].categoryName"
           :items="catArray"
           :label="$t('detailCategories')"
           chips
@@ -68,14 +61,14 @@
         :label="$t('detailObjectives')"
         :rules="[required]"
         multi-line
-        v-model="contract.objectives"
+        v-model="contract[0].objectives"
       ></v-textarea>
 
       <v-textarea
         :label="$t('detailfObjectives')"
         :rules="[required]"
         multi-line
-        v-model="contract.futureobjectives"
+        v-model="contract[0].futureobjectives"
       ></v-textarea>
     </panel>
     <div class="danger-alert" v-if="error">
@@ -131,7 +124,7 @@ export default {
      */
     async save () {
       this.error = null
-      this.contract.modifiedBy = this.$store.state.user.name
+      this.contract[0].modifiedBy = this.$store.state.user.name
       const areAllFieldsFilledIn = Object
         .keys(this.contract)
         .every(key => !!this.contract[key])
@@ -150,9 +143,9 @@ export default {
       for(const key in this.categories) {
         exists.push(this.categories[key].name)
       }
-      if(!exists.includes(this.contract.categories)) {
+      if(!exists.includes(this.contract[0].categories)) {
         const cntrctCat = {
-          name: this.contract.categories
+          name: this.contract[0].categories
         }
         try {
           await CategoryService.post(cntrctCat)
@@ -166,10 +159,10 @@ export default {
         console.log(pkey);
         checkPartner.push(this.partner[pkey].name)
       }
-      if(!checkPartner.includes(this.contract.partner)) {
+      if(!checkPartner.includes(this.contract[0].partner)) {
         const newPartner = {
-          company: this.contract.partner,
-          name: this.contract.optionalPartner
+          company: this.contract[0].partner,
+          name: this.contract[0].optionalPartner
         }
         try {
           await PartnerService.post(newPartner)
@@ -201,7 +194,7 @@ export default {
     try {
       this.partner = (await PartnerService.get()).data
       for(var i = 0; i < this.partner.length; i++) {
-        this.prtnrArr.push(this.partner[i].company)
+        this.prtnrArr.push(this.partner[i].companyId)
       }
     } catch (e) {
       console.log(e);
@@ -224,9 +217,9 @@ export default {
     }
   },
   watch: {
-    'contract.partner': function(val) {
+    'contract[0].partner': function(val) {
       for(var i = 0; i < this.partner.length; i++) {
-        if(this.partner[i].company === val) {         
+        if(this.partner[i].companyId === val) {         
           this.cmpnyPrtnr.push(this.partner[i].name)
         }
       }

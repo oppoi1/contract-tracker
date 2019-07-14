@@ -6,7 +6,7 @@ export class ContractController {
 
   async index(request: Request, response: Response, next: NextFunction) {
     try {
-      return await this.service.getAll()
+      return await this.service.get(request.query.search)
     } catch (error) {
       console.log(error)
       response.status(500).send({
@@ -49,6 +49,19 @@ export class ContractController {
   async delete(request: Request, response: Response, next: NextFunction) {
     try {
       this.service.delete(request.params.contractId)
+      response.send({
+        message: 'Contract deleted successfully.'
+      })
+    } catch (error) {
+      response.status(500).send({
+        error: error
+      })
+    }
+  }
+
+  async getAll(request: Request, response: Response, next: NextFunction) {
+    try {
+      this.service.getAll()
     } catch (error) {
       response.status(500).send({
         error: error

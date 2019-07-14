@@ -13,15 +13,10 @@ export class AuthenticationService {
   public jwtSignUser(user: any) {
     const ONE_WEEK = 60 * 60 * 24 * 7
     try {
-      return jwt.sign(user, config.authentication.jwtSecret, {
-        expiresIn: ONE_WEEK
-      })
+      return jwt.sign(user, config.authentication.jwtSecret)
     } catch (error) {
-      console.log(error)
       throw new Error(error)
     }
-
-
   }
 
   async register (_body) {
@@ -44,33 +39,6 @@ export class AuthenticationService {
     } catch (error) {
       throw new Error('Can\'t create User. #ASR#1' + error)
     }
-  }
-
-  async login (_body) {
-    const { name, password } = _body
-    let user
-    let isPasswordValid: boolean
-    let userJson: Users
-
-    try {
-      user = await this.authenticationService.findOne({
-        where: {
-          name: name
-        }
-      })
-    } catch (error) {
-      throw new Error('The login information was incorrect.')
-    }
-
-    isPasswordValid = await user.comparePassword(password)
-
-    if (!isPasswordValid) {
-      throw new Error('The login information was incorrect.')
-    }
-
-    userJson = user.toJson()
-
-    return {user: userJson, token: this.jwtSignUser(userJson)}
   }
 
   async get () {

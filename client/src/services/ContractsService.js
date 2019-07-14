@@ -26,5 +26,8 @@ export default {
   },
   delete(contractId) {
     return Api().delete(`contracts/${contractId}`)
+  },
+  getAll() {
+    return Api().get('contracts/all')
   }
 };

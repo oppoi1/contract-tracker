@@ -1,6 +1,8 @@
 import { ContractController } from './controllers/ContractController';
 import { AuthenticationController } from './controllers/AuthenticationController';
 import { CategoryController } from './controllers/CategoryController';
+import { PartnerController } from './controllers/PartnerController';
+import { CompanyController } from './controllers/CompanyController';
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 
 export const Routes = [
@@ -12,6 +14,12 @@ export const Routes = [
   route: "/contracts",
   controller: ContractController,
   action: "index"
+},
+{
+  method: "get",
+  route: "/contracts/all",
+  controller: ContractController,
+  action: "getAll"
 },
 {
   method: "post",
@@ -59,6 +67,12 @@ export const Routes = [
   controller: AuthenticationController,
   action: "authenticate"
 },
+{
+  method: "get",
+  route: "/users",
+  controller: AuthenticationController,
+  action: "get"
+},
 /**
  * Category Routes
  */
@@ -73,5 +87,23 @@ export const Routes = [
   route: "/categories",
   controller: CategoryController,
   action: "post"
+},
+/**
+ * Partner Routes
+ */
+{
+  method: "get",
+  route: "/partner",
+  controller: PartnerController,
+  action: "get"
+},
+/**
+ * Company Service
+ */
+{
+  method: "get",
+  route: "/company",
+  controller: CompanyController,
+  action: "get"
 },
 ]

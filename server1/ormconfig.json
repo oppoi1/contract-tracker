@@ -6,7 +6,7 @@
     "port": 3306,
     "username": "oppoi",
     "password": "Mama1337new@",
-    "database": "contracttracker",
+    "database": "contracts",
     "synchronize": false,
     "entities": [
       "src/entities/**/*.ts"

@@ -1,5 +1,5 @@
 import { Contracts } from "../entities/Contracts"
-import { getRepository } from "typeorm"
+import { getRepository, Like } from "typeorm"
 import { Categories } from '../entities/Categories';
 import { Companies } from '../entities/Companies';
 import { Partners } from "../entities/Partners";
@@ -19,17 +19,55 @@ export class ContractService {
     return (dateFinal - dateInitial) / (1000 * 3600 * 24)
   } 
 
-  async getAll() {
-    try {
-      return await this.contractService.find()
-    } catch (error) {
-      throw new Error('No contract found. #CS1') 
+  // Get all Contracts w/wo search parameter
+  async get(search) {
+    let contracts: Contracts[]
+
+    if (search) {
+      contracts = await this.contractService.find({
+        where: [
+          {number: Like(search)},
+          {partner: Like(search)},
+          {start: Like(search)},
+          {duration: Like(search)},
+          {category: Like(search)},
+        ]
+      })
+    } else {
+      contracts = await this.getAll()
     }
+    return contracts
+  }
+
+  async getAll() {
+    return await this.contractService.query(`
+    SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName, u.name as createdByName 
+    FROM 
+    Contracts as cont, Categories as cat, Companies as comp, Partners as p, Users as u 
+    WHERE 
+    cont.createdBy = u.id AND 
+    cont.categoryId = cat.id AND 
+    cont.companyId = comp.id AND 
+    cont.partnerId = p.id AND
+    cont.isActive = 1`)
   }
 
   async getOne(id: number) {
+    let contract: Contracts
     try {
-      return await this.contractService.findOne(id)
+      // return await this.contractService.findOne(id)
+      return contract = await this.contractService.query(`
+      SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName,comp.address, p.branch, p.phone, u.name as createdByName 
+      FROM 
+      Contracts as cont, Categories as cat, Companies as comp, Partners as p, Users as u 
+      WHERE 
+      cont.createdBy = u.id AND
+      cont.categoryId = cat.id AND 
+      cont.companyId = comp.id AND
+      cont.partnerId = p.id AND
+      cont.id = ${id} AND
+      cont.isActive = 1
+      `)
     } catch (error) {
       throw new Error(`No contract found with id: ${id} #CS2`)
     }

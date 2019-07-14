@@ -1,12 +1,8 @@
-import { Contracts } from "../entities/Contracts"
 import { getRepository } from "typeorm"
-import { Categories } from '../entities/Categories';
 import { Companies } from '../entities/Companies';
 import { Partners } from "../entities/Partners";
 
 export class PartnerService {
-  private contractService = getRepository(Contracts)
-  private categoryService = getRepository(Categories)
   private companyService = getRepository(Companies)
   private partnerService = getRepository(Partners)
 
@@ -14,11 +10,13 @@ export class PartnerService {
     let partner: Partners = null
 
     try {
-      return partner = await this.partnerService.query(`
+      partner = await this.partnerService.query(`
       SELECT p.*, comp.name as compName
-      from Partner, Companies as comp
+      from Partners as p, Companies as comp
       where p.companyId = comp.id
       `)
+
+      return partner
     } catch (error) {
       throw new Error('An error occured while trying to fetch partner data. #PSG#1')
     }

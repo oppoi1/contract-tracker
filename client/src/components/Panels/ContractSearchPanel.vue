@@ -25,6 +25,7 @@ export default {
       }
       this.$router.push(route)
     }),
+    // also no comments sometimes I is stupiiid
     '$route.query.search': {
       immediate: true,
       handler (value) {

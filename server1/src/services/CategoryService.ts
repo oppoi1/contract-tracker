@@ -7,13 +7,9 @@ export class CategoryService {
 
   async get () {
     let categories: Categories[]
-    try {
-      categories = await this.categoryService.find({
-        take: 50
-      })
-    } catch (error) {
-      throw new Error('An error occured while trying to fetch categories. #CSG#1')
-    }
+    return categories = await this.categoryService.find({
+      take: 50
+    })
   }
 
   async post (_body) {

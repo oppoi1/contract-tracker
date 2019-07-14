@@ -6,7 +6,7 @@ createConnection().then(async connection => {
   const app = Server.bootstrap().app
 
   // start express server
-  app.listen(3000)
+  app.listen(3001)
 
   console.log('Magic happens on port 3000.')
 }).catch(err => console.log(err))

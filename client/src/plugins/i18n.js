@@ -75,7 +75,7 @@ const messages = {
   },
   'de': {
     // partner details
-    partnerDetails: 'Partner Eigenschaften: ',
+    partnerDetails: 'Partnerinformation: ',
     company: 'Firma:',
     contact: 'Kontakt:',
     address: 'Adresse:',
