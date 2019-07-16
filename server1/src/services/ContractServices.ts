@@ -19,7 +19,11 @@ export class ContractService {
     return (dateFinal - dateInitial) / (1000 * 3600 * 24)
   } 
 
-  // Get all Contracts w/wo search parameter
+  /**
+   * Gets contract service
+   * @param search 
+   * @returns  
+   */
   async get(search) {
     let contracts: Contracts[]
 
@@ -36,6 +40,12 @@ export class ContractService {
     } else {
       contracts = await this.getAll()
     }
+    /**
+     * logik:
+spaetester Termin
+Ende - cancel
+SELECT DATE_SUB(NOW(), INTERVAL 10 DAY)
+     */
     return contracts
   }
 

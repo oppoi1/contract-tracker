@@ -55,6 +55,7 @@ const messages = {
     tblCompany: 'Company',
     tblCreatedBy: 'Created By',
     tblCreated: 'Created',
+    Noticeterm: 'Term of Notice',
 
     // contract details
     detailId: 'Identifier',
@@ -119,6 +120,7 @@ const messages = {
     tblCompany: 'Firma',
     tblCreatedBy: 'Erstellt durch',
     tblCreated: 'Erstellt am',
+    Noticeterm: 'Letzter Kündigungstermin',
 
     // contract details
     detailId: 'Nummer',

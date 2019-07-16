@@ -49,6 +49,7 @@ export default {
           { text: this.$t('tblCategory'), value: 'categories'},
           { text: this.$t('tblResponsible'), value: 'responsible' },
           { text: this.$t('tblDuration'), value: 'duration' },
+          { text: this.$t('Noticeterm'), value: ''},
           { text: '', value: 'id'}
         ],
       contracts: []

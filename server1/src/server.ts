@@ -59,7 +59,7 @@ export class Server {
 
   // Environment setup
   public config() {
-    this.app.use(logger('dev'))
+    this.app.use(logger('tiny'))
     this.app.use(cors())
     this.app.use(bodyParser.json())
     this.app.use(helmet())
