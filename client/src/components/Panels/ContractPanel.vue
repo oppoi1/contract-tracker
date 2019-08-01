@@ -44,6 +44,7 @@ export default {
             sortable: false,
             value: 'id',
           },
+          { text: this.$t('name'), value: 'name' },
           { text: this.$t('tblCompany'), value: 'companyName' },
           { text: this.$t('tblPartner'), value: 'partner' },
           { text: this.$t('tblCategory'), value: 'categories'},

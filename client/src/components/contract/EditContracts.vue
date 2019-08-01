@@ -7,6 +7,11 @@
           :rules="[required]"
           v-model="contract[0].number"
         ></v-text-field>
+        <v-text-field
+          :label="$t('name')"
+          :rules="[required]"
+          v-model="contract[0].name"
+        ></v-text-field>
         <v-combobox
           v-model="contract[0].companyName"
           :rules="[required]"
@@ -40,6 +45,14 @@
           prefix="€"
           v-model="contract[0].pricePerMonth"
         ></v-text-field>
+        <v-select
+          :items="items"
+          label="Solo field"
+          solo
+          required
+          :rules="[required]"
+          v-model="contract.pricePerPriod"
+        ></v-select>
         </panel>
     </v-flex>
     <v-flex xs8>
@@ -99,6 +112,7 @@ export default {
         optionalPartner: null,
         categories: null,
         pricePerMonth: null,
+        pricePerPeriod: null,
         modifiedBy: this.$store.state.user.name
       },
       partner: {

@@ -16,6 +16,7 @@
   >
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.number }}</td>
+        <td class="text-xs-left">{{ props.item.name }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.partner) }}</td>
         <td class="text-xs-left">{{ props.item.category }}</td>
         <td class="text-xs-left">{{ StripAndReverse(props.item.start) }}</td>

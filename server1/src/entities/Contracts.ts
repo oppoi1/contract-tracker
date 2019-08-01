@@ -26,6 +26,14 @@ export class Contracts {
         name:"number"
         })
     number:string | null;
+
+    
+    @Column("varchar",{ 
+      nullable:true,
+      length:90,
+      name:"name"
+      })
+    name:string | null;
         
 
     @Column("date",{ 
@@ -82,8 +90,12 @@ export class Contracts {
         })
     pricePerMonth:number | null;
         
-
-   
+    @Column("int",{ 
+        nullable:true,
+        name:"pricePerPeriod"
+        })
+    pricePerPeriod:number | null;
+         
     @ManyToOne(type=>Users, users=>users.contractss2,{ onDelete: 'RESTRICT',onUpdate: 'RESTRICT' })
     @JoinColumn({ name:'responsible'})
     responsible:Users | null;

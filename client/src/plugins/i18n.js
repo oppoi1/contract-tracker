@@ -24,7 +24,7 @@ const messages = {
     contractEnds: 'Contract Ends:',
     contractCat: 'Contract Category:',
     contractObjectives: 'Contract Objectives:',
-    pricePerMonth: 'Price per Month: ',
+    pricePerMonth: 'Price per Period: ',
     futuresObjectives: 'Future Objectives',
     misc: 'Miscellaneous:',
 
@@ -89,7 +89,7 @@ const messages = {
     contractEnds: 'Vertragsende:',
     contractCat: 'Vertragskategorie:',
     contractObjectives: 'Vertragsziele:',
-    pricePerMonth: 'Preis pro Monat: ',
+    pricePerMonth: 'Preis pro Periode: ',
     futuresObjectives: 'Geplante Ziele',
     misc: 'Sonstiges:',
 

@@ -30,6 +30,7 @@ export class ContractService {
     if (search) {
       contracts = await this.contractService.find({
         where: [
+          {name: Like(search)},
           {number: Like(search)},
           {partner: Like(search)},
           {start: Like(search)},
@@ -42,9 +43,9 @@ export class ContractService {
     }
     /**
      * logik:
-spaetester Termin
-Ende - cancel
-SELECT DATE_SUB(NOW(), INTERVAL 10 DAY)
+        spaetester Termin 
+        Ende - cancel
+        SELECT DATE_SUB(NOW(), INTERVAL 10 DAY)
      */
     return contracts
   }
@@ -165,8 +166,9 @@ SELECT DATE_SUB(NOW(), INTERVAL 10 DAY)
         contract.objectives = _body.objectives
         contract.futureobjectives = _body.futureobjectives
         contract.other = _body.other
-        contract.createdBy = _body.createdBy,
+        contract.createdBy = _body.createdBy
         contract.pricePerMonth = _body.pricePerMonth
+        contract.pricePerPeriod = _body.pricePerPeriod
         contract.responsible = _body.responsible
         contract.cancel = _body.cancel
         // contract.modifiedBy = _body.modifiedBy || _body.createdBy
