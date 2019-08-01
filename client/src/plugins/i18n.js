@@ -24,7 +24,7 @@ const messages = {
     contractEnds: 'Contract Ends:',
     contractCat: 'Contract Category:',
     contractObjectives: 'Contract Objectives:',
-    pricePerMonth: 'Price per Month: ',
+    pricePerMonth: 'Price per Period: ',
     futuresObjectives: 'Future Objectives',
     misc: 'Miscellaneous:',
 
@@ -55,6 +55,7 @@ const messages = {
     tblCompany: 'Company',
     tblCreatedBy: 'Created By',
     tblCreated: 'Created',
+    Noticeterm: 'Term of Notice',
 
     // contract details
     detailId: 'Identifier',
@@ -88,7 +89,7 @@ const messages = {
     contractEnds: 'Vertragsende:',
     contractCat: 'Vertragskategorie:',
     contractObjectives: 'Vertragsziele:',
-    pricePerMonth: 'Preis pro Monat: ',
+    pricePerMonth: 'Preis pro Periode: ',
     futuresObjectives: 'Geplante Ziele',
     misc: 'Sonstiges:',
 
@@ -119,6 +120,7 @@ const messages = {
     tblCompany: 'Firma',
     tblCreatedBy: 'Erstellt durch',
     tblCreated: 'Erstellt am',
+    Noticeterm: 'Letzter Kündigungstermin',
 
     // contract details
     detailId: 'Nummer',

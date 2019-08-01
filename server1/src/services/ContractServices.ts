@@ -19,13 +19,18 @@ export class ContractService {
     return (dateFinal - dateInitial) / (1000 * 3600 * 24)
   } 
 
-  // Get all Contracts w/wo search parameter
+  /**
+   * Gets contract service
+   * @param search 
+   * @returns  
+   */
   async get(search) {
     let contracts: Contracts[]
 
     if (search) {
       contracts = await this.contractService.find({
         where: [
+          {name: Like(search)},
           {number: Like(search)},
           {partner: Like(search)},
           {start: Like(search)},
@@ -36,6 +41,12 @@ export class ContractService {
     } else {
       contracts = await this.getAll()
     }
+    /**
+     * logik:
+        spaetester Termin 
+        Ende - cancel
+        SELECT DATE_SUB(NOW(), INTERVAL 10 DAY)
+     */
     return contracts
   }
 
@@ -155,8 +166,9 @@ export class ContractService {
         contract.objectives = _body.objectives
         contract.futureobjectives = _body.futureobjectives
         contract.other = _body.other
-        contract.createdBy = _body.createdBy,
+        contract.createdBy = _body.createdBy
         contract.pricePerMonth = _body.pricePerMonth
+        contract.pricePerPeriod = _body.pricePerPeriod
         contract.responsible = _body.responsible
         contract.cancel = _body.cancel
         // contract.modifiedBy = _body.modifiedBy || _body.createdBy

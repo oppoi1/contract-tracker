@@ -18,6 +18,16 @@
             </div>
             <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
+                {{$t('name')}}
+              </div>
+              <div style="display:inline-table" class="contract-contact v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract[0].name}}
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div style="display:inline-table" class="v-badge contract">
                 {{$t('contractStart')}}
               </div>
               <div style="display:inline-table" class="contract-start v-badge">
@@ -53,6 +63,16 @@
               <div style="display:inline-table" class="contract-price v-badge">
                 <span class="font-weight-bold contract">
                   {{contract[0].pricePerMonth}}&euro;
+                </span>
+              </div>
+             </div>
+             <div class="mb-3">
+              <div style="display:inline-table" class="v-badge contract">
+                {{$t('pricePerPeriod')}}
+              </div>
+              <div style="display:inline-table" class="contract-price v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract[0].pricePerPeriod}}&euro;
                 </span>
               </div>
              </div>
@@ -174,7 +194,7 @@ export default {
       company: {},
       companyArr: [],
       // contract properties
-      items: ['Contract ID', 'Contract begins', 'Contract ends', 'Categories', 'Price per Month', 'Objectives', 'Future objectives', 'Miscellaneous'],
+      // items: ['Contract ID', 'Contract begins', 'Contract ends', 'Categories', 'Price per Month', 'Objectives', 'Future objectives', 'Miscellaneous'],
       success: null,
       error: null
     }

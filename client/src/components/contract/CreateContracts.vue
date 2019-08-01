@@ -8,6 +8,12 @@
         :rules="[required]"
         v-model="contract.number"
       ></v-text-field>
+      <v-text-field
+        :label="$t('name')"
+        required
+        :rules="[required]"
+        v-model="contract.name"
+      ></v-text-field>
       <v-combobox
         v-model="contract.responsible"
         :rules="[required]"
@@ -58,7 +64,15 @@
         prefix="€"
         v-model="contract.pricePerMonth"
       ></v-text-field>
-      <p class="red">p.A: {{ contract.pricePerMonth * 12 }} €</p>
+      <v-select
+        :items="items"
+        label="Solo field"
+        solo
+        required
+        :rules="[required]"
+        v-model="contract.pricePerPriod"
+      ></v-select>
+      <p class="red">(stimmt nicht mehr)p.A: {{ contract.pricePerMonth * 12 }} €</p>
     </panel>
    </v-flex>
    <v-flex xs8>
@@ -112,6 +126,7 @@ export default {
     return {
       contract: {
         number: '',
+        name: '',
         partner: null,
         start: null,
         end: null,
@@ -121,6 +136,7 @@ export default {
         optionalPartner: null,
         categories: null,
         pricePerMonth: null,
+        pricePerPriod: null,
         responsible: null,
         cancel: null,
         createdBy: this.$store.state.user.name
@@ -143,6 +159,7 @@ export default {
       error: null,
       required: (value) => !!value || 'Required.',
       date: new Date().toJSON().slice(0,10).toString(),
+      items: ['monatlich', 'vierteljährlich', 'halbjährlich', 'jährlich']
     }
   },
   methods: {

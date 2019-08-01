@@ -44,11 +44,13 @@ export default {
             sortable: false,
             value: 'id',
           },
+          { text: this.$t('name'), value: 'name' },
           { text: this.$t('tblCompany'), value: 'companyName' },
           { text: this.$t('tblPartner'), value: 'partner' },
           { text: this.$t('tblCategory'), value: 'categories'},
           { text: this.$t('tblResponsible'), value: 'responsible' },
           { text: this.$t('tblDuration'), value: 'duration' },
+          { text: this.$t('Noticeterm'), value: ''},
           { text: '', value: 'id'}
         ],
       contracts: []
