@@ -13,12 +13,16 @@
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
+
         <td class="text-xs-left">{{ props.item.number }}</td>
+        <td class="text-xs-left">{{ props.item.name }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.companyName) }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.partnerName) }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.categoryName) }}</td>
-        <td class="text-xs-left">{{ firstLetterUC(props.item.createdByName) }}</td>
+        <td class="text-xs-left">{{ firstLetterUC(props.item.responsible) }}</td>
         <td class="text-xs-left">{{ props.item.duration }} Tage</td>
+        <td class="text-xs-left">{{ StripAndReverse(props.item.cancelDate) }}</td> 
+        <!-- TODO: last date for cancelling contract-->
         <td class="text-xs-left">
           <v-btn small color="primary" fab dark :to="{name: 'contract', params: {contractId: props.item.id}}">
             <v-icon dark>list</v-icon>
