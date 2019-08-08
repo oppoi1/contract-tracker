@@ -5,7 +5,7 @@ export default {
      */
     StripAndReverse(val) {
       val = val.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]
-      return val.split('-').reverse().join('-')
+      return val.split('-').reverse().join('.')
     },
     /**
      * Set first letter to capital

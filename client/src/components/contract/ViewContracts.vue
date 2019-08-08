@@ -8,17 +8,7 @@
           <v-flex xs8 ma-2 text-xs-left ma-3 subheading>
             <div class="mb-3">
               <div style="display:inline-table" class="v-badge contract">
-                {{$t('contract')}}
-              </div>
-              <div style="display:inline-table" class="contract-contact v-badge">
-                <span class="font-weight-bold contract">
-                  {{contract[0].number}}
-                </span>
-              </div>
-            </div>
-            <div class="mb-3">
-              <div style="display:inline-table" class="v-badge contract">
-                {{$t('name')}}
+                {{firstLetterUC($t('name'))}}:
               </div>
               <div style="display:inline-table" class="contract-contact v-badge">
                 <span class="font-weight-bold contract">
@@ -32,7 +22,7 @@
               </div>
               <div style="display:inline-table" class="contract-start v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].start}}
+                  {{StripAndReverse(contract[0].start)}}
                 </span>
               </div>
             </div>
@@ -42,10 +32,30 @@
               </div>
               <div style="display:inline-table" class="contract-end v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].end}}
+                  {{StripAndReverse(contract[0].end)}}
                 </span>
               </div>
              </div>
+            <div class="mb-3">
+              <div style="display:inline-table" class="v-badge contract">
+                {{$t('detailCancel')}}:
+              </div>
+              <div style="display:inline-table" class="contract-start v-badge">
+                <span class="font-weight-bold contract">
+                  {{contract[0].cancel}} {{$t('month')}}
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div style="display:inline-table" class="v-badge contract">
+                {{$t('detailCancelDate')}}:
+              </div>
+              <div style="display:inline-table" class="contract-start v-badge">
+                <span class="font-weight-bold contract">
+                  {{StripAndReverse(contract[0].cancelDate)}}
+                </span>
+              </div>
+            </div>
              <div class="mb-3">
               <div style="display:inline-table" class="contract">
                 {{$t('contractCat')}}
@@ -62,17 +72,7 @@
               </div>
               <div style="display:inline-table" class="contract-price v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].pricePerMonth}}&euro;
-                </span>
-              </div>
-             </div>
-             <div class="mb-3">
-              <div style="display:inline-table" class="v-badge contract">
-                {{$t('pricePerPeriod')}}
-              </div>
-              <div style="display:inline-table" class="contract-price v-badge">
-                <span class="font-weight-bold contract">
-                  {{contract[0].pricePerPeriod}}&euro;
+                  {{contract[0].pricePerPeriod}} &euro;
                 </span>
               </div>
              </div>

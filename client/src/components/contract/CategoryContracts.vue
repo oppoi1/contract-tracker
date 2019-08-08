@@ -94,7 +94,7 @@ export default {
 
 <style>
 .contract {
-  padding: 20px;
+  /* padding: 20px; */
   overflow: hidden;
 }
 

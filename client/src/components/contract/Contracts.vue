@@ -33,7 +33,7 @@ export default {
 
 <style>
 .contract {
-  padding: 20px;
+  /* padding: 20px; */
   /* height: 150px; */
   overflow: hidden;
 }

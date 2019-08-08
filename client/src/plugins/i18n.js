@@ -67,10 +67,12 @@ const messages = {
     detailEnd: 'End',
     detailPpM: 'per Month',
     detailCancel: 'Cancel period',
+    detailCancelDate: 'Date of notice',
     detailCategories: 'Select a category or create a new one',
     detailObjectives: 'Objectives',
     detailfObjectives: 'Objectives for the future',
     detailOther: 'Comments / Specifics',
+    month: 'months',
 
     // search label
     lblSearch: 'Search by Number',
@@ -133,10 +135,12 @@ const messages = {
     detailEnd: 'Endet',
     detailPpM: 'Pro Monat',
     detailCancel: 'Kündigungsfrist',
+    detailCancelDate: 'Kündigungsdatum',
     detailCategories: 'Wählen Sie eine Kategory aus oder erstellen Sie eine neue',
     detailObjectives: 'Ziele',
     detailfObjectives: 'Ziele für die Zukunft',
     detailOther: 'Kommentare / Weitere Informationen',
+    month: 'Monate',
 
     // search label
     lblSearch: 'Vertragsnummer eingeben',

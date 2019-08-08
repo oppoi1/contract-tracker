@@ -46,13 +46,17 @@ export class ContractService {
         spaetester Termin 
         Ende - cancel
         SELECT DATE_SUB(NOW(), INTERVAL 10 DAY)
+        SELECT DATE_SUB(start, INTERVAL cancel MONTH) FROM `Contracts` WHERE 1
      */
     return contracts
   }
 
   async getAll() {
-    return await this.contractService.query(`
-    SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName, u.name as createdByName 
+    let contract: Contracts[]
+
+    contract = await this.contractService.query(`
+    SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName, u.name as createdByName, u.name as responsible,
+    DATE_SUB(cont.start, INTERVAL cont.cancel MONTH) as cancelDate
     FROM 
     Contracts as cont, Categories as cat, Companies as comp, Partners as p, Users as u 
     WHERE 
@@ -60,7 +64,10 @@ export class ContractService {
     cont.categoryId = cat.id AND 
     cont.companyId = comp.id AND 
     cont.partnerId = p.id AND
+    cont.responsible = u.id AND
     cont.isActive = 1`)
+
+    return contract
   }
 
   async getOne(id: number) {
@@ -68,7 +75,8 @@ export class ContractService {
     try {
       // return await this.contractService.findOne(id)
       return contract = await this.contractService.query(`
-      SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName,comp.address, p.branch, p.phone, u.name as createdByName 
+      SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName,comp.address, p.branch, p.phone, u.name as createdByName ,
+      DATE_SUB(cont.start, INTERVAL cont.cancel MONTH) as cancelDate
       FROM 
       Contracts as cont, Categories as cat, Companies as comp, Partners as p, Users as u 
       WHERE 
