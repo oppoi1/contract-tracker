@@ -5,6 +5,7 @@ import cors from 'cors'
 import logger from 'morgan'
 import compression from 'compression'
 import helmet from 'helmet'
+import fileupload from "express-fileupload";
 import { Request, Response } from 'express'
 // eslint-disable-next-line no-unused-vars
 import dotenv from 'dotenv/config'
@@ -64,5 +65,6 @@ export class Server {
     this.app.use(bodyParser.json())
     this.app.use(helmet())
     this.app.use(compression())
+    this.app.use(fileupload() )
   }
 }

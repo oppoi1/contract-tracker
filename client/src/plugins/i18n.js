@@ -36,6 +36,7 @@ const messages = {
     signUp: 'sign Up',
     login: 'login',
     save: 'save',
+    appendFile: 'Append File',
 
     // menu items
     menuContracts: 'Contracts',
@@ -101,6 +102,7 @@ const messages = {
     signUp: 'Registrieren',
     login: 'Anmelden',
     save: 'Speichern',
+    appendFile: 'Dokument hinzufügen',
 
     // menu items
     menuContracts: 'Verträge',
