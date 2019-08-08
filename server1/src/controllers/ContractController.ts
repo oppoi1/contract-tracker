@@ -28,7 +28,7 @@ export class ContractController {
 
   async post(request: Request, response: Response, next: NextFunction) {
     try {
-      await this.service.post(request.body)
+      await this.service.post(request.body, request.files)
     } catch (error) {
       response.status(500).send({
         error: error

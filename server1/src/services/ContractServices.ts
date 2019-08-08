@@ -92,16 +92,23 @@ export class ContractService {
     }
   }
 
-  async post (_body: any) {
+  async post (_body: any, _files: any) {
     let company: Companies = null
     let partner: Partners = null
     let category: Categories = null
     let contract: Contracts = null
     let duration: number
+    let file: any
 
     // calculate duration
     duration = this.getDaysDiffBetweenDates(new Date(_body.start), new Date(_body.end))
 
+    // check if files
+    if(Object.keys(_files).length == 0) {
+      file = _files.document
+
+      file.mv(`/files/${contract.number} + ${new Date()}/${file.name}`)
+    }
 
     // Check if category exists
     try {
@@ -115,7 +122,6 @@ export class ContractService {
         category.name = _body.categories
         this.categoryService.save(category)
       }
-      console.log(category.id)
     } catch (error) {
       throw new Error('Error while creating Category. CSP#1')
     }

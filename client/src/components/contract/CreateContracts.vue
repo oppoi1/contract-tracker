@@ -103,6 +103,11 @@
         :rules="[required]"
         v-model="contract.other"
       ></v-textarea>
+      <v-file-input
+      :label="$t('appendFile')"
+      @change="uploadFile"
+      >
+      </v-file-input>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
@@ -159,7 +164,8 @@ export default {
       error: null,
       required: (value) => !!value || 'Required.',
       date: new Date().toJSON().slice(0,10).toString(),
-      items: ['monatlich', 'vierteljährlich', 'halbjährlich', 'jährlich']
+      items: ['monatlich', 'vierteljährlich', 'halbjährlich', 'jährlich'],
+      file: ''
     }
   },
   methods: {
@@ -223,6 +229,17 @@ export default {
       console.log(error)
     }
   },
+
+  uploadFile () {
+    this.file = this.$refs.file.files[0]
+
+    // for file attachment
+    let formData = new FormDate()
+    if(this.file) {
+      formData.append('file', this.file)
+    }
+  },
+
   // assign partner to company
   watch: {
     'contract.partner': function(val) {
