@@ -60,6 +60,7 @@ const messages = {
 
     // contract details
     detailId: 'Identifier',
+    detailName: 'Name',
     detailResponsible: 'Responsible for this contract',
     detailPartner: 'Select a Company or create a new one',
     detailoptionalPartner: 'Enter a Partner',
@@ -72,6 +73,18 @@ const messages = {
     detailObjectives: 'Objectives',
     detailfObjectives: 'Objectives for the future',
     detailOther: 'Comments / Specifics',
+    detailFile: 'File',
+    detailFiles: 'File Overview',
+    detailType: 'Type',
+    detailUpload: 'upload',
+    detailUploadDescription1: 'Drag your file(s) here to begin<br> or click to browse.',
+    detailUploadDescription2: ' or click to browse.',
+    detailRetryUpload: 'Try again',
+    detailUploadFailed: 'Upload failed.',
+    detailUploading1: 'Uploading',
+    detailUploading2: 'files...',
+    detailUploadSuccess1: 'Uploaded',
+    detailUploadSuccess2: 'file(s) successfully.',
     month: 'months',
 
     // search label
@@ -92,7 +105,7 @@ const messages = {
     contractEnds: 'Vertragsende:',
     contractCat: 'Vertragskategorie:',
     contractObjectives: 'Vertragsziele:',
-    pricePerMonth: 'Preis pro Periode: ',
+    pricePerMonth: 'Preis pro Zeitraum: ',
     futuresObjectives: 'Geplante Ziele',
     misc: 'Sonstiges:',
 
@@ -128,6 +141,7 @@ const messages = {
 
     // contract details
     detailId: 'Nummer',
+    detailName: 'Name',
     detailResponsible: 'Verantwortlicher',
     detailPartner: 'Eine Firma auswählen oder eine neue Eingeben',
     detailoptionalPartner: 'Einen Partner eingeben',
@@ -140,6 +154,18 @@ const messages = {
     detailObjectives: 'Ziele',
     detailfObjectives: 'Ziele für die Zukunft',
     detailOther: 'Kommentare / Weitere Informationen',
+    detailFile: 'Dokument',
+    detailFiles: 'Dokumente',
+    detailType: 'Datei',
+    detailUpload: 'speichern',
+    detailUploadDescription1: 'Dateien hineinziehen',
+    detailUploadDescription2: 'oder anklicken zum auswählen.',
+    detailRetryUpload: 'Erneut hochladen.',
+    detailUploadFailed: 'Upload fehlgeschlagen.',
+    detailUploading1: 'Hochladen von ',
+    detailUploading2: 'dateien...',
+    detailUploadSuccess1: 'Hochladen von',
+    detailUploadSuccess2: 'Dateien erfolgreich.',
     month: 'Monate',
 
     // search label

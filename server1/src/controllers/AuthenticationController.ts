@@ -21,6 +21,7 @@ export class AuthenticationController {
     let user: Users = new Users
     let isPasswordValid: boolean
     let userJson: Users
+
       try {
         const { name, password } = request.body
         user = await this.authenticationService.findOne({

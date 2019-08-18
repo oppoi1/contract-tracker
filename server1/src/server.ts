@@ -5,7 +5,8 @@ import cors from 'cors'
 import logger from 'morgan'
 import compression from 'compression'
 import helmet from 'helmet'
-import fileupload from "express-fileupload";
+import multer from 'multer'
+import * as path from 'path'
 import { Request, Response } from 'express'
 // eslint-disable-next-line no-unused-vars
 import dotenv from 'dotenv/config'
@@ -36,22 +37,22 @@ export class Server {
       Routes.forEach(route => {
         if(route.middleware) {
           (this.app as any)[route.method] (route.route, /* middleware here!*/ route.middleware, (req: Request, res: Response, next: Function) => {
-            const result = (new (route.controller as any))[route.action](req, res, next);
+            const result = (new (route.controller as any))[route.action](req, res, next)
             if (result instanceof Promise) {
-                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
+                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
 
             } else if (result !== null && result !== undefined) {
-                res.json(result);
+                res.json(result)
             }
         });
         } else {
           (this.app as any)[route.method] (route.route, (req: Request, res: Response, next: Function) => {
-              const result = (new (route.controller as any))[route.action](req, res, next);
+              const result = (new (route.controller as any))[route.action](req, res, next)
               if (result instanceof Promise) {
-                  result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
+                  result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
 
               } else if (result !== null && result !== undefined) {
-                  res.json(result);
+                  res.json(result)
               }
           });
         }
@@ -65,6 +66,6 @@ export class Server {
     this.app.use(bodyParser.json())
     this.app.use(helmet())
     this.app.use(compression())
-    this.app.use(fileupload() )
+    this.app.use("/uploads", express.static(path.join(__dirname, '../uploads')))
   }
 }

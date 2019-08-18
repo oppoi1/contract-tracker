@@ -50,7 +50,9 @@ export class ContractService {
      */
     return contracts
   }
-
+  /**
+   * Display all active contracts available
+   */
   async getAll() {
     let contract: Contracts[]
 
@@ -69,12 +71,13 @@ export class ContractService {
 
     return contract
   }
-
+  /**
+   * Find one contract
+   * @param  {number} id
+   */
   async getOne(id: number) {
-    let contract: Contracts
     try {
-      // return await this.contractService.findOne(id)
-      return contract = await this.contractService.query(`
+      return await this.contractService.query(`
       SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName,comp.address, p.branch, p.phone, u.name as createdByName ,
       DATE_SUB(cont.start, INTERVAL cont.cancel MONTH) as cancelDate
       FROM 
