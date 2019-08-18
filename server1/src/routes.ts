@@ -3,8 +3,24 @@ import { AuthenticationController } from './controllers/AuthenticationController
 import { CategoryController } from './controllers/CategoryController';
 import { PartnerController } from './controllers/PartnerController';
 import { CompanyController } from './controllers/CompanyController';
+import { FileUploadController } from "./controllers/FileUploadController";
+import multer from 'multer';
+import * as path from 'path'
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
+// const upload: any = multer({dest: 'uploads/'})
+let storage: any = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+const upload: any = multer({storage:storage})
 
+/**
+ * List of all routes
+ */
 export const Routes = [
 /**
  * Contract routes
@@ -105,5 +121,15 @@ export const Routes = [
   route: "/company",
   controller: CompanyController,
   action: "get"
+},
+/**
+ * File Upload Route
+ */
+{
+  method: "post",
+  route: "/documents/upload/:contractId",
+  controller: FileUploadController,
+  middleware: upload.array('documents',12),
+  action: "upload"
 },
 ]

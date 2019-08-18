@@ -3,6 +3,7 @@ import {Users} from "./Users";
 import {Categories} from "./Categories";
 import {Partners} from "./Partners";
 import {Companies} from "./Companies";
+import {Fileupload} from "./Fileupload";
 
 
 @Entity("Contracts",{schema:"contracts" } )
@@ -26,14 +27,6 @@ export class Contracts {
         name:"number"
         })
     number:string | null;
-
-    
-    @Column("varchar",{ 
-      nullable:true,
-      length:90,
-      name:"name"
-      })
-    name:string | null;
         
 
     @Column("date",{ 
@@ -95,7 +88,7 @@ export class Contracts {
         name:"pricePerPeriod"
         })
     pricePerPeriod:number | null;
-         
+   
     @ManyToOne(type=>Users, users=>users.contractss2,{ onDelete: 'RESTRICT',onUpdate: 'RESTRICT' })
     @JoinColumn({ name:'responsible'})
     responsible:Users | null;
@@ -139,8 +132,18 @@ export class Contracts {
         name:"updatedAt"
         })
     updatedAt:Date | null;
-
-    @Column()
-    isActive: Boolean
         
+
+    @Column("tinyint",{ 
+        nullable:true,
+        width:1,
+        name:"isActive"
+        })
+    isActive:boolean | null;
+        
+
+   
+    @OneToMany(type=>Fileupload, fileupload=>fileupload.contract,{ onDelete: 'RESTRICT' ,onUpdate: 'RESTRICT' })
+    fileuploads:Fileupload[];
+    
 }

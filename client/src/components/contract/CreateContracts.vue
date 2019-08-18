@@ -9,7 +9,7 @@
         v-model="contract.number"
       ></v-text-field>
       <v-text-field
-        :label="$t('name')"
+        :label="$t('detailName')"
         required
         :rules="[required]"
         v-model="contract.name"
@@ -66,7 +66,7 @@
       ></v-text-field>
       <v-select
         :items="items"
-        label="Solo field"
+        :label="$t('pricePerMonth')"
         solo
         required
         :rules="[required]"
@@ -103,11 +103,6 @@
         :rules="[required]"
         v-model="contract.other"
       ></v-textarea>
-      <v-file-input
-      :label="$t('appendFile')"
-      @change="uploadFile"
-      >
-      </v-file-input>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
@@ -227,16 +222,6 @@ export default {
       }
     } catch (error) {
       console.log(error)
-    }
-  },
-
-  uploadFile () {
-    this.file = this.$refs.file.files[0]
-
-    // for file attachment
-    let formData = new FormDate()
-    if(this.file) {
-      formData.append('file', this.file)
     }
   },
 
