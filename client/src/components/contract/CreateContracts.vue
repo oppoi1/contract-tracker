@@ -103,6 +103,11 @@
         :rules="[required]"
         v-model="contract.other"
       ></v-textarea>
+      <v-file-input
+      :label="$t('appendFile')"
+      @change="uploadFile"
+      >
+      </v-file-input>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
