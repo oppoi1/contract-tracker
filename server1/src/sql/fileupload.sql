@@ -17,3 +17,4 @@ CREATE TABLE Fileupload(
 )
 
 ALTER TABLE Fileupload ADD userId int AFTER contractId, ADD FOREIGN KEY (userId) REFERENCES Users(id)
+ALTER TABLE Fileupload ADD contractId int, ADD FOREIGN KEY (contractId) REFERENCES contracts(id)

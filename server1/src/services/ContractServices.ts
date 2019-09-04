@@ -55,7 +55,7 @@ export class ContractService {
    */
   async getAll() {
     let contract: Contracts[]
-
+// check https://stackoverflow.com/questions/4767055/error-select-command-denied-to-user-useridip-address-for-table-table
     contract = await this.contractService.query(`
     SELECT cont.*, cat.name as categoryName, comp.name as companyName, p.name as partnerName, u.name as createdByName, u.name as responsible,
     DATE_SUB(cont.start, INTERVAL cont.cancel MONTH) as cancelDate
