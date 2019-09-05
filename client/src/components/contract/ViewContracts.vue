@@ -146,8 +146,8 @@
               </span>
             </div>
             <div class="mb-3">
-              <span class="font-weight-bold" v-if="partner[0].name">
-                {{firstLetterUC(partner[0].name)}}
+              <span class="font-weight-bold" v-if="contract.partnerName">
+                {{firstLetterUC(contract.partnerName)}}
               </span>
             </div>
             <div class="mb-3">
@@ -157,12 +157,12 @@
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{partner[0].branch}}
+                {{contract.branch}}
               </span>
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{partner[0].phone}}
+                {{contract.phone}}
               </span>
             </div>
           </v-flex>
@@ -184,7 +184,7 @@
               <div class="mt-2 downloadField" v-for="file in files" :key="file.filename">
                 <p>{{$t('detailFiles')}}: {{file.originalname}}</p>
                 <p>{{$t('detailType')}}: {{file.mimetype}}</p>
-                <v-btn class="green" dark :href="'http://localhost:3001/' + file.path">
+                <v-btn class="green" dark :href="'http://S190018:3001/' + file.path">
                   DOWNLOAD
                 </v-btn>
                 <hr class="mt-2">
@@ -271,18 +271,17 @@ export default {
       let data = (await ContractsService.show(contractId)).data
       this.contract = data.contract[0]
       this.files = data.files
-      console.log(data)
       console.log(this.contract)
       } catch (error) {
       console.log(error)
     }
 
     // find partner
-    try {
-      this.partner = (await PartnerService.get()).data
-    } catch (e) {
-      console.log(e)
-    }
+    // try {
+    //   this.partner = (await PartnerService.show(this.contract.partnerId)).data
+    // } catch (e) {
+    //   console.log(e)
+    // }
 
     // find company
     try {

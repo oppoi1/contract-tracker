@@ -3,12 +3,14 @@ import { getRepository, Like } from "typeorm"
 import { Categories } from '../entities/Categories';
 import { Companies } from '../entities/Companies';
 import { Partners } from "../entities/Partners";
+import { Users } from '../entities/Users';
 
 export class ContractService {
   private contractService = getRepository(Contracts)
   private categoryService = getRepository(Categories)
   private companyService = getRepository(Companies)
   private partnerService = getRepository(Partners)
+  private userService = getRepository(Users)
 
   /**
    * Calculates the day difference between two dates
@@ -95,23 +97,16 @@ export class ContractService {
     }
   }
 
-  async post (_body: any, _files: any) {
+  async post (_body: any) {
     let company: Companies = null
     let partner: Partners = null
     let category: Categories = null
     let contract: Contracts = null
     let duration: number
-    let file: any
+    let responsible: Users
 
     // calculate duration
     duration = this.getDaysDiffBetweenDates(new Date(_body.start), new Date(_body.end))
-
-    // check if files
-    if(Object.keys(_files).length == 0) {
-      file = _files.document
-
-      file.mv(`/files/${contract.number} + ${new Date()}/${file.name}`)
-    }
 
     // Check if category exists
     try {
@@ -147,9 +142,10 @@ export class ContractService {
 
     // Check if Partner exists
     try {
+      let optionalPartner = _body.optionalPartner.toLowerCase()
       partner = await this.partnerService.findOne({
         where: {
-          name: _body.optionalerPartner
+          name: optionalPartner
         }
       })
 
@@ -164,7 +160,22 @@ export class ContractService {
         // })
       }
     } catch (error) {
+      console.log(error)
       throw new Error('Error while creating Partner. #CSP#3')
+    }
+
+    console.log(_body)
+
+    // find responsible user
+    try {
+      responsible = await this.userService.findOne(({
+        where: {
+          name: _body.responsible
+        }
+      }))
+      console.log(responsible)
+    } catch (error) {
+      console.log(error)
     }
 
     // Create Contract
@@ -186,8 +197,9 @@ export class ContractService {
         contract.createdBy = _body.createdBy
         contract.pricePerMonth = _body.pricePerMonth
         contract.pricePerPeriod = _body.pricePerPeriod
-        contract.responsible = _body.responsible
+        contract.responsible = responsible
         contract.cancel = _body.cancel
+        contract.isActive = true
         // contract.modifiedBy = _body.modifiedBy || _body.createdBy
         contract.partner = partner
         contract.category = category

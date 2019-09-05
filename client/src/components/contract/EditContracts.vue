@@ -216,7 +216,8 @@ export default {
     // get contract data
     try {
       const contractId = this.$store.state.route.params.contractId
-      this.contract = (await ContractsService.show(contractId)).data
+      this.contract = (await ContractsService.show(contractId)).data.contract
+      console.log(this.contract)
     } catch (e) {
       console.log(e)
     }

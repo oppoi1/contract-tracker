@@ -3,7 +3,7 @@ import {Contracts} from "./Contracts";
 import { Users } from "./Users";
 
 
-@Entity("Fileupload",{schema:"contracts" } )
+@Entity("Fileupload",{schema:"contract" } )
 @Index("contractId",["contract",])
 export class Fileupload {
 

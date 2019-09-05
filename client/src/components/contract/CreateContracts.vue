@@ -72,7 +72,7 @@
         :rules="[required]"
         v-model="contract.pricePerPriod"
       ></v-select>
-      <p class="red">(stimmt nicht mehr)p.A: {{ contract.pricePerMonth * 12 }} €</p>
+      <p class="red" style="text-decoration: line-through">p.A: {{ contract.pricePerMonth * 12 }} €</p>
     </panel>
    </v-flex>
    <v-flex xs8>
@@ -103,11 +103,6 @@
         :rules="[required]"
         v-model="contract.other"
       ></v-textarea>
-      <v-file-input
-      :label="$t('appendFile')"
-      @change="uploadFile"
-      >
-      </v-file-input>
     </panel>
     <div class="danger-alert" v-if="error">
       {{error}}
@@ -165,7 +160,8 @@ export default {
       required: (value) => !!value || 'Required.',
       date: new Date().toJSON().slice(0,10).toString(),
       items: ['monatlich', 'vierteljährlich', 'halbjährlich', 'jährlich'],
-      file: ''
+      file: '',
+      user: {}
     }
   },
   methods: {
@@ -174,11 +170,12 @@ export default {
      */
     async create () {
       this.error = null
+      this.contract.createdBy = this.user.id
       const areAllFieldsFilledIn = Object
         .keys(this.contract)
         .every(key => !!this.contract[key])
       if (!areAllFieldsFilledIn) {
-        this.error = 'Please fill in all the required fields.'
+        this.error = 'Bitte füllen Sie alle Felder aus.'
         return
       }
       
@@ -198,6 +195,9 @@ export default {
    * Get partner, categories, companies and  users data
    */
   async mounted () {
+
+    this.user = JSON.parse(this.$store.state.user)
+
     try {
       this.partner = (await PartnerService.get()).data
     } catch (e) {
@@ -213,7 +213,6 @@ export default {
     }
     try {
       this.users = (await AuthenticationService.get()).data
-      console.log(this.users)
       for(var i = 0; i < this.users.length; i++) {
         this.usrArray.push(this.users[i].name)
       }
@@ -239,9 +238,11 @@ export default {
         if(this.companyArr[i].name === val) {
           // if the same then look in partner arr where company id = companyarr[i].id
           const result = this.partner.map(partner => {
-            var newObj = {}
-            partner.companyId === this.companyArr[i].id ? newObj = partner.name : undefined
-            return newObj
+            if(partner.companyId === this.companyArr[i].id) {
+              if(partner.name) {
+                return partner.name
+              }
+            }
           })
           this.cmpnyPrtnr = result
         }
