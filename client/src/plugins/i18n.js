@@ -77,7 +77,7 @@ const messages = {
     detailFiles: 'File Overview',
     detailType: 'Type',
     detailUpload: 'upload',
-    detailUploadDescription1: 'Drag your file(s) here to begin<br> or click to browse.',
+    detailUploadDescription1: 'Drag your file(s) here to begin',
     detailUploadDescription2: ' or click to browse.',
     detailRetryUpload: 'Try again',
     detailUploadFailed: 'Upload failed.',

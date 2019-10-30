@@ -198,7 +198,7 @@
                   <input type="file" multiple name="documents" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
                     accept="image/*" class="input-file">
                     <p v-if="isInitial">
-                      {{$t('detailUploadDescription1')}}<br> {{$t('detailUploadDescription2')}}
+                      {{$t('detailUploadDescription1')}} {{$t('detailUploadDescription2')}}
                     </p>
                     <p v-if="isSaving">
                       {{$t('detailUploading1')}} {{ fileCount }} {{$t('detailUploading2')}}
