@@ -260,10 +260,14 @@ export default {
       uploadFieldName: 'documents',
       success: null,
       error: null,
+      createdBy: this.$store.state.user.name
     }
   },
   async mounted () {
-    // reset document form
+    // console.log(JSON.stringify(this.$store.state))
+    this.createdBy = JSON.parse(this.$store.state.user).id
+
+// reset document form
     this.reset()
     // get contract id to get contract data
     const contractId = this.$store.state.route.params.contractId
@@ -330,7 +334,7 @@ export default {
     save(formData) {
       this.currentStatus = STATUS_SAVING
 
-      FileUploadService.save(formData, this.contract[0].id)
+      FileUploadService.save(formData, this.contract.id, this.createdBy)
       .then(data => {
         console.log(data)
         this.uploadedFiles = [].concat(data)
@@ -347,6 +351,8 @@ export default {
     filesChange(fieldName, fileList) {
       const formData = new FormData()
 
+      console.log(this.createdBy)
+
       if (!fileList.length) return
 
       // append files to formdata and save
@@ -355,6 +361,8 @@ export default {
       .map(data => {
         formData.append(fieldName, fileList[data], fileList[data].name)
       })
+
+      console.log(formData)
 
       this.save(formData)
     }
