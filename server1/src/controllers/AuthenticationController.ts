@@ -24,11 +24,16 @@ export class AuthenticationController {
 
       try {
         const { name, password } = request.body
-        user = await this.authenticationService.findOne({
-          where: {
-            name: name
-          }
-        })
+
+        try {
+          user = await this.authenticationService.findOne({
+            where: {
+              name: name
+            }
+          })
+        } catch (error) {
+          console.log(error)
+        }
   
         if (!user) {
           return response.status(403).send({

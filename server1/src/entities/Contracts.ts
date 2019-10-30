@@ -6,7 +6,7 @@ import {Companies} from "./Companies";
 import {Fileupload} from "./Fileupload";
 
 
-@Entity("Contracts",{schema:"contract" } )
+@Entity("Contracts",{schema:"contracts" } )
 @Index("createdBy",["createdBy",])
 @Index("responsible",["responsible",])
 @Index("categoryId",["category",])
