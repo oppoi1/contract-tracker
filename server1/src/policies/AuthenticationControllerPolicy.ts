@@ -41,7 +41,7 @@ module.exports = {
   },
   /**
    * Validate data
-   * then ??
+   * then jump to next middleware if available
    * @param {name, email, password} req
    * @param {*} res
    * @param {*} next

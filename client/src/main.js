@@ -19,7 +19,7 @@ Vue.use(Vuetify);
 Vue.use(FlagIcon)
 
 /**
- * Make Panel global accesible
+ * Make Panel global accessible
  */
 Vue.component("panel", Panel);
 
