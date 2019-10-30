@@ -184,7 +184,7 @@
               <div class="mt-2 downloadField" v-for="file in files" :key="file.filename">
                 <p>{{$t('detailFiles')}}: {{file.originalname}}</p>
                 <p>{{$t('detailType')}}: {{file.mimetype}}</p>
-                <v-btn class="green" dark :href="'http://S190018:3001/' + file.path">
+                <v-btn class="green" dark :href="'http://localhost:3001/' + file.path">
                   DOWNLOAD
                 </v-btn>
                 <hr class="mt-2">
@@ -330,7 +330,7 @@ export default {
     save(formData) {
       this.currentStatus = STATUS_SAVING
 
-      FileUploadService.save(formData, this.contract.id)
+      FileUploadService.save(formData, this.contract[0].id)
       .then(data => {
         console.log(data)
         this.uploadedFiles = [].concat(data)

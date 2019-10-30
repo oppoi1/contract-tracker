@@ -8,7 +8,7 @@ export class FileUploadService {
    * @param  {number} id contract ID
    */
   async getFilesForOneContract(id: number) {
-    // try {
+    try {
       return await this.fileRepo.query(`
       SELECT *
       FROM 
@@ -16,9 +16,10 @@ export class FileUploadService {
       WHERE 
       contractId = ${id}
       `)
-    // } catch (error) {
-    //   throw new Error(`No contract files found with id: ${id} #CS2`)
-    // }
+
+    } catch (error) {
+      throw new Error(`No contract files found with id: ${id} #CS2`)
+    }
   }
 
    /**

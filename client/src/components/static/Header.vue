@@ -34,12 +34,36 @@
       </v-menu>
     </v-toolbar-items>
     <v-spacer></v-spacer>
-    <v-toolbar-items>
+
+    <div class="text-center">
+    <v-menu offset-y>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Language
+        </v-btn>
+      </template>
+      <v-list>
+      <v-toolbar-items>
+        <v-btn flat dark v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+          <flag :iso="entry.flag" v-bind:squared="false" />
+          <p style="color: black; margin: 3px">{{ entry.title }} </p>
+        </v-btn>
+      </v-toolbar-items>
+      </v-list>
+    </v-menu>
+  </div>
+
+    <!-- <v-toolbar-items>
       <v-btn flat dark v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
         <flag :iso="entry.flag" v-bind:squared="false" />
         {{ entry.title }}
       </v-btn>
-    </v-toolbar-items>
+    </v-toolbar-items> -->
+
     <v-toolbar-items>
       <v-btn to="/login" flat dark v-if="!$store.state.isUserLoggedIn">
         {{$t('login')}}

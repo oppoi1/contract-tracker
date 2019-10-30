@@ -3,7 +3,7 @@ import {Contracts} from "./Contracts";
 import { Users } from "./Users";
 
 
-@Entity("Fileupload",{schema:"contract" } )
+@Entity("Fileupload",{schema:"contracts" } )
 @Index("contractId",["contract",])
 export class Fileupload {
 
@@ -96,4 +96,11 @@ export class Fileupload {
         })
     createdAt:Date | null;
         
+    @Column("datetime",{ 
+        nullable:true,
+        name:"updatedAt"
+        })
+    updatedAt:Date | null;
+        
+
 }
