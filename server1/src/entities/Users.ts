@@ -3,7 +3,7 @@ import {Contracts} from "./Contracts";
 import bcrypt from 'bcryptjs'
 
 
-@Entity("Users",{schema:"contract" } )
+@Entity("Users",{schema:"contracts" } )
 export class Users {
 
     @PrimaryGeneratedColumn({

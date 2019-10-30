@@ -3,7 +3,7 @@ import {Companies} from "./Companies";
 import {Contracts} from "./Contracts";
 
 
-@Entity("Partners",{schema:"contract" } )
+@Entity("Partners",{schema:"contracts" } )
 @Index("companyId",["company",])
 export class Partners {
 

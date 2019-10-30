@@ -7,7 +7,7 @@ export class CategoryService {
 
   async get () {
     let categories: Categories[]
-    return categories = await this.categoryService.query(`SELECT * FROM categories LIMIT 50`)
+    return categories = await this.categoryService.query(`SELECT * FROM Categories LIMIT 50`)
     // return categories = await this.categoryService.find({
     //   take: 50
     // })

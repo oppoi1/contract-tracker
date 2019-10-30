@@ -2,7 +2,7 @@ import {Column,Entity,OneToMany,PrimaryGeneratedColumn} from "typeorm";
 import {Contracts} from "./Contracts";
 
 
-@Entity("Categories",{schema:"contract" } )
+@Entity("Categories",{schema:"contracts" } )
 export class Categories {
 
     @PrimaryGeneratedColumn({
