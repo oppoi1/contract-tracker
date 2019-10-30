@@ -127,7 +127,7 @@ export const Routes = [
  */
 {
   method: "post",
-  route: "/documents/upload/:contractId",
+  route: "/documents/upload/:contractId/:userId",
   controller: FileUploadController,
   middleware: upload.array('documents',12),
   action: "upload"

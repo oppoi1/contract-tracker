@@ -16,12 +16,12 @@ export class FileUploadController {
    * @param  {NextFunction} next
    */
   async upload(request: Request, response: Response, next: NextFunction) {
-    // console.log(request.files) // fieldname, originalname encoding, mimetype, destination, filename, path, size
-    // console.log(request.params) // contractid
-    // console.log(request.body)
+    console.log(request.files) // fieldname, originalname encoding, mimetype, destination, filename, path, size
+    console.log(request.params) // contractid
+    console.log(request.body)
   
     const files = request.files
-    const { contractId } = request.params
+    const { contractId, userId } = request.params
     let contract: import("../entities/Contracts").Contracts
 
     // find contract
@@ -47,6 +47,7 @@ export class FileUploadController {
         fileupload.filename = files.filename
         fileupload.path = files.path
         fileupload.size = files.size
+        fileupload.createdBy = userId
   
         this.fileUploadService.save(fileupload)
       }); 

@@ -19,7 +19,7 @@ export class AuthenticationService {
     }
   }
 
-  async register (_body) {
+  async register (_body: any) {
     let user: Users
     let userJson
 
@@ -66,7 +66,7 @@ export class AuthenticationService {
     oldToken = _body.token
 
     if(oldToken) {
-      await jwt.verify(oldToken, process.env.JWT_SECRET, (err) => {
+      await jwt.verify(oldToken, process.env.JWT_SECRET, (err: any) => {
         if (err) return false
       })
     }

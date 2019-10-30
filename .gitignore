@@ -1,3 +1,4 @@
 server1/.gitignore
 server1/ormconfig.json
 server1/uploads
+server1/ormconfig.json
