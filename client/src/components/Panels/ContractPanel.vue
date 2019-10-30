@@ -17,10 +17,11 @@
         <td class="text-xs-left">{{ props.item.number }}</td>
         <td class="text-xs-left">{{ props.item.name }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.companyName) }}</td>
-        <td class="text-xs-left">{{ firstLetterUC(props.item.partnerName) }}</td>
+        <td class="text-xs-left"><span v-if="props.item.partnerName">{{ firstLetterUC(props.item.partnerName) }}</span></td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.categoryName) }}</td>
         <td class="text-xs-left">{{ firstLetterUC(props.item.responsible) }}</td>
         <td class="text-xs-left">{{ props.item.duration }} Tage</td>
+        <!-- DAUER does not work properly -->
         <td class="text-xs-left">{{ StripAndReverse(props.item.cancelDate) }}</td> 
         <!-- TODO: last date for cancelling contract-->
         <td class="text-xs-left">

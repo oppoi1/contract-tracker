@@ -16,6 +16,7 @@ export class FileUploadService {
       WHERE 
       contractId = ${id}
       `)
+
     } catch (error) {
       throw new Error(`No contract files found with id: ${id} #CS2`)
     }

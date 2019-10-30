@@ -3,7 +3,7 @@ import {Contracts} from "./Contracts";
 import {Partners} from "./Partners";
 
 
-@Entity("Companies",{schema:"contracts" } )
+@Entity("Companies",{schema:"contract" } )
 export class Companies {
 
     @PrimaryGeneratedColumn({

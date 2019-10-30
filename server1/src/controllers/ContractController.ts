@@ -39,6 +39,7 @@ export class ContractController {
     try {
       await this.service.post(request.body, request.files)
     } catch (error) {
+      console.log(error)
       response.status(500).send({
         error: error
       })

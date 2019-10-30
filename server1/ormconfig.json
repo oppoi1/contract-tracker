@@ -4,9 +4,9 @@
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "oppoi",
-    "password": "Mama1337new@",
-    "database": "contracts",
+    "username": "contract",
+    "password": "13371337",
+    "database": "contract",
     "synchronize": false,
     "entities": [
       "src/entities/**/*.ts"

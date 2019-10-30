@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs6>
-      <panel :title="$t('contract') + ' ' + contract[0].number">
+      <panel :title="$t('contract') + ' ' + contract.number">
         <div class="danger-alert mb-3" v-html="error"></div>
         <div class="success-alert mb-3" v-html="success"></div>
         <v-layout justify-start row fill-height>
@@ -12,7 +12,7 @@
               </div>
               <div style="display:inline-table" class="contract-contact v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].name}}
+                  {{contract.name}}
                 </span>
               </div>
             </div>
@@ -22,7 +22,7 @@
               </div>
               <div style="display:inline-table" class="contract-start v-badge">
                 <span class="font-weight-bold contract">
-                  {{StripAndReverse(contract[0].start)}}
+                  {{StripAndReverse(contract.start)}}
                 </span>
               </div>
             </div>
@@ -32,7 +32,7 @@
               </div>
               <div style="display:inline-table" class="contract-end v-badge">
                 <span class="font-weight-bold contract">
-                  {{StripAndReverse(contract[0].end)}}
+                  {{StripAndReverse(contract.end)}}
                 </span>
               </div>
              </div>
@@ -42,7 +42,7 @@
               </div>
               <div style="display:inline-table" class="contract-start v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].cancel}} {{$t('month')}}
+                  {{contract.cancel}} {{$t('month')}}
                 </span>
               </div>
             </div>
@@ -52,7 +52,7 @@
               </div>
               <div style="display:inline-table" class="contract-start v-badge">
                 <span class="font-weight-bold contract">
-                  {{StripAndReverse(contract[0].cancelDate)}}
+                  {{StripAndReverse(contract.cancelDate)}}
                 </span>
               </div>
             </div>
@@ -62,7 +62,7 @@
               </div>
               <div style="display:inline-table" class="contract-categories v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].categoryName}}
+                  {{contract.categoryName}}
                 </span>
               </div>
              </div>
@@ -72,7 +72,7 @@
               </div>
               <div style="display:inline-table" class="contract-price v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].pricePerPeriod}} &euro;
+                  {{contract.pricePerPeriod}} &euro;
                 </span>
               </div>
              </div>
@@ -82,7 +82,7 @@
               </div>
               <div style="display:inline-table" class="contract-objectives v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].objectives}}
+                  {{contract.objectives}}
                 </span>
               </div>
              </div>
@@ -92,7 +92,7 @@
               </div>
               <div style="display:inline-table" class="contract-futureObjectives v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].futureobjectives}}
+                  {{contract.futureobjectives}}
                 </span>
               </div>
              </div>
@@ -102,7 +102,7 @@
               </div>
               <div class="contract-other v-badge">
                 <span class="font-weight-bold contract">
-                  {{contract[0].other}}
+                  {{contract.other}}
                 </span>
               </div>
             </div>
@@ -112,7 +112,7 @@
           name: 'contract-edit',
           params () {
             return {
-              contractId: contract[0].id
+              contractId: contract.id
             }
           }
         }">{{$t('edit')}}</v-btn>
@@ -120,7 +120,7 @@
       </panel>
     </v-flex>
     <v-flex xs6>
-      <panel :title="$t('partnerDetails') + contract[0].companyName" class="ml-2">
+      <panel :title="$t('partnerDetails') + contract.companyName" class="ml-2">
         <v-layout>
           <v-flex xs3 ma-2 text-xs-left ma-3>
             <div class="text-xs-left subheading mb-3">
@@ -142,27 +142,27 @@
           <v-flex xs6 ma-2 text-xs-left ma-3 subheading>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{firstLetterUC(contract[0].companyName)}}
+                {{firstLetterUC(contract.companyName)}}
+              </span>
+            </div>
+            <div class="mb-3">
+              <span class="font-weight-bold" v-if="contract.partnerName">
+                {{firstLetterUC(contract.partnerName)}}
               </span>
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{firstLetterUC(partner[0].name)}}
+                {{contract.address}}
               </span>
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{contract[0].address}}
+                {{contract.branch}}
               </span>
             </div>
             <div class="mb-3">
               <span class="font-weight-bold">
-                {{partner[0].branch}}
-              </span>
-            </div>
-            <div class="mb-3">
-              <span class="font-weight-bold">
-                {{partner[0].phone}}
+                {{contract.phone}}
               </span>
             </div>
           </v-flex>
@@ -171,7 +171,7 @@
           name: 'contract-edit',
           params () {
             return {
-              contractId: contract[0].id
+              contractId: contract.id
             }
           }
         }">{{$t('edit')}}</v-btn>
@@ -269,19 +269,19 @@ export default {
     const contractId = this.$store.state.route.params.contractId
     try {
       let data = (await ContractsService.show(contractId)).data
-      this.contract = data.contract
+      this.contract = data.contract[0]
       this.files = data.files
-      console.log(data)
+      console.log(this.contract)
       } catch (error) {
       console.log(error)
     }
 
     // find partner
-    try {
-      this.partner = (await PartnerService.get()).data
-    } catch (e) {
-      console.log(e)
-    }
+    // try {
+    //   this.partner = (await PartnerService.show(this.contract.partnerId)).data
+    // } catch (e) {
+    //   console.log(e)
+    // }
 
     // find company
     try {
@@ -302,7 +302,7 @@ export default {
      * api call to "delete" a contract
      */
     async delete_contract() {
-      let confirmation = confirm(`Wollen Sie Vertrag ${this.contract[0].number} entfernen?`)
+      let confirmation = confirm(`Wollen Sie Vertrag ${this.contract.number} entfernen?`)
       if (confirmation) {
         try {
           const response = await ContractsService.delete(this.$store.state.route.params.contractId)
@@ -359,6 +359,9 @@ export default {
       this.save(formData)
     }
   },
+  /**
+   * File Upload status
+   */
   computed: {
     isInitial() {
       return this.currentStatus === STATUS_INITIAL
