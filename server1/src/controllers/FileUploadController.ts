@@ -49,7 +49,11 @@ export class FileUploadController {
         fileupload.size = files.size
         fileupload.createdBy = userId
   
-        this.fileUploadService.save(fileupload)
+        try {
+          this.fileUploadService.save(fileupload)
+        } catch (error) {
+          console.log(error)
+        }
       }); 
     } catch (error) {
       return response.status(500).send({
