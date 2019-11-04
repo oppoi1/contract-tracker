@@ -4,6 +4,7 @@ import { Categories } from '../entities/Categories';
 import { Companies } from '../entities/Companies';
 import { Partners } from "../entities/Partners";
 import { Users } from '../entities/Users';
+import { MailService } from "./MailService";
 
 export class ContractService {
   private contractService = getRepository(Contracts)
@@ -237,6 +238,35 @@ export class ContractService {
       }
     } catch (error) {
       throw new Error('Couldn\'t retrieve data: deleting Contract. #CSD#3')
+    }
+  }
+
+  /**
+   * Look for all Contracts where end is smaller than expirationdate(cancel) + 1 month
+   * and send an Email to the responsible user every 12 hours
+   * @class ContractServices
+   * @method checkExpirationDate
+   */
+  async checkExpirationDate() {
+    // TODO: check if an email was already sent in the last three days. if yes do not send again
+    let contracts: Contracts[]
+
+    try {
+      contracts = await this.categoryService.query(`SELECT Contracts.number, Contracts.end - INTERVAL (Contracts.cancel +1) MONTH as 'expi', Users.email FROM Contracts, Users WHERE Contracts.responsible = Users.id AND Contracts.end - INTERVAL (Contracts.cancel +1) MONTH < CURDATE()
+      `)
+    } catch (error) {
+      // throw new Error(`Couldn't retrieve data: No Contract found? #CSCXD#1`)
+      console.log(`Couldn't retrieve data: No Contract found? #CSCXD#1`)
+    }
+
+    if (contracts) {
+      const mailservice = new MailService()
+
+      for (let index = 0; index < contracts.length; index++) {
+        mailservice.send(contracts[index].email, `Contract ${contracts[index].number} is expiring soon.`, 
+        `Contract ${contracts[index].number} is expiring soon.`, 
+        `<b>Contract ${contracts[index].number} is expiring soon.</b>`)
+      }
     }
   }
 }
