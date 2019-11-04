@@ -11,9 +11,11 @@ import { Request, Response } from 'express'
 // eslint-disable-next-line no-unused-vars
 import dotenv from 'dotenv/config'
 import { Routes } from './routes'
+import { ContractService } from "./services/ContractServices";
 
 export class Server {
   public app: express.Application
+  public contractService = new ContractService()
 
   public static bootstrap(): Server {
     return new Server()
@@ -23,6 +25,9 @@ export class Server {
     this.app = express()
     this.config()
     this.api()
+    setInterval(() => {
+      this.contractService.checkExpirationDate()
+    }, 43200000) // check every 12 hours
   }
 
     /**
